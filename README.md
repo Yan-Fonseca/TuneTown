@@ -1,5 +1,7 @@
 # tunetown
 
+Projeto para a disciplina modelagem de sistemas UFJF
+
 ## Project setup
 ```
 npm install
