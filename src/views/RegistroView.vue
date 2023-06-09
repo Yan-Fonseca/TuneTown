@@ -16,5 +16,12 @@ export default {
 </script>
 
 <style scoped>
-
+    .corpo {
+        background-image: url("../assets/imgs/fundo_registro.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        margin: 0px;
+    }
 </style>
