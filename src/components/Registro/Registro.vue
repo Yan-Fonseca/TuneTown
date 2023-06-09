@@ -60,6 +60,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0, 3, 22, 1);
   }
   
   .input-large {
