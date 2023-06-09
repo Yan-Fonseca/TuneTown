@@ -4,6 +4,7 @@
         <router-link to="/perfil">Perfil</router-link>
         <router-link to="/search">Buscar</router-link>
         <router-link to="/login">Login</router-link>
+        <router-link to="/registro">Registro</router-link>
     </div>
 </template>
 
