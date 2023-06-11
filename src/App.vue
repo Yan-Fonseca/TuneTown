@@ -1,14 +1,14 @@
 <template>
-  <HeaderCommon/>
+  <!-- <HeaderCommon/> -->
   <router-view/>
 </template>
 
 <script>
-  import HeaderCommon from './components/common/Header.vue';
+  //<import HeaderCommon from './components/common/Header.vue';/>
   export default {
     name: 'App',
     components: {
-      HeaderCommon
+      //HeaderCommon
     }
   }
 </script>
@@ -61,5 +61,13 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+@font-face {
+font-family: "Arapey";
+src: url('https://fonts.googleapis.com/css2?family=Arapey&display=swap')
+
+}
+*{
+	font-family: 'Arapey', serif;
 }
 </style>
