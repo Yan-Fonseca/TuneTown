@@ -1,16 +1,27 @@
 <template>
     <div class="corpo">
+        <LoginHeader />
         <LoginComp />
+        <LoginFooter />
+      
+
     </div>
   </template>
   
   <script>
   import LoginComp from "@/components/Login/Login.vue";
+  import LoginHeader from "@/components/LoginHeader/LoginHeader.vue";
+  import LoginFooter from "@/components/LoginFooter/LoginFooter.vue";
+  
   
   export default {
     name: 'LoginView',
     components: {
-      LoginComp
+      LoginComp,
+      LoginHeader,
+      LoginFooter
+      
+
     }
   }
   </script>
@@ -23,19 +34,16 @@
     background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
   }
-  
-  .login {
-    width: 648px;
-    height: 610px;
-    background: rgba(36, 56, 81, 0.84);
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  * {
+    
+
+    font-family: 'Arapey', serif;
   }
+ 
   
   </style>
   
