@@ -1,14 +1,14 @@
 <template>
-  <!-- <HeaderCommon/> -->
+  <HeaderCommon/>
   <router-view/>
 </template>
 
 <script>
-  //<import HeaderCommon from './components/common/Header.vue';/>
+  import HeaderCommon from './components/common/Header.vue';
   export default {
     name: 'App',
     components: {
-      //HeaderCommon
+      HeaderCommon
     }
   }
 </script>
