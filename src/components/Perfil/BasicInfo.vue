@@ -104,7 +104,7 @@ export default {
 .biography-box {
   border: 1px solid gray;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: rgba(88, 112, 130, 0.26);
   width: 300px;
 }
 
