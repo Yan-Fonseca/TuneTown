@@ -4,7 +4,7 @@
       <div class="data">
         <p class="nome">Nome</p>
         <button class="perfil-btn">Perfil</button>
-        <p class="avaliacao">Avaliação: x.x/5.0</p>
+        <p class="avaliacao">x.x/5.0</p>
       </div>
     </div>
   </template>
@@ -43,6 +43,12 @@
     border-radius: 7px;
     color: black;
     background-color: rgba(56, 123, 223, 1);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  p {
+    font-size: large;
   }
   </style>
   
