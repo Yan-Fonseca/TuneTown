@@ -9,6 +9,24 @@
                         <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
                     </select>
                 </div>
+                <div>
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade">
+                </div>
+                <div>
+                    <label for="genero">Gênero musical:</label>
+                    <input type="text" id="genero">
+                </div>
+                <div>
+                    <label for="profissao">Profissão:</label>
+                    <input type="text" id="profissao">
+                </div>
+                <div>
+                    <label for="avaliacao">Avaliação:</label>
+                    <input type="text" id="avaliacao">
+                </div>
+
+                <button classe="buscar">Buscar</button>
             </form>
         </div>
     </div>
@@ -58,5 +76,10 @@ export default {
     .filtro {
         background-color: rgba(29, 36, 45, 0.84);
         color: white;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
     }
 </style>
