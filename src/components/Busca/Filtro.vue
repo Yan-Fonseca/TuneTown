@@ -76,10 +76,29 @@ export default {
     .filtro {
         background-color: rgba(29, 36, 45, 0.84);
         color: white;
+        height: 100%; 
+        float: left; 
+        margin: 10px;
     }
 
     form {
+        display: grid;
+        grid-template-columns: 1fr; 
+        gap: 1rem; 
+        padding: 1rem;
+    }
+
+    .form-group {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+    }
+
+    label {
+        margin-right: 0.5rem;
+    }
+
+    .buscar {
+        margin-top: 1rem;
+        align-self: flex-start; /* Alinha o botão à esquerda */
     }
 </style>

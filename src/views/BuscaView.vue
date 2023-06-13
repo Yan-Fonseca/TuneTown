@@ -25,13 +25,13 @@
 
 <style scoped>
     .container {
-        display: grid;
-        grid-template-rows: auto 1fr; /* A primeira linha se ajusta ao conteúdo, a segunda ocupa o restante da altura */
-        height: 100vh; /* Define a altura total da página */
-    }
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh; 
+}
 
-    .content {
-        display: grid;
-        grid-template-columns: minmax(200px, 1fr) 1fr; /* Define a largura do FiltroBusca e ResultadosBusca */
-    }
+.content {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 </style>
