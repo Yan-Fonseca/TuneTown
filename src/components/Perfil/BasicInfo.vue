@@ -7,6 +7,9 @@
             <p class="name">Nome</p>
             <p class="id">@id_usuário</p>
           </div>
+          <div class="calendar">
+            <button>Calendario</button>
+          </div>
         </div>
         <div class="contatos">
           <h3>Estado:</h3>
