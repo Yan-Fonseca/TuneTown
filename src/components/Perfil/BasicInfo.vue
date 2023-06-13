@@ -23,6 +23,9 @@
             <div class="biography-box">
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia mollitia obcaecati libero cumque cupiditate temporibus, iure enim assumenda magnam. Perferendis illum aliquam possimus aliquid reprehenderit placeat earum! Minima, minus suscipit!</p>
             </div>
+            <div class="edit">
+              <button>Editar</button>
+            </div>
           </div>
         </div>
       </div>
