@@ -46,6 +46,7 @@ export default {
   height: 25vh;
   background-color: rgba(29, 36, 45, 0.84);
   border-radius: 20px;;
+  color: white;
 }
 
 .info {
