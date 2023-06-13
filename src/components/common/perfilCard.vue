@@ -9,7 +9,11 @@
     </div>
 </template>
 
-
+<script>
+    export default {
+        name: 'PerfilCard'
+    }
+</script>
 
 <style scoped>
     .perfil-card {
