@@ -2,31 +2,31 @@
     <div class="filtro">
         <h2>Filtrar Busca</h2>
         <div class="info">
-            <form action="">
-                <div>
+            <form>
+                <div class="form-group">
                     <label for="selecao">Estado:</label>
                     <select v-model="selectedOption" id="selecao">
                         <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
                     </select>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="cidade">Cidade:</label>
                     <input type="text" id="cidade">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="genero">Gênero musical:</label>
                     <input type="text" id="genero">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="profissao">Profissão:</label>
                     <input type="text" id="profissao">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="avaliacao">Avaliação:</label>
                     <input type="text" id="avaliacao">
                 </div>
 
-                <button classe="buscar">Buscar</button>
+                <button class="buscar">Buscar</button>
             </form>
         </div>
     </div>

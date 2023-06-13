@@ -1,8 +1,10 @@
 <template>
     <div class="container">
         <BuscaPerfil/>
-        <FiltroBusca/>
-        <ResultadosBusca/>
+        <div class="content">
+            <FiltroBusca/>
+            <ResultadosBusca/>
+        </div>
     </div>
 </template>
 
@@ -22,5 +24,14 @@
 </script>
 
 <style scoped>
+    .container {
+        display: grid;
+        grid-template-rows: auto 1fr; /* A primeira linha se ajusta ao conteúdo, a segunda ocupa o restante da altura */
+        height: 100vh; /* Define a altura total da página */
+    }
 
+    .content {
+        display: grid;
+        grid-template-columns: minmax(200px, 1fr) 1fr; /* Define a largura do FiltroBusca e ResultadosBusca */
+    }
 </style>
