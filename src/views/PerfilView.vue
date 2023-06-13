@@ -1,6 +1,16 @@
 <template>
   <div class="perfil">
-    <h1>This is an user Perfil</h1>
-    <p>:D</p>
+    <BasicInfo/>
   </div>
 </template>
+
+<script>
+import BasicInfo from '@/components/Perfil/BasicInfo.vue';
+
+export default {
+  name: 'PerfilView',
+  components: {
+    BasicInfo
+  }
+}
+</script>
