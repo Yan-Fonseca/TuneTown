@@ -26,6 +26,9 @@
     flex-direction: column; /* Alinha os itens verticalmente */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
+
+    margin-left: 10px;
+    margin-right: 10px;
   }
   
   .data {

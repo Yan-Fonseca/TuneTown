@@ -29,5 +29,8 @@
 
         margin-bottom: 10px;
         margin-top: 10px;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 </style>
