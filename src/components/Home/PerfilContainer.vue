@@ -27,8 +27,8 @@
         justify-content: center; /* Centraliza verticalmente */
         align-items: center; /* Centraliza horizontalmente */
 
-        margin-bottom: 10px;
-        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
 
         padding-top: 10px;
         padding-bottom: 10px;

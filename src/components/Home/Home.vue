@@ -37,6 +37,12 @@
   .perto {
     width: 75%;
     margin-bottom: 20px; /* Adiciona um espaço entre os containers */
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-size: 50px;
+    color: white;
   }
   </style>
   
