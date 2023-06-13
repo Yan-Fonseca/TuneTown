@@ -20,8 +20,6 @@
       LoginComp,
       LoginHeader,
       LoginFooter
-      
-
     }
   }
   </script>
