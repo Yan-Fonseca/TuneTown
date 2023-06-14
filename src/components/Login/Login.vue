@@ -5,13 +5,13 @@
         <h3>A Sua Vitrine Musical</h3>
       </div>
       
-      <div class="form">
+      <div class="form" @submit.prevent="realizarLogin">
         <form action="">
           <div class="input-container">
-            <input type="text"  placeholder="Email">
+            <input type="text"  placeholder="Email" v-model="email">
           </div>
           <div class="input-container">
-            <input type="password" placeholder="Senha">
+            <input type="password" placeholder="Senha" v-model="senha">
           </div>
           <div>
             <button class="btn">LOGIN</button>
@@ -41,9 +41,19 @@
 import router from '@/router'
 export default {
   name: 'LoginComp',
+  data() {
+    return {
+      email: '',
+      senha: ''
+    };
+  },
   methods: {
     navegar(){
       router.push('/Registro');
+    },
+    realizarLogin() {
+      console.log(this.email);
+      console.log(this.senha);
     }
   },
 } 
