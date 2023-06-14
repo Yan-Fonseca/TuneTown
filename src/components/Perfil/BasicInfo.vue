@@ -8,7 +8,7 @@
             <p class="id">@id_usuário</p>
           </div>
           <div class="calendar">
-            <button>Calendario</button>
+            <button @click="acessarCalendario">Calendário</button>
           </div>
         </div>
         <div class="contatos">
@@ -34,7 +34,12 @@
 
 <script>
 export default {
-    name: 'BasicInfo'
+    name: 'BasicInfo',
+    methods: {
+      acessarCalendario() {
+        this.$router.push('/calendario');
+      }
+    }
 }
 </script>
 
