@@ -3,8 +3,6 @@
         <LoginHeader />
         <LoginComp />
         <LoginFooter />
-      
-
     </div>
   </template>
   
