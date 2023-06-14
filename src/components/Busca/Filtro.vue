@@ -33,40 +33,14 @@
 </template>
 
 <script>
+import {estados} from "@/scripts/data.js"
+
 export default {
     name: 'FiltroBusca',
     data() {
         return {
             selectedOption: null,
-            options: [
-            { value: 1, label: 'Acre' },
-            { value: 2, label: 'Alagoas' },
-            { value: 3, label: 'Amapá' },
-            { value: 4, label: 'Amazonas' },
-            { value: 5, label: 'Bahia' },
-            { value: 6, label: 'Ceará' },
-            { value: 7, label: 'Distrito Federal' },
-            { value: 8, label: 'Espírito Santo' },
-            { value: 9, label: 'Goiás' },
-            { value: 10, label: 'Maranhão' },
-            { value: 11, label: 'Mato Grosso' },
-            { value: 12, label: 'Mato Grosso do Sul' },
-            { value: 13, label: 'Minas Gerais' },
-            { value: 14, label: 'Pará' },
-            { value: 15, label: 'Paraíba' },
-            { value: 16, label: 'Paraná' },
-            { value: 17, label: 'Pernambuco' },
-            { value: 18, label: 'Piauí' },
-            { value: 19, label: 'Rio de Janeiro' },
-            { value: 20, label: 'Rio Grande do Norte' },
-            { value: 21, label: 'Rio Grande do Sul' },
-            { value: 22, label: 'Rondônia' },
-            { value: 23, label: 'Roraima' },
-            { value: 24, label: 'Santa Catarina' },
-            { value: 25, label: 'São Paulo' },
-            { value: 26, label: 'Sergipe' },
-            { value: 27, label: 'Tocantins' }
-            ]
+            options: estados
         };
     }
 }
