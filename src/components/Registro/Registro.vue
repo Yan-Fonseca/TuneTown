@@ -8,23 +8,23 @@
         <h2>Inscreva-se grátis e viva a música</h2>
       </div>
       <div class="form-box">
-        <form action="">
+        <form @submit.prevent="enviarFormulario">
           <label for="email">Qual é o seu Email?</label>
-          <input type="text" id="email" placeholder="Insira o seu email" class="input-large">
+          <input type="text" id="email" placeholder="Insira o seu email" class="input-large" v-model="email">
   
           <label for="senha">Crie uma senha</label>
-          <input type="password" id="senha" placeholder="Crie uma senha" class="input-large">
+          <input type="password" id="senha" placeholder="Crie uma senha" class="input-large" v-model="senha">
   
           <label for="repSenha">Repita a sua senha</label>
-          <input type="password" id="repSenha" placeholder="Repita a senha" class="input-large">
+          <input type="password" id="repSenha" placeholder="Repita a senha" class="input-large" v-model="repSenha">
   
           <label for="nome">Como devemos te chamar?</label>
-          <input type="text" id="nome" placeholder="Insira o seu nome de perfil" class="input-large">
+          <input type="text" id="nome" placeholder="Insira o seu nome de perfil" class="input-large" v-model="nome">
   
           <div class="row">
             <div class="column">
               <label for="dataNascimento">Data de Nascimento</label>
-              <input type="text" id="dataNascimento" placeholder="DD/MM/AAAA" class="input-small">
+              <VueDatePicker v-model="dataNascimento"></VueDatePicker>
             </div>
             <div class="column">
               <label for="selecao">Estado:</label>
@@ -43,21 +43,33 @@
             <label for="musico">Sou músico</label>
           </div>
   
-          <button class="btn">Registrar</button>
+          <button class="btn" type="submit">Registrar</button>
         </form>
       </div>
     </div>
   </template>
   
   <script>
-  import {estados} from "@/scripts/data.js"
+  import {estados} from "@/scripts/data.js";
+  import VueDatePicker from '@vuepic/vue-datepicker';
+  import '@vuepic/vue-datepicker/dist/main.css'
 
   export default {
     name: 'RegistroComp',
+    components: {
+      VueDatePicker
+    },
     data() {
       return {
         selectedOption: null,
-        options: estados
+        options: estados,
+        email: "",
+        senha: "",
+        repSenha: "",
+        nome: "",
+        dataNascimento: null,
+        cidade: "",
+        musico: false
       }
     }
   }
