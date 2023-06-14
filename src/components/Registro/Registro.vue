@@ -40,7 +40,7 @@
   
           <div class="checkbox">
             <input type="checkbox" id="musico">
-            <label for="musico">Sou músico</label>
+            <label for="musico">Sou Profissional Musical</label>
           </div>
   
           <button class="btn" type="submit">Registrar</button>
