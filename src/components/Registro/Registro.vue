@@ -27,8 +27,10 @@
               <input type="text" id="dataNascimento" placeholder="DD/MM/AAAA" class="input-small">
             </div>
             <div class="column">
-              <label for="estado">Estado</label>
-              <input type="text" id="estado" placeholder="Insira o estado" class="input-small">
+              <label for="selecao">Estado:</label>
+              <select v-model="selectedOption" id="selecao">
+                  <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
+              </select>
             </div>
             <div class="column">
               <label for="cidade">Cidade</label>
@@ -48,8 +50,16 @@
   </template>
   
   <script>
+  import {estados} from "@/scripts/data.js"
+
   export default {
-    name: 'RegistroComp'
+    name: 'RegistroComp',
+    data() {
+      return {
+        selectedOption: null,
+        options: estados
+      }
+    }
   }
   </script>
   
@@ -112,6 +122,10 @@
   h2 {
     font-size: 37px;
     line-height: 41px;
+  }
+
+  select {
+    background-color: rgba(217, 217, 217, 0.47);
   }
   
   .logo {
