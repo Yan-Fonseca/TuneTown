@@ -39,17 +39,14 @@
 
 <script>
 import router from '@/router'
-    export default {
-        name: 'LoginComp',
-      methods: {
-      navegar(){
+export default {
+  name: 'LoginComp',
+  methods: {
+    navegar(){
       router.push('/Registro');
     }
-    },
-    }
-    
-    
-   
+  },
+} 
 </script>
   
   <style scoped>
