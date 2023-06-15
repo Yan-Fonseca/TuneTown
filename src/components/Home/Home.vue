@@ -25,7 +25,15 @@ export default {
         { id: 0, nome: 'Yan', avaliacao: 9.9 },
         { id: 1, nome: 'Gabriela', avaliacao: 9.6 },
         { id: 2, nome: 'Amanda', avaliacao: 9.9 },
-        { id: 3, nome: 'Cleopatra', avaliacao: 9.6 }
+        { id: 3, nome: 'Cleopatra', avaliacao: 9.6 },
+        { id: 0, nome: 'Yan', avaliacao: 9.9 },
+        { id: 1, nome: 'Joel', avaliacao: 8.5 },
+        { id: 2, nome: 'João', avaliacao: 7.8 },
+        { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
+        { id: 0, nome: 'Yan', avaliacao: 9.9 },
+        { id: 1, nome: 'Joel', avaliacao: 8.5 },
+        { id: 2, nome: 'João', avaliacao: 7.8 },
+        { id: 3, nome: 'Gabriela', avaliacao: 9.6 }
       ],
       profissionaisPerto: [
         { id: 0, nome: 'Yan', avaliacao: 9.9 },

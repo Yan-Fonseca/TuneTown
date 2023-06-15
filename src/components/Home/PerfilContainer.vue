@@ -1,6 +1,8 @@
 <template>
     <div class="container">
+        <div class="cards-wrapper">
         <PerfilCard v-for="item in users" :key="item.id" :nome="item.nome" :avaliacao="item.avaliacao" />
+        </div>
     </div>
 </template>
 
@@ -25,15 +27,20 @@
     .container {
         background-color: rgba(42, 52, 62, 1);
         border-radius: 20px;
-        display: flex; /* Adicionado para usar flexbox */
-        flex-direction: row; /* Alinha os itens verticalmente */
-        justify-content: center; /* Centraliza verticalmente */
-        align-items: center; /* Centraliza horizontalmente */
 
         margin-bottom: 20px;
         margin-top: 20px;
 
         padding-top: 10px;
         padding-bottom: 10px;
+        overflow-x: auto; 
+        white-space: nowrap;
+
+    }
+
+    .cards-wrapper {
+        display: inline-flex; /* Utiliza flexbox no eixo X */
+        gap: 10px; /* Adiciona um espaço entre os cards */
+        padding: 10px; /* Adiciona um espaço interno entre os cards */
     }
 </style>
