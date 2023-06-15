@@ -1,10 +1,11 @@
 <template>
-    <div class="container">
-      <div class="info">
+  <div class="container">
+    <div class="info">
+      <div class="info-basica">
         <div class="img">
           <img src="../../assets/imgs/perfil.png" alt="imagem de perfil">
           <div class="profile-info">
-            <p class="name">Nome</p>
+            <p class="name">{{ nome }}</p>
             <p class="id">@id_usuário</p>
           </div>
           <div class="calendar">
@@ -12,36 +13,49 @@
           </div>
         </div>
         <div class="contatos">
-          <h3>Estado:</h3>
-          <h3>Cidade:</h3>
-          <h3>Telefone:</h3>
-          <h3>Email:</h3>
+          <h3>Estado: {{ estado }}</h3>
+          <h3>Cidade: {{ cidade }}</h3>
+          <h3>Telefone: {{ telefone }}</h3>
+          <h3>Email: {{ email }}</h3>
         </div>
-        <div class="biography">
-          <div class="work-info">
-            <h3>Trabalho com:</h3>
-            <div class="biography-box">
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia mollitia obcaecati libero cumque cupiditate temporibus, iure enim assumenda magnam. Perferendis illum aliquam possimus aliquid reprehenderit placeat earum! Minima, minus suscipit!</p>
-            </div>
-            <div class="edit">
-              <button>Editar</button>
-            </div>
+      </div>
+      <div class="biography">
+        <div class="work-info">
+          <h3>Trabalho com: {{ trabalho }}</h3>
+          <div class="biography-box">
+            <p>{{ biografia }}</p>
+          </div>
+          <div class="edit">
+            <button>Editar</button>
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 export default {
-    name: 'BasicInfo',
-    methods: {
-      acessarCalendario() {
-        this.$router.push('/calendario');
-      }
+  name: 'BasicInfo',
+  methods: {
+    acessarCalendario() {
+      this.$router.push('/calendario');
     }
+  },
+  data() {
+    return {
+      biografia: 'Estudante e especialista em engenharia de som e afins',
+      nome: 'Baiao',
+      estado: 'minas gerais',
+      cidade: 'juiz de fora',
+      telefone: '32 98888-8888',
+      email: 'baiao.mixer@teste.com',
+      trabalho: 'Engenharia de som'
+    };
+  }
 }
 </script>
+
 
 <style scoped>
 .container {
@@ -57,18 +71,19 @@ export default {
 .info {
   display: flex;
   align-items: center;
+  flex-direction: row;
 }
 
 .img {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin-right: 20px;
 }
 
 .img img {
-  width: 150px;
-  height: 150px;
+  width: 90px;
+  height: 93px;
   border-radius: 50%;
   margin-bottom: 10px;
 }
