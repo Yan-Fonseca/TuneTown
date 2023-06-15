@@ -11,22 +11,22 @@
                 </div>
                 <div class="form-group">
                     <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade">
+                    <input type="text" id="cidade" v-model="cidade">
                 </div>
                 <div class="form-group">
                     <label for="genero">Gênero musical:</label>
-                    <input type="text" id="genero">
+                    <input type="text" id="genero" v-model="genero">
                 </div>
                 <div class="form-group">
                     <label for="profissao">Profissão:</label>
-                    <input type="text" id="profissao">
+                    <input type="text" id="profissao" v-model="profissao">
                 </div>
                 <div class="form-group">
                     <label for="avaliacao">Avaliação:</label>
-                    <input type="text" id="avaliacao">
+                    <input type="text" id="avaliacao" v-model="avaliacao">
                 </div>
 
-                <button class="buscar">Buscar</button>
+                <button class="buscar" @click="buscar">Buscar</button>
             </form>
         </div>
     </div>
@@ -40,8 +40,25 @@ export default {
     data() {
         return {
             selectedOption: null,
-            options: estados
+            options: estados,
+            cidade: '',
+            genero: '',
+            profissao: '',
+            avaliacao: 0.0
         };
+    },
+    methods: {
+        buscar() {
+            let dados = {
+                estado: this.selectedOption,
+                cidade: this.cidade,
+                genero: this.genero,
+                profissao: this.profissao,
+                avaliacao: this.avaliacao
+            };
+
+            console.log(dados);
+        }
     }
 }
 </script>
