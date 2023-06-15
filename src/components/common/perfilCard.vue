@@ -2,16 +2,26 @@
     <div class="perfil-card">
       <img src="../../assets/imgs/perfil.png" alt="foto de perfil">
       <div class="data">
-        <p class="nome">Nome</p>
+        <p class="nome">{{ nome }}</p>
         <button class="perfil-btn">Perfil</button>
-        <p class="avaliacao">x.x/5.0</p>
+        <p class="avaliacao">{{ avaliacao }}/10.0</p>
       </div>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'PerfilCard'
+    name: 'PerfilCard',
+    props: {
+      nome: {
+        type: String,
+        required: true
+      },
+      avaliacao: {
+        type: Number,
+        required: true
+      }
+    }
   }
   </script>
   

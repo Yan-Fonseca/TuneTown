@@ -47,8 +47,7 @@ export default {
             descricao: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             dataPublicacao: "2023-06-02",
             imagem: "caminho/imagem2.jpg"
-            },
-            // Adicione mais trabalhos conforme necessário
+            }
         ]
         };
     },
