@@ -186,6 +186,7 @@ h1 {
 h2 {
   font-size: 37px;
   line-height: 41px;
+  margin-left: 100px;
 }
 
 select {
@@ -194,11 +195,11 @@ select {
 
 .logo {
   display: flex;
-  align-items: center;
   margin-bottom: 10px;
 }
 
 .logo img {
+  margin-left: 150px;
   width: 125px;
   height: 133px;
 }
@@ -206,7 +207,6 @@ select {
 .top {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-bottom: 20px;
 }
 
