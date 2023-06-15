@@ -43,7 +43,7 @@
         </div>
         <div class="checkbox">
           <input type="checkbox" id="musico" v-model="musico">
-          <label for="musico">Sou Profissional Musical</label>
+          <label for="musico">Criar perfil como profissional musical</label>
         </div>
         <div class="checkbox2">
           <input type="checkbox" id="termos" v-model="termos">
@@ -54,7 +54,7 @@
           <a class="Login" @click=navegar>Política de Privacidade da TuneTown.</a>
         </p>
         <button class="btn" type="submit">Inscreva-se</button>
-        <p class="text">já tem uma conta? 
+        <p class="text">Já tem uma conta? 
         <a class="Login" @click=navegar>Faça Login.</a>
         </p>
       </div>
