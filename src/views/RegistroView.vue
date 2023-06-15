@@ -1,6 +1,6 @@
 <template>
     <div class="corpo">
-      <div class="registro-container">
+    <div id="registro-container">
         <RegistroComp />
       </div>
     </div>
@@ -18,6 +18,11 @@
   </script>
   
   <style scoped>
+    #registro-container {
+    margin-right: 50px;
+    background-color: rgba(0, 3, 22, 1);
+    background-color: transparent;
+   }
   .corpo {
     background-image: url("../assets/imgs/fundo_registro.png");
     background-size: cover;
@@ -28,12 +33,8 @@
     justify-content: flex-end;
     align-items: center;
     background-repeat: no-repeat;
-    background-color: transparent;
   }
   
-  .registro-container {
-    margin-right: 50px;
-    background-color: rgba(0, 3, 22, 1);
-  }
+
   </style>
   

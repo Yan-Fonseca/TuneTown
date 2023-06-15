@@ -35,8 +35,6 @@
     align-items: center;
   }
   * {
-    
-
     font-family: 'Arapey', serif;
   }
  

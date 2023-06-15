@@ -1,5 +1,5 @@
 <template>
-  <div class="corpo">
+  <div class="Registro">
     <div class="top">
       <div class="logo">
         <img src="../../assets/imgs/logo_TuneTown.png" alt="Logo">
@@ -9,23 +9,22 @@
     </div>
     <div class="form-box">
       <form @submit.prevent="enviarFormulario">
-        <label for="email">Qual é o seu Email?</label>
-        <input type="text" id="email" placeholder="Insira o seu email" class="input-large" v-model="email">
+        <div class="test">
+        <div class="formP">
+          <label for="email">Qual é o seu Email?</label>
+          <input type="text" id="email" placeholder="Insira o seu email" class="input-large" v-model="email">
 
-        <label for="senha">Crie uma senha</label>
-        <input type="password" id="senha" placeholder="Crie uma senha" class="input-large" v-model="senha">
+          <label for="senha">Crie uma senha</label>
+          <input type="password" id="senha" placeholder="Crie uma senha" class="input-large" v-model="senha">
 
-        <label for="repSenha">Repita a sua senha</label>
-        <input type="password" id="repSenha" placeholder="Repita a senha" class="input-large" v-model="repSenha">
+          <label for="repSenha" id="formPlabel">Repita a sua senha</label>
+          <input type="password" id="repSenha" placeholder="Repita a senha" class="input-large" v-model="repSenha">
 
-        <label for="nome">Como devemos te chamar?</label>
-        <input type="text" id="nome" placeholder="Insira o seu nome de perfil" class="input-large" v-model="nome">
-
+          <label for="nome">Como devemos te chamar?</label>
+          <input type="text" id="nome" placeholder="Insira o seu nome de perfil" class="input-large" v-model="nome">
+          <p> Isso aparece no seu perfil.</p>
+       
         <div class="row">
-          <div class="column">
-            <label for="dataNascimento">Data de Nascimento</label>
-            <VueDatePicker v-model="dataNascimento" :enable-time-picker="false"></VueDatePicker>
-          </div>
           <div class="column">
             <label for="selecao">Estado:</label>
             <select v-model="selectedOption" id="selecao">
@@ -33,17 +32,32 @@
             </select>
           </div>
           <div class="column">
-            <label for="cidade">Cidade</label>
+            <label for="cidade">Cidade: </label>
             <input type="text" id="cidade" placeholder="Insira a cidade" class="input-small" v-model="cidade">
           </div>
         </div>
-
+        <div class="column">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <VueDatePicker v-model="dataNascimento"></VueDatePicker>
+          </div>
+        </div>
         <div class="checkbox">
           <input type="checkbox" id="musico" v-model="musico">
           <label for="musico">Sou Profissional Musical</label>
         </div>
-
-        <button class="btn" type="submit">Registrar</button>
+        <div class="checkbox2">
+          <input type="checkbox" id="termos" v-model="termos">
+          <label for="termos">Eu concordo com os<p class="text4"></p><a class="Login" @click=navegar> Termos de Uso da TuneTown.</a></label>
+        </div>
+        <p class="text3">Para saber mais sobre como a TuneTown coleta, utiliza, compartilha e protege</p>
+        <p class="text2">seus dados pessoais leia a 
+          <a class="Login" @click=navegar>Política de Privacidade da TuneTown.</a>
+        </p>
+        <button class="btn" type="submit">Inscreva-se</button>
+        <p class="text">já tem uma conta? 
+        <a class="Login" @click=navegar>Faça Login.</a>
+        </p>
+      </div>
       </form>
     </div>
   </div>
@@ -53,7 +67,7 @@
   import {estados} from "@/scripts/data.js";
   import VueDatePicker from '@vuepic/vue-datepicker';
   import '@vuepic/vue-datepicker/dist/main.css'
-
+  import router from '@/router'
   export default {
     name: 'RegistroComp',
     components: {
@@ -69,10 +83,13 @@
         nome: "",
         dataNascimento: null,
         cidade: "",
-        musico: false
+        musico: false,
       }
     },
     methods: {
+      navegar(){
+      router.push('/Login');
+    },
       enviarFormulario() {
         console.log('Email:', this.email);
         console.log('Senha:', this.senha);
@@ -87,27 +104,50 @@
 </script>
 
 <style scoped>
-.corpo {
-  height: 100vh;
+.text{
+  font-size: 20px;
+  margin-top: 10px;
+}
+.text2{
+  margin-top: 5px;
+  margin-left: 45px;
+}
+.text4{
+  margin-left: 10px;
+}
+.text3{
+  margin-left: 20px;
+}
+.test{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.formP{
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: rgba(0, 3, 22, 1);
+  margin-bottom: 10px;
+}
+p{
+  color: white;
+  font-size: 12px;
 }
 
 .input-large {
   width: 400px;
   height: 40px;
-  background: rgba(217, 217, 217, 0.47);
+  background-color: rgba(217, 217, 217, 0.47);
   border-radius: 5px;
   margin-bottom: 10px;
+  padding: 2px;
+  
 }
 
 .input-small {
   width: 200px;
   height: 40px;
-  background: rgba(217, 217, 217, 0.47);
+  background-color: rgba(217, 217, 217, 0.47);
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -117,14 +157,15 @@ input::placeholder {
 }
 
 label {
+  align-self: flex-start;
   font-family: 'Arapey';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   display: flex;
-  align-items: center;
   color: #FFFFFF;
+  align-items: flex-start;
 }
 
 h1, h2 {
@@ -154,7 +195,7 @@ select {
 .logo {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .logo img {
@@ -166,13 +207,13 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .form-box {
   background: rgba(88, 112, 130, 0.26);
   border-radius: 20px;
-  padding: 20px;
+  padding: 40px;
 }
 
 .row {
@@ -189,14 +230,32 @@ select {
 .checkbox {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+.checkbox2 {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 .btn {
+  font-size: 20px;
+  color: white;
   background: #E33FC9;
   border-radius: 7px;
   justify-content: center;
   width: 100%;
   height: 40px;
+}
+
+.Registro{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.Login:hover{
+  color: #E33FC9;
+  cursor: pointer;
+  text-decoration: underline;
 }
 </style>
