@@ -1,7 +1,9 @@
 <template>
     <div class="container">
+        <div class="scrollable-wrapper">
         <div class="cards-wrapper">
-        <PerfilCard v-for="item in users" :key="item.id" :nome="item.nome" :avaliacao="item.avaliacao" />
+            <PerfilCard v-for="item in users" :key="item.id" :nome="item.nome" :avaliacao="item.avaliacao" />
+        </div>
         </div>
     </div>
 </template>
@@ -38,9 +40,24 @@
 
     }
 
+    .scrollable-wrapper {
+        overflow-x: scroll; 
+        scrollbar-width: thin; 
+        scrollbar-color: rgba(255, 255, 255, 0.5) transparent; 
+    }
+
+    .scrollable-wrapper::-webkit-scrollbar {
+        height: 8px; 
+    }
+
+    .scrollable-wrapper::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 4px; 
+    }
+
     .cards-wrapper {
-        display: inline-flex; /* Utiliza flexbox no eixo X */
-        gap: 10px; /* Adiciona um espaço entre os cards */
-        padding: 10px; /* Adiciona um espaço interno entre os cards */
+        display: inline-flex; 
+        gap: 10px; 
+        padding: 10px; 
     }
 </style>
