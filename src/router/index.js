@@ -38,6 +38,12 @@ const routes = [
     name: 'calendario',
     component: () => import(/*webpackChunkName: "registro"*/'../views/CalendarioView.vue')/*,
     meta: {requiresAuth: true}*/
+  },
+  {
+    path: '/Welcome',
+    name: 'Welcome',
+    component: () => import(/*webpackChunkName: "Welcome"*/'../views/WelcomeView.vue')/*,
+    meta: {requiresAuth: true}*/
   }
 ]
 

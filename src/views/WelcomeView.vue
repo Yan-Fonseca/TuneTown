@@ -1,18 +1,18 @@
 <template>
     <div class="corpo">
     <div id="registro-container">
-        <RegistroComp />
+        <WelcomeComp/>
       </div>
     </div>
   </template>
   
   <script>
-  import RegistroComp from '@/components/Registro/Registro.vue'
+  import WelcomeComp from '@/components/Welcome/Welcome.vue'
   
   export default {
-    name: 'RegistroVue',
+    name: 'WelcomeView',
     components: {
-      RegistroComp
+        WelcomeComp
     }
   }
   </script>
@@ -34,7 +34,5 @@
     align-items: center;
     background-repeat: no-repeat;
   }
-  
-
   </style>
   
