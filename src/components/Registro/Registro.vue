@@ -228,7 +228,7 @@ select {
 .top {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .form-box {
@@ -261,12 +261,14 @@ select {
 }
 
 .btn {
+  margin-top: 10px;
+  margin-left: 120px;
   font-size: 20px;
   color: white;
   background: #E33FC9;
-  border-radius: 7px;
+  border-radius: 20px;
   justify-content: center;
-  width: 100%;
+  width: 40%;
   height: 40px;
 }
 
