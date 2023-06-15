@@ -126,6 +126,7 @@
    --dp-highlight-color: rgba(0, 92, 178, 0.2);
 }
 .text{
+  margin-left: 70px;
   font-size: 20px;
   margin-top: 10px;
 }
