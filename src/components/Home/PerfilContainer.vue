@@ -1,9 +1,6 @@
 <template>
     <div class="container">
-        <PerfilCard/>
-        <PerfilCard/>
-        <PerfilCard/>
-        <PerfilCard/>
+        <PerfilCard v-for="item in users" :key="item.id" :nome="item.nome" :avaliacao="item.avaliacao" />
     </div>
 </template>
 
@@ -14,6 +11,12 @@
         name: 'PerfilContainer',
         components: {
             PerfilCard
+        },
+        props: {
+            users: {
+                type: Array,
+                required: true
+            }
         }
     }
 </script>
