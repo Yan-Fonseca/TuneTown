@@ -53,6 +53,8 @@ export default {
         height: 100%; 
         float: left; 
         margin: 10px;
+        text-align: center;
+        padding: 5px;
     }
 
     form {
@@ -60,6 +62,7 @@ export default {
         grid-template-columns: 1fr; 
         gap: 1rem; 
         padding: 1rem;
+        margin-top: 5px;
     }
 
     .form-group {
@@ -73,6 +76,17 @@ export default {
 
     .buscar {
         margin-top: 1rem;
+        height: 5vh;
+        width: 40vh;
+        color: white;
+        margin-top: 5px;
+        margin-left: 2px;
+        border-radius: 12px;
         align-self: flex-start; /* Alinha o botão à esquerda */
+        background-color: #1f5b86ce;
+    }
+
+    .info {
+        margin-top: 40px;
     }
 </style>
