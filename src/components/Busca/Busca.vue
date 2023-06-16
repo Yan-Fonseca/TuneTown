@@ -1,13 +1,16 @@
 <template>
     <div class="header">
         <img class="logo" src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown">
-        <form action="">
+        <form id="search" action="">
             <input type="search" class="busca">
-            <button id="botao">Buscar</button>
+            <button id="botao" type="submit">Buscar</button>
         </form>
         <div class="icon">
-            <img class="icon-home" src="../../assets/icons/HomeIcon.png" alt="">
-            <img src="../../assets/imgs/perfil.png" alt="perfil" class="icon-perfil">
+            <div id="links">
+                <img class="icon-home" src="../../assets/icons/HomeIcon.png" alt="">
+                <img src="../../assets/imgs/perfil.png" alt="perfil" class="icon-perfil">
+            </div>
+            
         </div>
     </div>
 </template>
@@ -33,24 +36,39 @@ export default {
 
     .busca {
         background-color: rgba(83, 87, 103, 0.76);
-        width: 40vh;
-        height: 3vh;
+        width: 80vh;
+        height: 5.1vh;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
     }
 
     #botao {
         background-color: rgba(42, 52, 62, 1);
         color: white;
-        height: 3vh;
+        height: 5vh;
+        width: 60px;
+        margin-left: 1px;
     }
 
+    #links{
+        margin-left: 240px;
+    }
+
+    #search {
+        margin-left: 320px;
+    }
     .icon-home {
         width: 40px;
         height: 40px;
+        padding-right: 10px;
     }
 
     .icon-perfil {
         width: 40px;
         height: 40px;
+        margin-left: 10px;
     }
+
+    
 
 </style>
