@@ -69,14 +69,15 @@ body {
 .avaliados,
 .perto {
   width: 75%;
-  margin-bottom: 15px; /* Adiciona um espaço entre os containers */
+  margin-bottom: 40px; /* Adiciona um espaço entre os containers */
   margin-top: 10px;
+
 }
 
 h1 {
   display: flex;
   justify-content: center;
-  font-size: 40px;
+  font-size: 30px;
   color: white;
 }
 </style>

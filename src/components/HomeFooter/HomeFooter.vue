@@ -17,7 +17,7 @@
 
     .FooterBody{
         width: 100%;
-        height: 80px;
+        height: 49px;
         background: rgba(36, 56, 81, 0.64);
         font-family: 'Arapey', serif;
         display: flex;
