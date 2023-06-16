@@ -7,8 +7,8 @@
         </form>
         <div class="icon">
             <div id="links">
-                <img class="icon-home" src="../../assets/icons/HomeIcon.png" alt="">
-                <img src="../../assets/imgs/perfil.png" alt="perfil" class="icon-perfil">
+                <a class="home" @click="inicio"><img class="icon-home" src="../../assets/icons/HomeIcon.png" alt=""></a>
+                <a class="perfil" @click="navegarPerfil"><img src="../../assets/imgs/perfil.png" alt="perfil" class="icon-perfil"></a>
             </div>
             
         </div>
@@ -16,8 +16,18 @@
 </template>
 
 <script>
+import router from '@/router'
 export default {
-    name: 'BuscaPerfil'
+    name: 'BuscaPerfil',
+
+    methods: {
+    inicio(){
+      router.push('/#')
+    },
+    navegarPerfil(){
+        router.push('/Perfil')
+    }
+}
 }
 </script>
 
