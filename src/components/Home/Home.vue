@@ -39,7 +39,16 @@ export default {
         { id: 0, nome: 'Yan', avaliacao: 9.9 },
         { id: 1, nome: 'Joel', avaliacao: 8.5 },
         { id: 2, nome: 'João', avaliacao: 7.8 },
-        { id: 3, nome: 'Gabriela', avaliacao: 9.6 }
+        { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
+        { id: 3, nome: 'Cleopatra', avaliacao: 9.6 },
+        { id: 0, nome: 'Yan', avaliacao: 9.9 },
+        { id: 1, nome: 'Joel', avaliacao: 8.5 },
+        { id: 2, nome: 'João', avaliacao: 7.8 },
+        { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
+        { id: 0, nome: 'Yan', avaliacao: 9.9 },
+        { id: 1, nome: 'Joel', avaliacao: 8.5 },
+        { id: 2, nome: 'João', avaliacao: 7.8 },
+        { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
       ]
     };
   }
@@ -60,12 +69,14 @@ body {
 .avaliados,
 .perto {
   width: 75%;
-  margin-bottom: 20px; /* Adiciona um espaço entre os containers */
-  margin-top: 20px;
+  margin-bottom: 15px; /* Adiciona um espaço entre os containers */
+  margin-top: 10px;
 }
 
 h1 {
-  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
   color: white;
 }
 </style>
