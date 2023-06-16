@@ -5,29 +5,29 @@
         <div class="img">
           <img src="../../assets/imgs/perfil.png" alt="imagem de perfil">
           <div class="profile-info">
-            <p class="name">{{ nome }}</p>
+            <h3>{{ nome }}</h3>
             <p class="id">@id_usuário</p>
           </div>
           <div class="calendar">
             <button @click="acessarCalendario">Calendário</button>
           </div>
         </div>
-        <div class="contatos">
-          <h3>Estado: {{ estado }}</h3>
-          <h3>Cidade: {{ cidade }}</h3>
-          <h3>Telefone: {{ telefone }}</h3>
-          <h3>Email: {{ email }}</h3>
+        <div class="contatos" :style="{ borderColor: corBorda }">
+          <h3>Estado: <input v-model="estado" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Cidade: <input v-model="cidade" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Telefone: <input v-model="telefone" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Email: <input v-model="email" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
         </div>
       </div>
       <div class="biography">
         <div class="work-info">
           <h3>Trabalho com: {{ trabalho }}</h3>
-          <div class="biography-box">
-            <p>{{ biografia }}</p>
+          <div class="biography-box" :style="{ borderColor: corBorda }">
+            <textarea v-model="biografia" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></textarea>
           </div>
-          <div class="edit">
-            <button>Editar</button>
-          </div>
+        </div>
+        <div class="edit">
+          <button @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
         </div>
       </div>
     </div>
@@ -37,11 +37,6 @@
 <script>
 export default {
   name: 'BasicInfo',
-  methods: {
-    acessarCalendario() {
-      this.$router.push('/calendario');
-    }
-  },
   data() {
     return {
       biografia: 'Estudante e especialista em engenharia de som e afins',
@@ -50,12 +45,22 @@ export default {
       cidade: 'juiz de fora',
       telefone: '32 98888-8888',
       email: 'baiao.mixer@teste.com',
-      trabalho: 'Engenharia de som'
+      trabalho: 'Engenharia de som',
+      editando: false,
+      corBorda: 'rgba(29, 36, 45, 0.84)'
     };
+  },
+  methods: {
+    acessarCalendario() {
+      this.$router.push('/calendario');
+    },
+    toggleEdicao() {
+      this.editando = !this.editando;
+      this.corBorda = this.editando ? 'green' : 'rgba(29, 36, 45, 0.84)';
+    }
   }
 }
 </script>
-
 
 <style scoped>
 .container {
@@ -64,7 +69,7 @@ export default {
   align-items: center;
   height: 25vh;
   background-color: rgba(29, 36, 45, 0.84);
-  border-radius: 20px;;
+  border-radius: 20px;
   color: white;
 }
 
@@ -92,22 +97,30 @@ export default {
   text-align: center;
 }
 
-.profile-info .name {
+.profile-info input {
   font-size: 20px;
   font-weight: bold;
+  border: none;
+  color: white;
 }
 
 .profile-info .id {
   font-size: 14px;
-  color: gray;
+  color: white;
 }
 
 .contatos {
   margin-left: 20px;
+  border: 1px solid;
 }
 
 .contatos h3 {
   margin-bottom: 5px;
+}
+
+.contatos input {
+  border: none;
+  color: white;
 }
 
 .biography {
@@ -123,15 +136,21 @@ export default {
 }
 
 .biography-box {
-  border: 1px solid gray;
+  border: 1px solid;
   padding: 10px;
   background-color: rgba(88, 112, 130, 0.26);
   width: 300px;
+  margin-top: 10px;
 }
 
-.biography-box p {
+.biography-box textarea {
+  color: white;
   margin: 0;
   text-align: justify;
   text-justify: inter-word;
+  width: 100%;
+  height: 100px;
+  border: none;
+  resize: none;
 }
 </style>
