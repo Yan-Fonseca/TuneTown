@@ -4,7 +4,7 @@
       <div class="data">
         <p class="nome">{{ nome }}</p>
         <button class="perfil-btn">Perfil</button>
-        <p class="avaliacao">{{ avaliacao }}/10.0</p>
+        <p class="avaliacao">{{ avaliacao }}/10</p>
       </div>
     </div>
   </template>
