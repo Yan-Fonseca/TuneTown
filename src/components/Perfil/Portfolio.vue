@@ -8,6 +8,7 @@
             <div class="upload">
                 <input type="file" accept="image/*, video/*" @change="handleFileUpload">
             </div>
+            <button @click.prevent="adicionarTrabalho">Salvar</button>
         </div>
         <div class="trabalhos">
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
@@ -40,13 +41,13 @@ export default {
             id: 1,
             descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             dataPublicacao: "2023-06-01",
-            imagem: "caminho/imagem1.jpg"
+            imagem: ""
             },
             {
             id: 2,
             descricao: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             dataPublicacao: "2023-06-02",
-            imagem: "caminho/imagem2.jpg"
+            imagem: ""
             }
         ]
         };
@@ -58,14 +59,46 @@ export default {
       console.log("Arquivo selecionado:", file);
     },
 
+    reiniciarIndices() {
+
+    },
+
+    adicionarTrabalho() {
+        const data = new Date();
+        let counter = 0;
+        this.trabalhos.forEach(element => {
+            if(element.id>counter) {
+                counter = element.id;
+            }
+        });
+        counter++;
+
+        let publicacao = data.getDate().toString() + '-' + (data.getUTCMonth() + 1).toString() + '-' + data.getFullYear().toString();
+
+        let trabalho = {
+            id: counter,
+            descricao: this.texto,
+            dataPublicacao: publicacao,
+            imagem: ""
+        }
+
+        this.trabalhos.push(trabalho);
+
+    },
+
     editarTrabalho(id) {
       // Lógica para editar o trabalho com o ID fornecido
       console.log("Editar trabalho:", id);
     },
 
     removerTrabalho(id) {
-      // Lógica para remover o trabalho com o ID fornecido
-      console.log("Remover trabalho:", id);
+      const index = this.trabalhos.findIndex(trabalho => trabalho.id == id);
+      if (index!= -1) {
+        this.trabalhos.splice(index,1);
+      }
+      else {
+        console.log('Trabalho não encontrado');
+      }
     }
   }
 }
