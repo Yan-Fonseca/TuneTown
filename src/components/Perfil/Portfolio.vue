@@ -119,6 +119,7 @@ export default {
         border: 1px solid #ccc;
         resize: vertical;
         background-color: rgba(88, 112, 130, 0.26);
+        color: white;
     }
 
     .novo-trabalho {
