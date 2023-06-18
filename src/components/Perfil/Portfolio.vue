@@ -1,14 +1,16 @@
 <template>
     <div class="portfolio">
-        <div class="novo-trabalho">
-            <div class="descricao">
-                <h3>Trabalho</h3>
-                <textarea v-model="texto" rows="6"></textarea>
+        <div class="container">
+            <div class="novo-trabalho">
+                <div class="descricao">
+                    <h3>Novo Trabalho</h3>
+                    <textarea v-model="texto" rows="6"></textarea>
+                </div>
+                <div class="upload">
+                    <input type="file" accept="image/*, video/*" @change="handleFileUpload">
+                </div>
+                <button @click.prevent="adicionarTrabalho" id="enviar">Enviar</button>
             </div>
-            <div class="upload">
-                <input type="file" accept="image/*, video/*" @change="handleFileUpload">
-            </div>
-            <button @click.prevent="adicionarTrabalho" id="enviar">Enviar</button>
         </div>
         <div class="trabalhos">
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
@@ -112,7 +114,7 @@ export default {
 </script>
 
 <style scoped>
-    .portfolio {
+    .container, .trabalho {
         background-color: rgba(29, 36, 45, 0.84);
         color: white;
         border-radius: 20px;
@@ -142,6 +144,10 @@ export default {
         margin-bottom: 20px;
         padding: 10px;
         border: 1px solid #ccc;
+    }
+
+    .trabalho-info {
+        margin-top: 1vh;
     }
 
     .descricao {

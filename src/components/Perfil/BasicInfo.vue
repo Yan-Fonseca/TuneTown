@@ -72,6 +72,8 @@ export default {
   border-radius: 20px;
   color: white;
   font-size: 20px;
+  margin-top: 1vh;
+  padding: 10px;
 }
 
 .info {
