@@ -18,14 +18,14 @@
     data() {
       return {
         users: [
-          { id: 0, nome: 'Yan', avaliacao: 9.9 },
-          { id: 1, nome: 'Joel', avaliacao: 8.5 },
-          { id: 2, nome: 'João', avaliacao: 7.8 },
-          { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
+          { id: 0, nome: 'Yan', avaliacao: 10.0 },
+          { id: 1, nome: 'Joel', avaliacao: 5.5 },
+          { id: 2, nome: 'João', avaliacao: 1.8 },
+          { id: 3, nome: 'Gabriela', avaliacao: 1.0 },
           { id: 4, nome: 'Amanda', avaliacao: 9.9 },
           { id: 5, nome: 'Alexandre', avaliacao: 8.5 },
           { id: 6, nome: 'Julio', avaliacao: 7.8 },
-          { id: 7, nome: 'Cleopatra', avaliacao: 9.6 }
+          { id: 7, nome: 'Cleopatra', avaliacao: 2 }
         ]
       };
     }
