@@ -23,7 +23,18 @@
         </div>
         <div class="form-group">
           <label for="avaliacao">Avaliação:</label>
-          <input type="text" id="avaliacao" :class="{ 'custom-background': avaliacaoFilled }" @input="avaliacaoFilled = $event.target.value !== ''">
+           <div class="rating-filter">
+              <input type="radio" id="star5" name="rating" value="5" />
+              <label for="star5">&#9733;</label>
+              <input type="radio" id="star4" name="rating" value="4" />
+              <label for="star4">&#9733;</label>
+              <input type="radio" id="star3" name="rating" value="3" />
+              <label for="star3">&#9733;</label>
+              <input type="radio" id="star2" name="rating" value="2" />
+              <label for="star2">&#9733;</label>
+              <input type="radio" id="star1" name="rating" value="1" />
+              <label for="star1">&#9733;</label>
+           </div>
         </div>
 
         <button class="buscar">Buscar</button>
@@ -45,7 +56,6 @@ export default {
       cidadeFilled: false,
       generoFilled: false,
       profissaoFilled: false,
-      avaliacaoFilled: false,
     };
   },
 
@@ -58,6 +68,7 @@ export default {
 </script>
 
 <style scoped>
+
 .filtro {
   background-color: rgba(29, 36, 45, 0.84);
   color: white;
@@ -77,9 +88,6 @@ form {
 
 label {
   margin-right: 0.5rem;
-  padding: 5px;
-  position: absolute;
-  margin-top: -1.5rem;
   font-size: 0.8rem;
 }
 
@@ -94,10 +102,20 @@ input {
 select {
     margin-top: 20px;
     height: 4vh;
+    float: right;
 }
 .form-group {
   display: flex;
   align-items: center;
+}
+
+.form-group label {
+  margin-right: 0.5rem;
+  margin-top: 0; /* Remove o deslocamento vertical do label */
+}
+
+.form-group input {
+  margin-left: 0.5rem; /* Adiciona um espaçamento entre o input e o label */
 }
 
 .custom-background {
@@ -107,12 +125,10 @@ select {
 
 .buscar {
   margin-top: 1rem;
-  height: 5vh;
-  width: 40vh;
   color: white;
   margin-top: 5px;
   margin-left: 2px;
-  border-radius: 12px;
+  border-radius: 8px;
   align-self: flex-start; /* Alinha o botão à esquerda */
   background-color: #1f5b86ce;
 }
@@ -128,4 +144,25 @@ select {
 .info {
   margin-top: 40px;
 }
+
+.rating-filter {
+  font-size: 24px;
+  direction: rtl; /* Altera a direção para da direita para a esquerda */
+  text-align: left; /* Alinha à esquerda */
+}
+
+.rating-filter input {
+  display: none;
+}
+
+.rating-filter label {
+  color: gray;
+  cursor: pointer;
+}
+
+.rating-filter label:hover,
+.rating-filter input:checked ~ label {
+  color: gold; /* Altera a cor das estrelas para dourado */
+}
+
 </style>
