@@ -71,12 +71,18 @@ export default {
   background-color: rgba(29, 36, 45, 0.84);
   border-radius: 20px;
   color: white;
+  font-size: 20px;
 }
 
 .info {
   display: flex;
-  align-items: center;
-  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.info-basica {
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .img {
@@ -121,10 +127,11 @@ export default {
 .contatos input {
   border: none;
   color: white;
+  font-size: 20px;
 }
 
 .biography {
-  margin-top: 20px;
+  flex: 1;
 }
 
 .work-info {
@@ -146,11 +153,12 @@ export default {
 .biography-box textarea {
   color: white;
   margin: 0;
-  text-align: justify;
+  text-align: left;
   text-justify: inter-word;
   width: 100%;
   height: 100px;
   border: none;
   resize: none;
+  font-size: 20px;
 }
 </style>
