@@ -1,5 +1,5 @@
 import {initializeApp} from 'firebase/app'
-
+import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 
 const config = {
     apiKey: "AIzaSyAA1FMvpZBCI4j7K-QgAGiQWtytjuduAb4",
@@ -12,11 +12,26 @@ const config = {
 
 const firebaseapp = initializeApp(config);
 
+const auth = getAuth(firebaseapp);
 const db = firebaseapp.firestore();
 const userCollection = db.collection('usuários');
 
-export const createUser = user => {
+// Métodos de manipulação no firebase:
+
+export const registerUser = (email,senha) => {
+    return createUserWithEmailAndPassword(auth,email,senha);
+}
+
+export const createUserData = user => {
     return userCollection.add(user);
+}
+
+export const signInUser = (email,senha) => {
+    return signInWithEmailAndPassword(auth,email,senha);
+}
+
+export const signOutUser = () => {
+    return signOut(auth);
 }
 
 export const getUser = async id => {
