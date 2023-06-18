@@ -14,7 +14,7 @@
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
                 <div class="trabalho-info">
                     <div class="descricao">
-                        <img :src="trabalho.imagem" alt="Imagem">
+                        <img :src="trabalho.imagem" alt="Imagem" v-if="trabalho.imagem">
                         <div class="descricao">
                             <p>{{ trabalho.descricao }}</p> 
                         </div>
@@ -49,7 +49,8 @@ export default {
             dataPublicacao: "2023-06-02",
             imagem: ""
             }
-        ]
+        ],
+        arquivo: null
         };
     },
     methods: {
@@ -57,10 +58,6 @@ export default {
       const file = event.target.files[0];
       // ações futuras
       console.log("Arquivo selecionado:", file);
-    },
-
-    reiniciarIndices() {
-
     },
 
     adicionarTrabalho() {
@@ -82,13 +79,21 @@ export default {
             imagem: ""
         }
 
-        this.trabalhos.push(trabalho);
-
+        if (this.arquivo) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imagemURL = reader.result;
+                trabalho.imagem = imagemURL;
+                this.trabalhos.push(trabalho);
+            };
+            reader.readAsDataURL(this.arquivo);
+        } else {
+            this.trabalhos.push(trabalho);
+        }
     },
 
     editarTrabalho(id) {
-      // Lógica para editar o trabalho com o ID fornecido
-      console.log("Editar trabalho:", id);
+        console.log(id);
     },
 
     removerTrabalho(id) {
