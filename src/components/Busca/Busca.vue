@@ -79,6 +79,8 @@ export default {
         margin-left: 10px;
     }
 
-    
+    a:hover {
+        cursor: pointer;
+    }
 
 </style>
