@@ -1,24 +1,23 @@
 <template>
     <div class="container">
+        <HeaderCal/>
         <CalendarioUser/>
-        <h1>Olá!</h1>
     </div>
 </template>
 
 <script>
     import CalendarioUser from '../components/Calendario/Calendario.vue'
+    import HeaderCal from '../components/Calendario/HeaderCalendar.vue'
 
     export default {
         name: 'CalendarioView',
         components: {
+            HeaderCal,
             CalendarioUser
         }
     }
 </script>
 
 <style scoped>
-    h1 {
-        color: white;
-        font-size: 50px;
-    }
+    
 </style>

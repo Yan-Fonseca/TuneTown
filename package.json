@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "firebase": "^9.22.2",
     "vue": "^3.2.13",
+    "vue-cal": "^4.8.1",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {

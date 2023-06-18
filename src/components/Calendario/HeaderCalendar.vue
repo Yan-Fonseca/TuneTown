@@ -1,35 +1,34 @@
 <template>
-<div class="HeaderBody">
-    <div class="Logo">
-        <img src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown">
-        <h1>TuneTown</h1>
+    <div class="HeaderBody">
+        <div class="Logo">
+            <img src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown">
+            <h1>TuneTown</h1>
+        </div>
+        <div class="Nav">
+          <p><a class="PerfilButton" @click=navegar1>Perfil</a></p>
+          <p><a class="PerfilButton" @click=navegar2>Buscar Perfil</a></p>
+        </div>
+        <div class="Icons">
+          <img  src="../../assets/imgs/git.png"/>
+          <img  src="../../assets/imgs/twt.png"/>
+          <img  src="../../assets/imgs/insta.png"/>
+        </div>
     </div>
-    <div class="Nav">
-      <p><a class="PerfilButton" @click=navegar1>Home</a></p>
-      <p><a class="PerfilButton" @click=navegar2>Buscar Perfil</a></p>
-    </div>
-    <div class="Icons">
-      <img  src="../../assets/imgs/git.png"/>
-      <img  src="../../assets/imgs/twt.png"/>
-      <img  src="../../assets/imgs/insta.png"/>
-    </div>
-</div>
-</template>
+  </template>
 
 <script>
 import router from '@/router'
 export default {
-  name: 'PerfilHeader',
-  methods: {
-    navegar1(){
-      router.push('/');
-    },
-    navegar2(){
-      router.push('/search');
-    },
-  }
+    name:'HeaderCal',
+    methods: {
+      navegar1(){
+        router.push('/perfil');
+      },
+      navegar2(){
+        router.push('/search');
+      },
+    }
 }
-
 </script>
 
 <style scoped>
