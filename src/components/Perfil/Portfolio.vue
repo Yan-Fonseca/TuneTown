@@ -8,7 +8,7 @@
             <div class="upload">
                 <input type="file" accept="image/*, video/*" @change="handleFileUpload">
             </div>
-            <button @click.prevent="adicionarTrabalho">Salvar</button>
+            <button @click.prevent="adicionarTrabalho" id="enviar">Enviar</button>
         </div>
         <div class="trabalhos">
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
@@ -90,6 +90,8 @@ export default {
         } else {
             this.trabalhos.push(trabalho);
         }
+
+        this.texto = '';
     },
 
     editarTrabalho(id) {
@@ -115,20 +117,26 @@ export default {
         color: white;
         border-radius: 20px;
         margin-top: 20px;
+        font-size: 20px;
     }
 
     textarea {
         width: 100%;
         padding: 10px;
-        font-size: 14px;
+        font-size: 20px;
         border: 1px solid #ccc;
         resize: vertical;
         background-color: rgba(88, 112, 130, 0.26);
         color: white;
+        margin-bottom: 15px;
     }
 
     .novo-trabalho {
         margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
     .trabalho {
         margin-bottom: 20px;
@@ -138,7 +146,11 @@ export default {
 
     .descricao {
         display: flex;
-        align-items: center;
+        align-items: justify;
+        flex-direction: column;
+        width: 70%;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .descricao img {
@@ -156,5 +168,13 @@ export default {
 
     button {
         margin-left: 10px;
+    }
+
+    #enviar {
+        margin-right: 10vh;
+    }
+
+    h3 {
+        font-size: 30px;
     }
 </style>
