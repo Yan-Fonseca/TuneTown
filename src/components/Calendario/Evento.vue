@@ -7,6 +7,10 @@
         <div class="events">
             <div class="card" v-for="evento in eventos" :key="evento.id" :style="getCardStyle(evento.id)">
                 <div id="header">
+                    <div class="btns">
+                        <button id="remove">X</button>
+                        <button id="edit">Edit</button>
+                    </div>
                     <div class="date">
                         <h3>{{ evento.dia }} / {{ evento.mes }}</h3>
                     </div>
@@ -16,9 +20,6 @@
                         <p>horário: {{ evento.horario }}</p>
                         <p>descrição: {{ evento.descricao }}</p>
                         <p>integrantes: {{ evento.integrantes }}</p>
-                    </div>
-                    <div class="btns">
-
                     </div>
                 </div>
             </div>
@@ -191,10 +192,17 @@ export default {
         background-color: rgba(36, 43, 52, 1);
         margin-top: 10px;
         padding: 10px;
+        display: flex;
+        flex-direction: row;
     }
 
     .info p {
         margin: 0;
+    }
+
+    .btns {
+        display: flex;
+        justify-content: flex-end;
     }
 
 </style>
