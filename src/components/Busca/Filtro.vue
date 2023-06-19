@@ -4,26 +4,44 @@
     <div class="info">
       <form>
         <div class="form-group">
-          <label for="selecao">Estado:</label>
-          <select v-model="selectedOption" id="selecao" :class="[selectedOption !== null ? 'custom-background' : '', 'custom-select']">
-            <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
-          </select>
+          <div class="label-wrapper">
+            <label for="selecao">Estado:</label>
+          </div>
+          <div class="input-wrapper">
+            <select v-model="selectedOption" id="selecao" :class="[selectedOption !== null ? 'custom-background' : '', 'custom-select']">
+              <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
-          <label for="cidade">Cidade:</label>
-          <input type="text" id="cidade" :class="{ 'custom-background': cidadeFilled }" @input="cidadeFilled = $event.target.value !== ''">
+          <div class="label-wrapper">
+            <label for="cidade">Cidade:</label>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" id="cidade" :class="{ 'custom-background': cidadeFilled }" @input="cidadeFilled = $event.target.value !== ''">
+          </div>
         </div>
         <div class="form-group">
-          <label for="genero">Gênero musical:</label>
-          <input type="text" id="genero" :class="{ 'custom-background': generoFilled }" @input="generoFilled = $event.target.value !== ''">
+          <div class="label-wrapper">
+            <label for="genero">Gênero musical:</label>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" id="genero" :class="{ 'custom-background': generoFilled }" @input="generoFilled = $event.target.value !== ''">
+          </div>
         </div>
         <div class="form-group">
-          <label for="profissao">Profissão:</label>
-          <input type="text" id="profissao" :class="{ 'custom-background': profissaoFilled }" @input="profissaoFilled = $event.target.value !== ''">
+          <div class="label-wrapper">
+            <label for="profissao">Profissão:</label>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" id="profissao" :class="{ 'custom-background': profissaoFilled }" @input="profissaoFilled = $event.target.value !== ''">
+          </div>
         </div>
         <div class="form-group">
-          <label for="avaliacao">Avaliação:</label>
-           <div class="rating-filter">
+          <div class="label-wrapper">
+            <label for="avaliacao">Avaliação:</label>
+          </div>
+          <div class="rating-filter">
               <input type="radio" id="star5" name="rating" value="5" />
               <label for="star5">&#9733;</label>
               <input type="radio" id="star4" name="rating" value="4" />
@@ -96,26 +114,42 @@ input {
     color: white;
     border-radius: 10px;
     height: 3vh;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 select {
-    margin-top: 20px;
+    margin-top: 10px;
     height: 4vh;
     float: right;
 }
 .form-group {
-  display: flex;
-  align-items: center;
+  display: grid; /* Altera para grid */
+  grid-template-columns: 1fr auto; /* Divide em duas colunas, uma com tamanho flexível e outra com tamanho automático */
+  gap: 1rem;
+  align-items: center; /* Centraliza verticalmente os elementos dentro de cada form-group */
+}
+
+.input-wrapper {
+  display: flex; /* Adiciona flex para alinhar os elementos na coluna automática */
+  justify-content: flex-end; /* Alinha os elementos à direita */
+  align-items: center; /* Centraliza verticalmente o conteúdo */
+}
+
+.input-wrapper input,
+.input-wrapper select {
+  flex: 1; /* Ocupa o espaço disponível */
 }
 
 .form-group label {
-  margin-right: 0.5rem;
-  margin-top: 0; /* Remove o deslocamento vertical do label */
+  margin-top: 7px;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-.form-group input {
-  margin-left: 0.5rem; /* Adiciona um espaçamento entre o input e o label */
+.label-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .custom-background {
@@ -141,14 +175,13 @@ select {
 .custom-select option {
   background-color: #5870827a;
 }
-.info {
-  margin-top: 40px;
-}
 
 .rating-filter {
   font-size: 24px;
-  direction: rtl; /* Altera a direção para da direita para a esquerda */
-  text-align: left; /* Alinha à esquerda */
+  text-align: left;
+  display: flex;
+  direction: rtl;
+  justify-content: flex-start;
 }
 
 .rating-filter input {

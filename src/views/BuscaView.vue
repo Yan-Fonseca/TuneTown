@@ -51,7 +51,7 @@
 }
 
 .main-content {
-    position: sticky;
+  position: sticky;
   overflow-y: auto; 
  }
 
