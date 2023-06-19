@@ -8,7 +8,7 @@
         <div class="card" v-for="evento in eventos" :key="evento.id" :style="getCardStyle(evento.id)">
           <div id="header">
             <div class="btns">
-              <button id="remove">X</button>
+              <button id="remove" @click="deleteEvent(evento.id)">X</button>
               <button id="edit">Edit</button>
             </div>
             <div class="date">
@@ -117,12 +117,17 @@
           backgroundColor,
         };
       },
+
       openForm() {
         this.showForm = true; // Exibe o formulário
       },
       cancelForm() {
         this.showForm = false; // Oculta o formulário
       },
+
+      deleteEvent(id) {
+        this.eventos = this.eventos.filter((evento) => evento.id !== id);
+      }
     },
   };
 </script>
