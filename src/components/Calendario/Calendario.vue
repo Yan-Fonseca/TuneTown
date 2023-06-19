@@ -1,6 +1,13 @@
 <template>
     <div class="calendar">
-      <vue-cal :time="false" active-view="month" events-on-month-view="short" :styles="calendarStyles" :event-styles="eventStyles"></vue-cal>
+      <vue-cal
+      :time="false"
+      active-view="month"
+      events-on-month-view="short"
+      :styles="calendarStyles"
+      :event-styles="eventStyles"
+      class="vuecal--full-height-delete"
+      ></vue-cal>
     </div>
   </template>
   
@@ -55,7 +62,12 @@
   
   <style scoped>
   .calendar {
-    background-color: #ffffff;
-  }
+  background-color: #ffffff;
+}
+
+
+.vuecal__calendar-body .vuecal__day-cell {
+  height: 60px; 
+}
   </style>
   

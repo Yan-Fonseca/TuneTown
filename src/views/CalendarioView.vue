@@ -1,23 +1,50 @@
 <template>
     <div class="container">
-        <HeaderCal/>
-        <CalendarioUser/>
+      <HeaderCal/>
+      <div class="content">
+        <div class="calendar-wrapper">
+          <CalendarioUser/>
+        </div>
+        <div class="agenda-wrapper">
+          <AgendaUser/>
+        </div>
+      </div>
     </div>
-</template>
-
-<script>
-    import CalendarioUser from '../components/Calendario/Calendario.vue'
-    import HeaderCal from '../components/Calendario/HeaderCalendar.vue'
-
-    export default {
-        name: 'CalendarioView',
-        components: {
-            HeaderCal,
-            CalendarioUser
-        }
+  </template>
+  
+  <script>
+  import CalendarioUser from '../components/Calendario/Calendario.vue'
+  import HeaderCal from '../components/Calendario/HeaderCalendar.vue'
+  import AgendaUser from '../components/Calendario/Evento.vue'
+  
+  export default {
+    name: 'CalendarioView',
+    components: {
+      HeaderCal,
+      CalendarioUser,
+      AgendaUser
     }
-</script>
-
-<style scoped>
-    
-</style>
+  }
+  </script>
+  
+  <style scoped>
+  .container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+  
+.content {
+  flex: 1;
+  display: flex;
+}
+  
+  .calendar-wrapper {
+    width: 75%;
+  }
+  
+  .agenda-wrapper {
+    width: 25%;
+  }
+  </style>
+  
