@@ -2,7 +2,7 @@
   <div class="calendar">
     <vue-cal
       active-view="month"
-      style="height: 96vh"
+      style="height: 93vh"
       :styles="calendarStyles"
       :event-styles="eventStyles"
       :cell-height="cellHeight"
