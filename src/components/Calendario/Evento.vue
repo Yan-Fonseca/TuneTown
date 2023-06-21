@@ -98,6 +98,7 @@
 
       deleteEvent(id) {
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
+        this.counter--;
       },
 
       saveEvent() {
@@ -115,6 +116,13 @@
 
         this.eventos.push(evento);
         this.counter++;
+        this.showForm = false;
+
+        this.nome = ''
+        this.data = '';
+        this.horario = '';
+        this.descricao = '';
+        this.integrantes = '';
       }
     },
   };
