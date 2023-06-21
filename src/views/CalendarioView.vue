@@ -6,7 +6,7 @@
           <CalendarioUser/>
         </div>
         <div class="agenda-wrapper">
-          <AgendaUser/>
+          <AgendaUser @attCalendario="atualizarCalendario"/>
         </div>
       </div>
     </div>
@@ -23,6 +23,17 @@
       HeaderCal,
       CalendarioUser,
       AgendaUser
+    },
+    data() {
+      return {
+        eventos_para_calendario: null
+      };
+    },
+    methods: {
+      atualizarCalendario(dados) {
+        this.eventos_para_calendario = dados;
+        console.log(dados);
+      }
     }
   }
   </script>

@@ -119,6 +119,7 @@
         this.showForm = false;
 
         this.resetarCampos();
+        this.atualizarCalendario();
       },
 
       resetarCampos() {
@@ -127,6 +128,10 @@
         this.horario = '';
         this.descricao = '';
         this.integrantes = '';
+      },
+
+      atualizarCalendario() {
+        this.$emit('attCalendario',this.eventos);
       }
     },
   };
