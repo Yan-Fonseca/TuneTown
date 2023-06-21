@@ -41,7 +41,7 @@
             <input type="text" id="data" name="data" />
   
             <label for="horario">Horário:</label>
-            <input type="text" id="horario" name="horario" />
+            <input type="time" id="horario" name="horario" />
   
             <!-- Botões de ação -->
             <div class="form-buttons">
@@ -247,7 +247,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 1;
   }
   
   .form-container {
