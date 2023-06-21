@@ -196,11 +196,11 @@
     overflow-y: auto;
     height: 70vh;
     justify-content: center;
-    align-items: center;
   }
   
   .card {
     width: 300px;
+    max-height: 15vh;
     padding: 20px;
     border-radius: 8px;
     color: white;
