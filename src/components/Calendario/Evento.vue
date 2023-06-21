@@ -99,6 +99,7 @@
       deleteEvent(id) {
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
         this.counter--;
+        this.atualizarCalendario();
       },
 
       saveEvent() {
