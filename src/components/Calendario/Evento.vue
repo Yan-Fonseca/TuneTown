@@ -36,9 +36,12 @@
           <form>
             <label for="nome">Nome do Evento:</label>
             <input type="text" id="nome" name="nome" />
+
+            <label for="nome">Descrição do Evento:</label>
+            <input type="text" id="descricao" name="descricao" />
   
             <label for="data">Data:</label>
-            <input type="text" id="data" name="data" />
+            <input type="date" id="data" name="data" />
   
             <label for="horario">Horário:</label>
             <input type="time" id="horario" name="horario" />
