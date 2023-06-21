@@ -1,9 +1,16 @@
 <template>
     <div class="container">
-        <BuscaPerfil/>
+        <div class="header-busca">
+            <BuscaPerfil/>
+        </div>
         <div class="content">
-            <FiltroBusca/>
-            <ResultadosBusca/>
+            <div class="sidebar">
+                <FiltroBusca />
+            </div>
+            
+            <div class="main-content">
+                <ResultadosBusca />
+            </div>
         </div>
     </div>
 </template>
@@ -24,14 +31,33 @@
 </script>
 
 <style scoped>
-    .container {
+.container {
     display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100vh; 
+    grid-template-rows: auto 1fr; 
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.sidebar {
+  position: sticky;
+  top: 70px; /* Ajuste a altura do cabeçalho */
+  height: calc(100vh - 70px); /* Subtrai a altura do cabeçalho */
+  overflow-y: auto;
+}
+
+.main-content {
+  position: sticky;
+  overflow-y: auto; 
+ }
+
 .content {
-    display: grid;
-    grid-template-columns: 25% 75%;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  margin-top: 70px; /* Ajuste a altura do cabeçalho */
 }
 </style>
