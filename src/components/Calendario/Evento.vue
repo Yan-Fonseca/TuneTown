@@ -118,6 +118,10 @@
         this.counter++;
         this.showForm = false;
 
+        this.resetarCampos();
+      },
+
+      resetarCampos() {
         this.nome = ''
         this.data = '';
         this.horario = '';
