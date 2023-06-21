@@ -3,7 +3,7 @@
       <HeaderCal/>
       <div class="content">
         <div class="calendar-wrapper">
-          <CalendarioUser/>
+          <CalendarioUser :data="eventos_para_calendario"/>
         </div>
         <div class="agenda-wrapper">
           <AgendaUser @attCalendario="atualizarCalendario"/>
@@ -26,13 +26,13 @@
     },
     data() {
       return {
-        eventos_para_calendario: null
+        eventos_para_calendario: []
       };
     },
     methods: {
       atualizarCalendario(dados) {
         this.eventos_para_calendario = dados;
-        console.log(dados);
+        console.log(dados[0]);
       }
     }
   }

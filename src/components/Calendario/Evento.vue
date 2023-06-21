@@ -12,7 +12,7 @@
               <button id="edit">Edit</button>
             </div>
             <div class="date">
-              <h3>{{ evento.dia }} / {{ evento.mes }}</h3>
+              <h3>{{evento.data}}</h3>
             </div>
           </div>
           <div class="content">
@@ -103,13 +103,10 @@
       },
 
       saveEvent() {
-        const mes = this.data.slice(5,7);
-        const dia = this.data.slice(8,10);
-
         let evento = {
           id: this.counter,
-          dia: dia,
-          mes: mes,
+          nome: this.nome,
+          data: this.data,
           horario: this.horario,
           descricao: this.descricao,
           integrantes: this.integrantes
@@ -206,7 +203,7 @@
   
   .card {
     width: 300px;
-    max-height: 18vh;
+    max-height: 15vh;
     padding: 20px;
     border-radius: 8px;
     color: white;

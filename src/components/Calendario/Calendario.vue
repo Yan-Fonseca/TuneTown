@@ -3,6 +3,7 @@
     <vue-cal
       active-view="month"
       style="height: 93vh"
+      :event="events"
       :styles="calendarStyles"
       :event-styles="eventStyles"
       :cell-height="cellHeight"
@@ -18,6 +19,9 @@ export default {
   name: 'CalendarioUser',
   components: {
     VueCal
+  },
+  props: {
+    data: Array
   },
   data() {
     return {
@@ -56,6 +60,18 @@ export default {
       },
       cellHeight: 60
     };
+  },
+  methods: {
+    tratarEventosParaCalendario() {
+      let data = this.props.data;
+      data.forEach(element => {
+        this.events.push({
+          title: element.nome,
+          start: element.data,
+          end: element.data
+        })
+      });
+    }
   }
 };
 </script>
