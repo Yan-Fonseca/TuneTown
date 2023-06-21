@@ -35,21 +35,24 @@
           <h2>Novo Evento</h2>
           <form>
             <label for="nome">Nome do Evento:</label>
-            <input type="text" id="nome" name="nome" />
+            <input type="text" id="nome" name="nome" v-model="nome"/>
 
             <label for="nome">Descrição do Evento:</label>
-            <input type="text" id="descricao" name="descricao" />
+            <input type="text" id="descricao" name="descricao" v-model="descricao"/>
   
             <label for="data">Data:</label>
-            <input type="date" id="data" name="data" />
+            <input type="date" id="data" name="data" v-model="data"/>
   
             <label for="horario">Horário:</label>
-            <input type="time" id="horario" name="horario" />
+            <input type="time" id="horario" name="horario" v-model="horario"/>
+
+            <label for="integrantes">Integrantes:</label>
+            <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
   
             <!-- Botões de ação -->
             <div class="form-buttons">
               <button type="button" @click="cancelForm">Cancelar</button>
-              <button type="submit">Salvar</button>
+              <button type="submit" @click.prevent="saveEvent">Salvar</button>
             </div>
           </form>
         </div>
@@ -62,49 +65,14 @@
     name: 'AgendaUser',
     data() {
       return {
-        eventos: [
-          {
-            id: 1,
-            dia: '10',
-            mes: '6',
-            horario: '22:00',
-            descricao: 'Balada',
-            integrantes: 'Baião',
-          },
-          {
-            id: 2,
-            dia: '14',
-            mes: '6',
-            horario: '22:00',
-            descricao: 'Balada',
-            integrantes: 'Baião',
-          },
-          {
-            id: 3,
-            dia: '18',
-            mes: '6',
-            horario: '22:00',
-            descricao: 'Balada',
-            integrantes: 'Baião',
-          },
-          {
-            id: 4,
-            dia: '23',
-            mes: '6',
-            horario: '22:00',
-            descricao: 'Balada',
-            integrantes: 'Baião',
-          },
-          {
-            id: 5,
-            dia: '23',
-            mes: '6',
-            horario: '22:00',
-            descricao: 'Balada',
-            integrantes: 'Baião',
-          },
-        ],
+        eventos: [],
         showForm: false, // Variável para controlar a exibição do formulário
+        counter: 1,
+        nome: '',
+        descricao: '',
+        data: '',
+        horario: '',
+        integrantes: ''
       };
     },
     methods: {
@@ -130,6 +98,23 @@
 
       deleteEvent(id) {
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
+      },
+
+      saveEvent() {
+        const mes = this.data.slice(5,7);
+        const dia = this.data.slice(8,10);
+
+        let evento = {
+          id: this.counter,
+          dia: dia,
+          mes: mes,
+          horario: this.horario,
+          descricao: this.descricao,
+          integrantes: this.integrantes
+        }
+
+        this.eventos.push(evento);
+        this.counter++;
       }
     },
   };
@@ -203,7 +188,7 @@
   
   .card {
     width: 300px;
-    max-height: 15vh;
+    max-height: 18vh;
     padding: 20px;
     border-radius: 8px;
     color: white;
