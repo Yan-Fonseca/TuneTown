@@ -97,6 +97,7 @@
       cancelForm() {
         this.showForm = false; // Oculta o formulário
         this.resetarCampos();
+        this.editMode = false;
       },
 
       deleteEvent(id) {
@@ -153,13 +154,14 @@
 
       saveEditedEvent() {
         let evento = this.eventos.find((evento) => evento.id === this.editEventId);
-          if (evento) {
-            evento.nome = this.nome;
-            evento.data = this.data;
-            evento.horario = this.horario;
-            evento.descricao = this.descricao;
-            evento.integrantes = this.integrantes;
-          }
+        if (evento) {
+          evento.nome = this.nome;
+          evento.data = this.data;
+          evento.horario = this.horario;
+          evento.descricao = this.descricao;
+          evento.integrantes = this.integrantes;
+        }
+        this.editMode = false;
       },
 
       atualizarCalendario() {
