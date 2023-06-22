@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     tratarEventosParaCalendario(dados) {
+      this.events = [];
       dados.forEach(element => {
         this.events.push({
           title: element.nome,
