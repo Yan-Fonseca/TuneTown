@@ -88,16 +88,22 @@
     },
     methods: {
       navegar(){
-      router.push('/Login');
-    },
+        router.push('/Login');
+      },
       enviarFormulario() {
-        console.log('Email:', this.email);
-        console.log('Senha:', this.senha);
-        console.log('Repita a senha:', this.repSenha);
-        console.log('Nome:', this.nome);
-        console.log('Data de Nascimento:', this.dataNascimento);
-        console.log('Cidade:', this.cidade);
-        console.log('Sou Profissional Musical:', this.musico);
+        let data = {
+          nome: this.nome,
+          email: this.email,
+          dataNascimento: this.dataNascimento,
+          estado: this.options[this.selectedOption - 1].label,
+          cidade: this.cidade,
+          profissional: this.musico,
+          biografia: '',
+          telefone: '',
+          trabalho: ''
+        };
+        
+        console.log(data);
       }
     }
   }
