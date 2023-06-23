@@ -32,23 +32,35 @@
       <!-- Tela flutuante com o formulário -->
       <div class="form-overlay" v-if="showForm">
         <div class="form-container">
-          <h2>Novo Evento</h2>
+          <h2 class="form-title">Novo Evento</h2>
           <form>
-            <label for="nome">Nome do Evento:</label>
-            <input type="text" id="nome" name="nome" v-model="nome"/>
+            <div class="form-row">
+              <label for="nome">Nome do Evento:</label>
+              <input type="text" id="nome" name="nome" v-model="nome"/>
+            </div>
 
-            <label for="nome">Descrição do Evento:</label>
-            <input type="text" id="descricao" name="descricao" v-model="descricao"/>
+            <div class="form-row">
+              <label for="data">Data:</label>
+              <input type="date" id="data" name="data" v-model="data"/>
   
-            <label for="data">Data:</label>
-            <input type="date" id="data" name="data" v-model="data"/>
-  
-            <label for="horario">Horário:</label>
-            <input type="time" id="horario" name="horario" v-model="horario"/>
+              <label for="horario">Horário:</label>
+              <input type="time" id="horario" name="horario" v-model="horario"/>
+            </div>
 
-            <label for="integrantes">Integrantes:</label>
-            <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
-  
+            <div class="form-row integrantes-row">
+              <label for="integrantes">Integrantes:</label>
+              <div class="input-container">
+                <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
+              </div>
+            </div>
+            
+            <div class="form-row descricao-row">
+              <label for="nome">Descrição do Evento:</label>
+              <div class="textarea-container"> 
+                <textarea id="descricao" name="descricao" v-model="descricao"></textarea>
+              </div>
+            </div>
+            
             <!-- Botões de ação -->
             <div class="form-buttons">
               <button type="button" @click="cancelForm">Cancelar</button>
@@ -258,7 +270,42 @@
     padding: 20px;
     border-radius: 8px;
   }
+
+  .form-title {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .integrantes-row,
+  .descricao-row {
+  flex-direction: column;
+}
+
+
+  .form-row textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 100px;
+  }
   
+  .form-row label {
+    margin-right: 10px;
+  }
+
+  .input-container {
+    flex: 1;
+  }
+
+  .textarea-container {
+    flex: 1;
+  }
+
   .form-buttons {
     display: flex;
     justify-content: flex-end;
