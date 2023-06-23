@@ -52,8 +52,9 @@
               <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
             </div>
             
-            <div class="form-row descricao-row">
+            <div>
               <label for="nome">Descrição do Evento:</label>
+
               <div class="input-contaneir"> 
                 <textarea id="descricao" name="descricao" v-model="descricao"></textarea>
               </div>
@@ -61,8 +62,8 @@
             
             <!-- Botões de ação -->
             <div class="form-buttons">
-              <button type="button" @click="cancelForm">Cancelar</button>
-              <button type="submit" @click.prevent="saveEvent">{{ editMode ? 'Editar' : 'Salvar' }}</button>
+              <button type="button" @click="cancelForm" class="cancelar">Cancelar</button>
+              <button type="submit" @click.prevent="saveEvent" class="salvar">{{ editMode ? 'Editar' : 'Salvar' }}</button>
             </div>
           </form>
         </div>
@@ -322,19 +323,20 @@
   .form-row input {
     margin-right: 10px;
     float: right;
+    background-color: rgb(161, 159, 159);
   }
   .integrantes-row input {
     width: 202px;
   }
-  .descricao-row {
-  flex-direction: column;
-}
 
-  .form-row textarea {
+  textarea {
     flex: 1;
     resize: vertical;
-    min-height: 100px;
-    width: 295px;
+    min-height: 150px;
+    max-height: 150px;
+    width: 305px;
+    margin-top: 5px;
+    background-color: rgb(161, 159, 159);
   }
   
   .form-row label {
@@ -353,12 +355,23 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    margin-right: 18px;
   }
   
   .form-buttons button {
     margin-left: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    color: #FFF;
   }
   
+  .cancelar {
+    background-color: rgba(233, 63, 63, 0.904);
+  }
+
+  .salvar {
+    background-color: rgb(35, 163, 35);
+  }
   #nome {
     width: 160px;
   }
