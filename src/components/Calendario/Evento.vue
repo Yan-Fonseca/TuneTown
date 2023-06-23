@@ -49,14 +49,12 @@
 
             <div class="form-row integrantes-row">
               <label for="integrantes">Integrantes:</label>
-              <div class="input-container">
-                <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
-              </div>
+              <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
             </div>
             
             <div class="form-row descricao-row">
               <label for="nome">Descrição do Evento:</label>
-              <div class="textarea-container"> 
+              <div class="input-contaneir"> 
                 <textarea id="descricao" name="descricao" v-model="descricao"></textarea>
               </div>
             </div>
@@ -274,28 +272,37 @@
   .form-title {
     text-align: center;
     margin-top: 0;
+    margin-bottom: 20px;
   }
 
   .form-row {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 20px;
   }
 
-  .integrantes-row,
+  .form-row input {
+    margin-right: 10px;
+    float: right;
+  }
+  .integrantes-row input {
+    width: 202px;
+  }
   .descricao-row {
   flex-direction: column;
 }
-
 
   .form-row textarea {
     flex: 1;
     resize: vertical;
     min-height: 100px;
+    width: 295px;
   }
   
   .form-row label {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 
   .input-container {
@@ -316,5 +323,12 @@
     margin-left: 10px;
   }
   
+  #nome {
+    width: 160px;
+  }
+
+  #data {
+    margin-right: 37px;
+  }
   </style>
   
