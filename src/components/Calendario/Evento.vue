@@ -9,7 +9,7 @@
           <div id="header">
             <div class="btns">
               <button id="remove" @click="deleteEvent(evento.id)">X</button>
-              <button id="edit">Edit</button>
+              <button id="edit" @click="editEvent(evento.id)">Edit</button>
             </div>
             <div class="date">
               <h3>{{evento.data}}</h3>
@@ -62,7 +62,7 @@
             <!-- Botões de ação -->
             <div class="form-buttons">
               <button type="button" @click="cancelForm">Cancelar</button>
-              <button type="submit" @click.prevent="saveEvent">Salvar</button>
+              <button type="submit" @click.prevent="saveEvent">{{ editMode ? 'Editar' : 'Salvar' }}</button>
             </div>
           </form>
         </div>
@@ -77,12 +77,14 @@
       return {
         eventos: [],
         showForm: false, // Variável para controlar a exibição do formulário
-        counter: 1,
+        counter: 1, // Contador para atribuir as Ids dos eventos
         nome: '',
         descricao: '',
         data: '',
         horario: '',
-        integrantes: ''
+        integrantes: '',
+        editMode: false, // Indicador do modo de edição
+        editEventId: null // ID do evento em edição
       };
     },
     methods: {
@@ -104,6 +106,8 @@
       },
       cancelForm() {
         this.showForm = false; // Oculta o formulário
+        this.resetarCampos();
+        this.editMode = false;
       },
 
       deleteEvent(id) {
@@ -113,20 +117,22 @@
       },
 
       saveEvent() {
-        let evento = {
-          id: this.counter,
-          nome: this.nome,
-          data: this.data,
-          horario: this.horario,
-          descricao: this.descricao,
-          integrantes: this.integrantes
+        if (!this.editMode) {
+          let evento = {
+            id: this.counter,
+            nome: this.nome,
+            data: this.data,
+            horario: this.horario,
+            descricao: this.descricao,
+            integrantes: this.integrantes
+          }
+          this.eventos.push(evento);
+          this.counter++;
+        } else {
+          this.saveEditedEvent();
         }
 
-        this.eventos.push(evento);
-        this.counter++;
-        this.showForm = false;
-
-        this.resetarCampos();
+        this.cancelForm();
         this.atualizarCalendario();
       },
 
@@ -138,6 +144,36 @@
         this.integrantes = '';
       },
 
+      preencherCampos(evento) {
+        this.nome = evento.nome;
+        this.data = evento.data;
+        this.horario = evento.horario;
+        this.descricao = evento.descricao;
+        this.integrantes = evento.integrantes;
+      },
+
+      editEvent(id) {
+        let evento = this.eventos.find((evento) => evento.id === id);
+        if(evento) {
+          this.editMode = true; // Ativar o modo de edição
+          this.editEventId = id; // Definir o ID do evento em edição
+          this.openForm();
+          this.preencherCampos(evento);
+        }
+      },
+
+      saveEditedEvent() {
+        let evento = this.eventos.find((evento) => evento.id === this.editEventId);
+        if (evento) {
+          evento.nome = this.nome;
+          evento.data = this.data;
+          evento.horario = this.horario;
+          evento.descricao = this.descricao;
+          evento.integrantes = this.integrantes;
+        }
+        this.editMode = false;
+      },
+
       atualizarCalendario() {
         this.$emit('attCalendario',this.eventos);
       }
@@ -145,7 +181,7 @@
   };
 </script>
   
-  <style scoped>
+<style scoped>
   .container {
     background-color: rgba(36, 43, 52, 1);
     color: white;
@@ -260,7 +296,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
   }
   
   .form-container {

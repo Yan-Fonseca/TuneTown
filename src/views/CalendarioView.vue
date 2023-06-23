@@ -3,7 +3,7 @@
       <HeaderCal/>
       <div class="content">
         <div class="calendar-wrapper">
-          <CalendarioUser :data="eventos_para_calendario"/>
+          <CalendarioUser ref="calendar"/>
         </div>
         <div class="agenda-wrapper">
           <AgendaUser @attCalendario="atualizarCalendario"/>
@@ -24,15 +24,9 @@
       CalendarioUser,
       AgendaUser
     },
-    data() {
-      return {
-        eventos_para_calendario: []
-      };
-    },
     methods: {
       atualizarCalendario(dados) {
-        this.eventos_para_calendario = dados;
-        console.log(dados[0]);
+        this.$refs.calendar.tratarEventosParaCalendario(dados);
       }
     }
   }

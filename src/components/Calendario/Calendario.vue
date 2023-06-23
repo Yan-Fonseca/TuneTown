@@ -18,32 +18,22 @@ export default {
   components: {
     VueCal
   },
-  props: {
-    data: Array
-  },
   data() {
     return {
-      events: [
-        {
-          start: '2023-06-15',
-          end: '2023-06-15',
-          title: 'Event 1',
-          content: 'Teste',
-          class: 'music'
-        }
-      ]
+      events: []
     };
   },
   methods: {
-    tratarEventosParaCalendario() {
-      let data = this.data;
-      data.forEach(element => {
+    tratarEventosParaCalendario(dados) {
+      this.events = [];
+      dados.forEach(element => {
         this.events.push({
           title: element.nome,
           start: element.data,
           end: element.data,
-          content: element.descricao
-        })
+          content: element.descricao,
+          class: 'music'
+        });
       });
     }
   }
