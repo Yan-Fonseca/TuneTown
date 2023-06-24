@@ -91,6 +91,7 @@ export default {
   background-color: rgba(29, 36, 45, 0.84);
   color: white;
   height: 100%;
+  width: 95%;
   float: left;
   margin: 10px;
   padding: 5px;
@@ -114,6 +115,7 @@ input {
     color: white;
     border-radius: 10px;
     height: 3vh;
+    width: 100%;
     margin-top: 10px;
 }
 

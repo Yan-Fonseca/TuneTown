@@ -1,10 +1,14 @@
 <template>
     <div class="header">
-        <img class="logo" src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown">
-        <form id="search" action="">
-            <input type="search" class="busca">
-            <button id="botao" type="submit">Buscar</button>
-        </form>
+        <div>
+            <img class="logo" src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown">    
+        </div>
+        
+        <div id="search">
+                <input type="search" class="busca">
+                <button id="botao" type="submit">Buscar</button>
+        </div>
+        
         <div class="icon">
             <div id="links">
                 <a class="home" @click="inicio"><img class="icon-home" src="../../assets/icons/HomeIcon.png" alt=""></a>
@@ -34,7 +38,8 @@ export default {
 <style scoped>
     .header {
         background-color: rgba(23, 36, 52, 1);
-        display: flex;
+        display: grid;
+        grid-template-columns: 25% 65% 15%;
         flex-direction: row;
         align-items: center;
     }
@@ -44,13 +49,11 @@ export default {
         height: 72px;
     }
 
-    .busca {
-        background-color: rgba(83, 87, 103, 0.76);
-        width: 80vh;
-        height: 5.1vh;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
+ input {
+     background-color: rgba(83, 87, 103, 0.76);
+     width: 80%;
+     height: 5vh;
+ }
 
     #botao {
         background-color: rgba(42, 52, 62, 1);
@@ -60,13 +63,7 @@ export default {
         margin-left: 1px;
     }
 
-    #links{
-        margin-left: 240px;
-    }
 
-    #search {
-        margin-left: 320px;
-    }
     .icon-home {
         width: 40px;
         height: 40px;
