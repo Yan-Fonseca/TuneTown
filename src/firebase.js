@@ -59,5 +59,7 @@ export const fetchData = async (parametros) => {
     }
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot;
+    const usersData = querySnapshot.docs.map((doc) => doc.data());
+
+    return usersData;
 };

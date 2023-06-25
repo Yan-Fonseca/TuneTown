@@ -31,26 +31,29 @@
           { id: 7, nome: 'Cleopatra', avaliacao: 2 },
           { id: 8, nome: 'Cleo', avaliacao: 0 }
         ],
-        counter: 1
+        counter: 9
       };
     },
     methods: {
-      buscarUsuarios(dados) {
+      async buscarUsuarios(dados) {
         try {
-          const usersData = fetchData(dados);
-          if(usersData) {
+          const usersDataPromise = fetchData(dados);
+          const usersData = await usersDataPromise;
+          if (usersData) {
+            this.users = [];
+            const user = usersData[0]; // Obter o primeiro usuário do array
             const data = {
               id: this.counter,
-              nome: usersData.nome,
-              avaliacao: 5
-            }
+              nome: user.nome,
+              avaliacao: 5,
+            };
             this.users.push(data);
           }
         } catch (error) {
           console.log('erro: ' + error);
         }
-      }
-    }
+      },
+    },
   }
 </script>
 
