@@ -54,8 +54,7 @@
               <label for="star1">&#9733;</label>
            </div>
         </div>
-
-        <button class="buscar">Buscar</button>
+          <button class="buscar">Buscar</button>   
       </form>
     </div>
   </div>
@@ -115,32 +114,15 @@ input {
     color: white;
     border-radius: 10px;
     height: 3vh;
-    width: 100%;
+    width: 90%;
     margin-top: 10px;
 }
 
 select {
     margin-top: 10px;
     height: 4vh;
-    float: right;
-}
-.form-group {
-  display: grid; /* Altera para grid */
-  grid-template-columns: 1fr auto; /* Divide em duas colunas, uma com tamanho flexível e outra com tamanho automático */
-  gap: 1rem;
-  align-items: center; /* Centraliza verticalmente os elementos dentro de cada form-group */
 }
 
-.input-wrapper {
-  display: flex; /* Adiciona flex para alinhar os elementos na coluna automática */
-  justify-content: flex-end; /* Alinha os elementos à direita */
-  align-items: center; /* Centraliza verticalmente o conteúdo */
-}
-
-.input-wrapper input,
-.input-wrapper select {
-  flex: 1; /* Ocupa o espaço disponível */
-}
 
 .form-group label {
   margin-top: 7px;
@@ -162,10 +144,11 @@ select {
 .buscar {
   margin-top: 1rem;
   color: white;
+  height: 35px;
+  width: 100%;
+  margin-left: 5px;
   margin-top: 5px;
-  margin-left: 2px;
   border-radius: 8px;
-  align-self: flex-start; /* Alinha o botão à esquerda */
   background-color: #1f5b86ce;
 }
 
@@ -187,10 +170,13 @@ select {
 }
 
 .rating-filter input {
+  order: -1;
+  margin-right: 5px;
   display: none;
 }
 
 .rating-filter label {
+  font-size: 27px;
   color: gray;
   cursor: pointer;
 }
