@@ -5,7 +5,7 @@
             <h1>TuneTown</h1>
         </div>
         <div class="Nav">
-          <p><a class="PerfilButton" @click=navegar1>Perfil</a></p>
+          <p><a class="PerfilButton" @click=navegar1>Meu Perfil</a></p>
           <p><a class="PerfilButton" @click=navegar2>Buscar Perfil</a></p>
         </div>
         <div class="Icons">
