@@ -36,25 +36,14 @@
 </template>
 
 <script>
+import {updateUserData} from '@/firebase';
+
 export default {
     name: 'PortfolioMusic',
     data() {
         return {
         texto: "",
-        trabalhos: [
-            {
-            id: 1,
-            descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            dataPublicacao: "2023-06-01",
-            imagem: ""
-            },
-            {
-            id: 2,
-            descricao: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            dataPublicacao: "2023-06-02",
-            imagem: ""
-            }
-        ],
+        trabalhos: [],
         arquivo: null,
         trabalhoEditado: null
         };
@@ -65,6 +54,15 @@ export default {
       console.log("Arquivo selecionado:", file);
     },
 
+    async enviarTrabalhoParaFirestore() {
+        try {
+            const userData = { trabalhos: this.trabalhos };
+            await updateUserData(userData);
+        } catch (error) {
+            alert('Erro: ' + error);
+        }
+    },
+
     salvarTrabalho() {
         if (this.trabalhoEditado) {
             this.trabalhoEditado.descricao = this.texto;
@@ -73,6 +71,8 @@ export default {
             this.adicionarTrabalho();
         }
         this.texto = '';
+
+        this.enviarTrabalhoParaFirestore();
     },
 
     adicionarTrabalho() {
@@ -123,6 +123,7 @@ export default {
       const index = this.trabalhos.findIndex(trabalho => trabalho.id == id);
       if (index!= -1) {
         this.trabalhos.splice(index,1);
+        this.enviarTrabalhoParaFirestore();
       }
       else {
         console.log('Trabalho não encontrado');
