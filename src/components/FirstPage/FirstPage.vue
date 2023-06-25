@@ -8,10 +8,10 @@
         <div class="botoes">
           <ul>
             <li class="login">
-              <a href="">Login</a>
+              <a class="linkLogin" @click=navegarLogin>Login</a>
             </li>
             <li class="registro">
-              <a href="">Registre-se</a>
+              <a class="linkRegistro" @click=navegarRegistro>Registre-se</a>
             </li>
           </ul>
         </div>
@@ -55,9 +55,19 @@
 </template>
 
 <script>
+    import router from '@/router'
 	export default {
-		name: 'FirstPageVue'
-	}
+		name: 'FirstPageVue',
+
+        methods: {
+            navegarRegistro(){
+              router.push('/Registro');
+            },
+            navegarLogin(){
+              router.push('/Login');
+            },
+        },
+    }
 </script>
 
 <style scoped>
@@ -68,35 +78,44 @@
     background: rgba(36, 56, 81, 0.459);
     clear: both;
     width: 100%;
-    height: 56px;
+    height: 100%;
 }
 
 footer {
-  background-image: url(../../assets/imgs/fundo3.gif);
+    width: 100%;
+    background-image: url(../../assets/imgs/m.gif);
 }
 
 nav {
       background: rgba(36, 56, 81, 0.64);
 }
 
-nav ul {
-        float: right;
-        list-style: none;
+.nav ul {
+    display: flex;
+    align-items: center;
 }
+
 
 nav ul li {
-    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-nav ul li a:link {
+.linkLogin, .linkRegistro {
+    color: white;
+    cursor: pointer;
+}
+.linkLogin, .linkRegistro{
     display: block;
     margin-right: 25px;
     padding-bottom: 3px;
     text-transform: uppercase;
+    text-align: center;
 }
 
-nav ul li a:hover {
+.linkLogin:hover, .linkRegistro:hover {
     border-bottom: 1px solid #535858;
+    color: pink;
 }
 
 a:link, a:active, a:visited {
@@ -104,7 +123,7 @@ a:link, a:active, a:visited {
 }
 
 .botoes {
-    margin-top: 30px;
+    padding: 25px;
     float: right;
 }
 
@@ -134,9 +153,10 @@ a:link, a:active, a:visited {
 
 .main {
         clear: both;
-        background-image: url(../../assets/imgs/fundo3.gif);
+        min-height: 100vh;
+        justify-content: space-between;
+        background-size: cover;
         text-align: center;
-        height: 540px;
 }
 
 #mainDescricao {
@@ -181,7 +201,7 @@ a:link, a:active, a:visited {
 .FooterBody{
         width: 100%;
         height:150px;
-        background: rgba(36, 56, 81, 0.616);
+        background: rgba(36, 56, 81, 0.253);
         font-family: 'Arapey', serif;
         display: flex;
         flex-direction: row;
@@ -195,6 +215,13 @@ a:link, a:active, a:visited {
         font-size: 20px;
         margin-left: 30px;
         float: left;
-    }
+}
+
+.registro,
+.login {
+    display: inline-block;
+    margin-right: 25px;
+    vertical-align: middle;
+}
 
 </style>
