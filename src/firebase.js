@@ -33,8 +33,8 @@ export const signInUser = async (email, senha) => {
     return user.uid;
 };
 
-export const signOutUser = () => {
-    return signOut(auth);
+export const signOutUser = async () => {
+    return await signOut(auth);
 }
 
 export const getUser = async id => {
