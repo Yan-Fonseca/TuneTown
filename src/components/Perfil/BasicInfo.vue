@@ -30,11 +30,17 @@
           <button @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
         </div>
       </div>
+      <div class="logout">
+        <button class="sair" @click="sairDoSistema">Sair</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import {signOutUser} from '@/firebase'
+import router from '@/router';
+
 export default {
   name: 'BasicInfo',
   data() {
@@ -57,6 +63,14 @@ export default {
     toggleEdicao() {
       this.editando = !this.editando;
       this.corBorda = this.editando ? 'green' : 'rgba(29, 36, 45, 0.84)';
+    },
+    sairDoSistema() {
+      try {
+        signOutUser();
+        router.push('/login');
+      } catch (error) {
+        alert('Erro ao sair: ' + error);
+      }
     }
   }
 }
@@ -162,5 +176,12 @@ export default {
   border: none;
   resize: none;
   font-size: 20px;
+}
+
+.sair {
+  background-color: crimson;
+  color: white;
+  width: 5vw;
+  padding: 10%;
 }
 </style>
