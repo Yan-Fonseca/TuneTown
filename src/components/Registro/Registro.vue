@@ -91,6 +91,8 @@ export default {
     async enviarFormulario() {
       const camposObrigatorios = [
         { campo: this.nome, nomeCampo: 'Nome' },
+        { campo: this.senha, nomeCampo: 'senha' },
+        { campo: this.repSenha, nomeCampo: 'repita a senha' },
         { campo: this.email, nomeCampo: 'Email' },
         { campo: this.dataNascimento, nomeCampo: 'Data de Nascimento' },
         { campo: this.selectedOption, nomeCampo: 'Estado' },
@@ -103,6 +105,11 @@ export default {
       if (camposVazios.length > 0) {
         const camposFaltantes = camposVazios.map(campo => campo.nomeCampo);
         alert(`Por favor, preencha os seguintes campos obrigatórios: ${camposFaltantes.join(', ')}`);
+        return;
+      }
+
+      if(this.senha != this.repSenha) {
+        alert('Por favor, repita a senha correta');
         return;
       }
 
