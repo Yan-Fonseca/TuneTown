@@ -1,5 +1,7 @@
-import {initializeApp} from 'firebase/app'
-import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const config = {
     apiKey: "AIzaSyAA1FMvpZBCI4j7K-QgAGiQWtytjuduAb4",
@@ -8,26 +10,26 @@ const config = {
     storageBucket: "tunetown-176ca.appspot.com",
     messagingSenderId: "354615473690",
     appId: "1:354615473690:web:d91229b53ba3d484f783a3"
-}
+};
 
-const firebaseapp = initializeApp(config);
+const firebaseApp = initializeApp(config);
 
-const auth = getAuth(firebaseapp);
-const db = firebaseapp.firestore();
-const userCollection = db.collection('usuários');
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+const userCollection = collection(db, 'usuários');
 
 // Métodos de manipulação no firebase:
 
-export const registerUser = (email,senha) => {
-    return createUserWithEmailAndPassword(auth,email,senha);
+export const registerUser = (email, senha) => {
+    return createUserWithEmailAndPassword(auth, email, senha);
 }
 
 export const createUserData = user => {
-    return userCollection.add(user);
+    return addDoc(userCollection, user);
 }
 
-export const signInUser = (email,senha) => {
-    return signInWithEmailAndPassword(auth,email,senha);
+export const signInUser = (email, senha) => {
+    return signInWithEmailAndPassword(auth, email, senha);
 }
 
 export const signOutUser = () => {
@@ -35,14 +37,29 @@ export const signOutUser = () => {
 }
 
 export const getUser = async id => {
-    const user = await userCollection.doc(id).get();
-    return user.exist ? user.data() : null;
+    const userDoc = await getDoc(doc(userCollection, id));
+    return userDoc.exists() ? userDoc.data() : null;
 }
 
-export const updateUser = (id,user) => {
-    return userCollection.doc(id).update(user);
+export const updateUser = (id, user) => {
+    return updateDoc(doc(userCollection, id), user);
 }
 
 export const deleteUser = id => {
-    return userCollection.doc(id).delete();
+    return deleteDoc(doc(userCollection, id));
 }
+
+export const fetchData = async (parametros) => {
+    let q = userCollection;
+    for (const campo in parametros) {
+        const valor = parametros[campo];
+        if (valor !== "") {
+            q = query(q, where(campo, "==", valor));
+        }
+    }
+
+    const querySnapshot = await getDocs(q);
+    const usersData = querySnapshot.docs.map((doc) => doc.data());
+
+    return usersData;
+};
