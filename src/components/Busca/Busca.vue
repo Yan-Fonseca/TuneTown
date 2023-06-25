@@ -27,7 +27,7 @@ export default {
 
     methods: {
     inicio(){
-      router.push('/#')
+      router.push('/home')
     },
     navegarPerfil(){
         router.push('/Perfil')
