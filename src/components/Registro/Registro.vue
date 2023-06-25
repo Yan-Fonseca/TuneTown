@@ -38,7 +38,7 @@
         </div>
         <div class="column">
             <label for="dataNascimento">Data de Nascimento</label>
-            <VueDatePicker v-model="dataNascimento" model-type="dd.MM.yyyy" :dark="true"></VueDatePicker>
+            <input type="date" id="dataNascimento" class="input-large" v-model="dataNascimento">
           </div>
         </div>
         <div class="checkbox">
@@ -65,15 +65,11 @@
 
 <script>
 import { estados } from "@/scripts/data.js";
-import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { registerUser, createUserData } from '@/firebase';
+//import { registerUser, createUserData } from '@/firebase';
 
 export default {
   name: 'RegistroComp',
-  components: {
-    VueDatePicker
-  },
   data() {
     return {
       selectedOption: null,
@@ -105,12 +101,7 @@ export default {
         trabalho: ''
       };
 
-      try {
-        await registerUser(this.email, this.senha);
-        await createUserData(data);
-      } catch (error) {
-        console.log('erro: ', error);
-      }
+      console.log(data);
     }
   }
 }
@@ -295,4 +286,8 @@ select {
   cursor: pointer;
   text-decoration: underline;
 }
+
+ #dataNascimento {
+  background-color: rgba(217, 217, 217, 0.47);
+ }
 </style>
