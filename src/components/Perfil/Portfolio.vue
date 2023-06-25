@@ -13,6 +13,9 @@
                 </div>
         </div>
         <div class="trabalhos">
+            <div class="trabalhos">
+                <h3>Trabalhos:</h3>
+            </div>
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
                 <div class="trabalho-info">
                     <div class="descricao">
@@ -59,7 +62,6 @@ export default {
     methods: {
     handleFileUpload(event) {
       const file = event.target.files[0];
-      // ações futuras
       console.log("Arquivo selecionado:", file);
     },
 
@@ -199,5 +201,6 @@ export default {
 
     h3 {
         font-size: 30px;
+        color: white;
     }
 </style>
