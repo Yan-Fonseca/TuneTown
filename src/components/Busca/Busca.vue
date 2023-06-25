@@ -1,7 +1,8 @@
 <template>
     <div class="header">
-        <div>
-            <img class="logo" src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown">    
+        <div class="logo">
+            <img src="../../assets/imgs/logo_TuneTown.png" alt="logo TuneTown"> 
+            <h1>TuneTown</h1>   
         </div>
         
         <div id="search">
@@ -44,9 +45,20 @@ export default {
         align-items: center;
     }
 
-    .logo {
+    .logo img {
         width: 68px;
         height: 72px;
+    }
+
+    .logo {
+        font-family: Arapey;
+        margin-left: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: white;
+        font-size: 25px;
+        font-weight: lighter;
     }
 
  input {
