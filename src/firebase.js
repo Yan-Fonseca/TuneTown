@@ -50,6 +50,17 @@ export const deleteUser = id => {
     return deleteDoc(doc(userCollection, id));
 }
 
+export const updateUserData = async (userData) => {
+    const userId = auth.currentUser.email;
+    const querySnapshot = await getDocs(userCollection);
+    const userDocRef = querySnapshot.docs.find((doc) => doc.data().email === userId);
+    if (userDocRef) {
+      await updateDoc(userDocRef.ref, userData);
+    } else {
+      console.log('Documento do usuário não encontrado');
+    }
+  }
+
 export const fetchData = async (parametros) => {
     let q = userCollection;
     for (const campo in parametros) {
