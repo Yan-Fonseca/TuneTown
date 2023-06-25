@@ -20,17 +20,7 @@
     },
     data() {
       return {
-        users: [
-          { id: 0, nome: 'Yan', avaliacao: 5.0 },
-          { id: 1, nome: 'Joel', avaliacao: 5.5 },
-          { id: 2, nome: 'João', avaliacao: 1.8 },
-          { id: 3, nome: 'Gabriela', avaliacao: 1.0 },
-          { id: 4, nome: 'Amanda', avaliacao: 9.9 },
-          { id: 5, nome: 'Alexandre', avaliacao: 3.0 },
-          { id: 6, nome: 'Julio', avaliacao: 7.8 },
-          { id: 7, nome: 'Cleopatra', avaliacao: 2 },
-          { id: 8, nome: 'Cleo', avaliacao: 0 }
-        ],
+        users: [],
         counter: 9
       };
     },
