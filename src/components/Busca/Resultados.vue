@@ -31,18 +31,21 @@
           const usersData = await usersDataPromise;
           if (usersData) {
             this.users = [];
-            const user = usersData[0]; // Obter o primeiro usuário do array
-            const data = {
-              id: this.counter,
-              nome: user.nome,
-              avaliacao: 5,
-            };
-            this.users.push(data);
+            for (let i = 0; i < usersData.length; i++) {
+              const user = usersData[i];
+              const data = {
+                id: this.counter + i,
+                nome: user.nome,
+                avaliacao: 5,
+              };
+              this.users.push(data);
+            }
           }
         } catch (error) {
           console.log('erro: ' + error);
         }
       },
+
     },
   }
 </script>
