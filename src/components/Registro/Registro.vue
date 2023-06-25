@@ -128,6 +128,8 @@ export default {
       try {
         await registerUser(this.email, this.senha);
         await createUserData(data);
+
+        this.$router.push('/Login');
       } catch (error) {
         console.log('erro: ', error);
       }
