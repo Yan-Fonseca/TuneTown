@@ -9,8 +9,8 @@
                 <div class="upload">
                     <input type="file" accept="image/*, video/*" @change="handleFileUpload">
                 </div>
-                <button @click.prevent="adicionarTrabalho" id="enviar">Enviar</button>
-            </div>
+                    <button @click.prevent="salvarTrabalho" id="enviar">Enviar</button>
+                </div>
         </div>
         <div class="trabalhos">
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
@@ -52,7 +52,8 @@ export default {
             imagem: ""
             }
         ],
-        arquivo: null
+        arquivo: null,
+        trabalhoEditado: null
         };
     },
     methods: {
@@ -60,6 +61,16 @@ export default {
       const file = event.target.files[0];
       // ações futuras
       console.log("Arquivo selecionado:", file);
+    },
+
+    salvarTrabalho() {
+        if (this.trabalhoEditado) {
+            this.trabalhoEditado.descricao = this.texto;
+            this.trabalhoEditado = null; // Limpar trabalhoEditado após a edição
+        } else {
+            this.adicionarTrabalho();
+        }
+        this.texto = '';
     },
 
     adicionarTrabalho() {
@@ -97,7 +108,13 @@ export default {
     },
 
     editarTrabalho(id) {
-        console.log(id);
+        const trabalho = this.trabalhos.find(trabalho => trabalho.id === id);
+        if (trabalho) {
+            this.trabalhoEditado = trabalho;
+            this.texto = trabalho.descricao;
+        } else {
+            console.log('Trabalho não encontrado');
+        }
     },
 
     removerTrabalho(id) {
