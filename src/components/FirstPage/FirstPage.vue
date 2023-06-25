@@ -83,7 +83,7 @@
 
 footer {
     width: 100%;
-    background-image: url(../../assets/imgs/m.gif);
+    background: rgba(19, 27, 36, 0.904);
 }
 
 nav {
