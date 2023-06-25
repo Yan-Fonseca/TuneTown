@@ -5,8 +5,8 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView/*,
+    name: 'first',
+    component: () => import(/*webpackChunkName: "First"*/'../views/FirstPageView.vue')/*,
     meta: {requiresAuth: true}*/
   },
   {
@@ -46,11 +46,12 @@ const routes = [
     meta: {requiresAuth: true}*/
   },
   {
-    path: '/first',
-    name: 'first',
-    component: () => import(/*webpackChunkName: "First"*/'../views/FirstPageView.vue')/*,
+    path: '/home',
+    name: 'home',
+    component: HomeView/*,
     meta: {requiresAuth: true}*/
   }
+  
 ]
 
 const router = createRouter({
