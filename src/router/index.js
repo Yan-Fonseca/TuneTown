@@ -44,6 +44,12 @@ const routes = [
     name: 'Welcome',
     component: () => import(/*webpackChunkName: "Welcome"*/'../views/WelcomeView.vue')/*,
     meta: {requiresAuth: true}*/
+  },
+  {
+    path: '/first',
+    name: 'first',
+    component: () => import(/*webpackChunkName: "First"*/'../views/FirstPageView.vue')/*,
+    meta: {requiresAuth: true}*/
   }
 ]
 
