@@ -39,6 +39,8 @@
 
 <script>
 import router from '@/router'
+import {signInUser} from '@/firebase'
+
 export default {
   name: 'LoginComp',
   data() {
@@ -51,9 +53,14 @@ export default {
     navegar(){
       router.push('/Registro');
     },
-    realizarLogin() {
-      console.log(this.email);
-      console.log(this.senha);
+    async realizarLogin() {
+      try {
+        const userId = await signInUser(this.email,this.senha);
+        console.log(userId);
+        router.push('/');
+      } catch (error) {
+        alert('Erro ao tentar entrar: ' + error);
+      }
     }
   },
 } 
