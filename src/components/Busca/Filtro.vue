@@ -91,7 +91,7 @@ export default {
         cidade: this.cidade,
         estado: this.selectedOption,
         profissao: this.profissao,
-        genero: this.genero
+        generoMusical: this.genero
       };
 
       this.$emit('buscarUsuarios', dados);
