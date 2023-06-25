@@ -63,3 +63,12 @@ export const fetchData = async (parametros) => {
 
     return usersData;
 };
+
+export const fetchDataName = async (name) => {
+    
+    let q = query(userCollection, where("nome", "==", name))
+    const querySnapshot = await getDocs(q);
+    const usersData = querySnapshot.docs.map((doc) => doc.data());
+
+    return usersData;
+};

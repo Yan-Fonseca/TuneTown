@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { fetchData } from "@/firebase";
+import { fetchData, fetchDataName } from "@/firebase";
 import perfilCard from "../common/perfilCard.vue";
 
 export default {
@@ -33,6 +33,27 @@ export default {
     async buscarUsuarios(dados) {
       try {
         const usersDataPromise = fetchData(dados);
+        const usersData = await usersDataPromise;
+        if (usersData) {
+          this.users = [];
+          for (var i = 0; i < usersData.length; i++) {
+            const user = usersData[i]
+            const data = {
+              id: this.counter,
+              nome: user.nome,
+              avaliacao: 5,
+            };
+            this.counter++;
+            this.users.push(data);
+          }
+        }
+      } catch (error) {
+        console.log("erro: " + error);
+      }
+    },
+    async buscarUsuariosNome(nome) {
+      try {
+        const usersDataPromise = fetchDataName(nome);
         const usersData = await usersDataPromise;
         if (usersData) {
           this.users = [];
