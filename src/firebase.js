@@ -46,3 +46,18 @@ export const updateUser = (id,user) => {
 export const deleteUser = id => {
     return userCollection.doc(id).delete();
 }
+
+export const fetchData = async (parametros) => {
+    let q = collection(db, "usuários");
+    for (const campo in parametros) {
+        const valor = parametros[campo];
+        if (valor != "") {
+            q = query(q, where(campo, "==", valor));
+        }
+    }
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id + " => " + JSON.stringify(doc.data()));
+    });
+};
