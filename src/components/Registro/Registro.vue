@@ -64,49 +64,56 @@
 </template>
 
 <script>
-  import {estados} from "@/scripts/data.js";
-  import VueDatePicker from '@vuepic/vue-datepicker';
-  import '@vuepic/vue-datepicker/dist/main.css'
-  import router from '@/router'
-  export default {
-    name: 'RegistroComp',
-    components: {
-      VueDatePicker
+import { estados } from "@/scripts/data.js";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { registerUser, createUserData } from '@/firebase';
+
+export default {
+  name: 'RegistroComp',
+  components: {
+    VueDatePicker
+  },
+  data() {
+    return {
+      selectedOption: null,
+      options: estados,
+      email: "",
+      senha: "",
+      repSenha: "",
+      nome: "",
+      dataNascimento: null,
+      cidade: "",
+      musico: false,
+      termos: false
+    }
+  },
+  methods: {
+    navegar() {
+      this.$router.push('/Login');
     },
-    data() {
-      return {
-        selectedOption: null,
-        options: estados,
-        email: "",
-        senha: "",
-        repSenha: "",
-        nome: "",
-        dataNascimento: null,
-        cidade: "",
-        musico: false
-      }
-    },
-    methods: {
-      navegar(){
-        router.push('/Login');
-      },
-      enviarFormulario() {
-        let data = {
-          nome: this.nome,
-          email: this.email,
-          dataNascimento: this.dataNascimento,
-          estado: this.options[this.selectedOption - 1].label,
-          cidade: this.cidade,
-          profissional: this.musico,
-          biografia: '',
-          telefone: '',
-          trabalho: ''
-        };
-        
-        console.log(data);
+    async enviarFormulario() {
+      let data = {
+        nome: this.nome,
+        email: this.email,
+        dataNascimento: this.dataNascimento,
+        estado: this.options[this.selectedOption - 1].label,
+        cidade: this.cidade,
+        profissional: this.musico,
+        biografia: '',
+        telefone: '',
+        trabalho: ''
+      };
+
+      try {
+        await registerUser(this.email, this.senha);
+        await createUserData(data);
+      } catch (error) {
+        console.log('erro: ', error);
       }
     }
   }
+}
 </script>
 
 <style scoped>
