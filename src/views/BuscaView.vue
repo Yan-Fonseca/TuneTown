@@ -5,11 +5,11 @@
         </div>
         <div class="content">
             <div class="sidebar">
-                <FiltroBusca />
+                <FiltroBusca @buscarUsuarios="buscar"/>
             </div>
             
             <div class="main-content">
-                <ResultadosBusca />
+                <ResultadosBusca ref="results"/>
             </div>
         </div>
     </div>
@@ -26,6 +26,11 @@
             BuscaPerfil,
             FiltroBusca,
             ResultadosBusca
+        },
+        methods: {
+            buscar(dados) {
+                this.$refs.results.buscarUsuarios(dados);
+            }
         }
     }
 </script>

@@ -18,7 +18,7 @@
             <label for="cidade">Cidade:</label>
           </div>
           <div class="input-wrapper">
-            <input type="text" id="cidade" :class="{ 'custom-background': cidadeFilled }" @input="cidadeFilled = $event.target.value !== ''">
+            <input type="text" id="cidade" :class="{ 'custom-background': cidadeFilled }" @input="cidadeFilled = $event.target.value !== ''" v-model="cidade">
           </div>
         </div>
         <div class="form-group">
@@ -26,7 +26,7 @@
             <label for="genero">Gênero musical:</label>
           </div>
           <div class="input-wrapper">
-            <input type="text" id="genero" :class="{ 'custom-background': generoFilled }" @input="generoFilled = $event.target.value !== ''">
+            <input type="text" id="genero" :class="{ 'custom-background': generoFilled }" @input="generoFilled = $event.target.value !== ''" v-model="genero">
           </div>
         </div>
         <div class="form-group">
@@ -34,7 +34,7 @@
             <label for="profissao">Profissão:</label>
           </div>
           <div class="input-wrapper">
-            <input type="text" id="profissao" :class="{ 'custom-background': profissaoFilled }" @input="profissaoFilled = $event.target.value !== ''">
+            <input type="text" id="profissao" :class="{ 'custom-background': profissaoFilled }" @input="profissaoFilled = $event.target.value !== ''" v-model="profissao">
           </div>
         </div>
         <div class="form-group">
@@ -55,7 +55,7 @@
            </div>
         </div>
 
-        <button class="buscar">Buscar</button>
+        <button class="buscar" @click="realizarBusca">Buscar</button>
       </form>
     </div>
   </div>
@@ -74,12 +74,27 @@ export default {
       cidadeFilled: false,
       generoFilled: false,
       profissaoFilled: false,
+      cidade: '',
+      genero: '',
+      profissao: ''
     };
   },
 
   watch: {
     selectedOption(newValue) {
       this.optionFilled = newValue !== '';
+    }
+  },
+  methods: {
+    realizarBusca() {
+      const dados = {
+        cidade: this.cidade,
+        estado: this.selectedOption,
+        profissao: this.profissao,
+        genero: this.genero
+      };
+
+      this.$emit('buscarUsuarios', dados);
     }
   }
 };

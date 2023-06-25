@@ -1,5 +1,6 @@
 import {initializeApp} from 'firebase/app'
 import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { query, where, getDocs } from "firebase/firestore";
 
 const config = {
     apiKey: "AIzaSyAA1FMvpZBCI4j7K-QgAGiQWtytjuduAb4",
@@ -48,7 +49,7 @@ export const deleteUser = id => {
 }
 
 export const fetchData = async (parametros) => {
-    let q = collection(db, "usuários");
+    let q = userCollection(db, "usuários");
     for (const campo in parametros) {
         const valor = parametros[campo];
         if (valor != "") {
@@ -57,7 +58,5 @@ export const fetchData = async (parametros) => {
     }
 
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id + " => " + JSON.stringify(doc.data()));
-    });
+    return querySnapshot;
 };
