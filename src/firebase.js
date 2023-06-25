@@ -59,6 +59,22 @@ export const updateUserData = async (userData) => {
     } else {
       console.log('Documento do usuário não encontrado');
     }
+}
+
+export const getCurrentUserEmail = () => {
+    return auth.currentUser.email;
+}
+
+export const getUserDocumentByEmail = async (email) => {
+    const q = query(userCollection, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+  
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      return userDoc.data();
+    } else {
+      return null;
+    }
   }
 
 export const fetchData = async (parametros) => {
