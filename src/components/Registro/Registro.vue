@@ -66,7 +66,7 @@
 <script>
 import { estados } from "@/scripts/data.js";
 import '@vuepic/vue-datepicker/dist/main.css';
-//import { registerUser, createUserData } from '@/firebase';
+import { registerUser, createUserData } from '@/firebase';
 
 export default {
   name: 'RegistroComp',
@@ -89,6 +89,23 @@ export default {
       this.$router.push('/Login');
     },
     async enviarFormulario() {
+      const camposObrigatorios = [
+        { campo: this.nome, nomeCampo: 'Nome' },
+        { campo: this.email, nomeCampo: 'Email' },
+        { campo: this.dataNascimento, nomeCampo: 'Data de Nascimento' },
+        { campo: this.selectedOption, nomeCampo: 'Estado' },
+        { campo: this.cidade, nomeCampo: 'Cidade' },
+        { campo: this.termos, nomeCampo: 'Termos de Uso' }
+      ];
+
+      const camposVazios = camposObrigatorios.filter(campo => !campo.campo);
+
+      if (camposVazios.length > 0) {
+        const camposFaltantes = camposVazios.map(campo => campo.nomeCampo);
+        alert(`Por favor, preencha os seguintes campos obrigatórios: ${camposFaltantes.join(', ')}`);
+        return;
+      }
+
       let data = {
         nome: this.nome,
         email: this.email,
@@ -101,7 +118,12 @@ export default {
         trabalho: ''
       };
 
-      console.log(data);
+      try {
+        await registerUser(this.email, this.senha);
+        await createUserData(data);
+      } catch (error) {
+        console.log('erro: ', error);
+      }
     }
   }
 }
