@@ -91,7 +91,7 @@ export default {
     realizarBusca() {
       const dados = {
         cidade: this.cidade,
-        estado: this.options[this.selectedOption - 1].label,
+        estado: this.selectedOption==null? '':this.options[this.selectedOption - 1].label,
         profissao: this.profissao,
         generoMusical: this.genero
       };

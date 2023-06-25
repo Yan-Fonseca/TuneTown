@@ -38,7 +38,7 @@
         </div>
         <div class="column">
             <label for="dataNascimento">Data de Nascimento</label>
-            <VueDatePicker v-model="dataNascimento" model-type="dd.MM.yyyy" :dark="true"></VueDatePicker>
+            <input type="date" id="dataNascimento" class="input-large" v-model="dataNascimento">
           </div>
         </div>
         <div class="checkbox">
@@ -64,49 +64,78 @@
 </template>
 
 <script>
-  import {estados} from "@/scripts/data.js";
-  import VueDatePicker from '@vuepic/vue-datepicker';
-  import '@vuepic/vue-datepicker/dist/main.css'
-  import router from '@/router'
-  export default {
-    name: 'RegistroComp',
-    components: {
-      VueDatePicker
+import { estados } from "@/scripts/data.js";
+import '@vuepic/vue-datepicker/dist/main.css';
+import { registerUser, createUserData } from '@/firebase';
+
+export default {
+  name: 'RegistroComp',
+  data() {
+    return {
+      selectedOption: null,
+      options: estados,
+      email: "",
+      senha: "",
+      repSenha: "",
+      nome: "",
+      dataNascimento: null,
+      cidade: "",
+      musico: false,
+      termos: false
+    }
+  },
+  methods: {
+    navegar() {
+      this.$router.push('/Login');
     },
-    data() {
-      return {
-        selectedOption: null,
-        options: estados,
-        email: "",
-        senha: "",
-        repSenha: "",
-        nome: "",
-        dataNascimento: null,
-        cidade: "",
-        musico: false
+    async enviarFormulario() {
+      const camposObrigatorios = [
+        { campo: this.nome, nomeCampo: 'Nome' },
+        { campo: this.senha, nomeCampo: 'senha' },
+        { campo: this.repSenha, nomeCampo: 'repita a senha' },
+        { campo: this.email, nomeCampo: 'Email' },
+        { campo: this.dataNascimento, nomeCampo: 'Data de Nascimento' },
+        { campo: this.selectedOption, nomeCampo: 'Estado' },
+        { campo: this.cidade, nomeCampo: 'Cidade' },
+        { campo: this.termos, nomeCampo: 'Termos de Uso' }
+      ];
+
+      const camposVazios = camposObrigatorios.filter(campo => !campo.campo);
+
+      if (camposVazios.length > 0) {
+        const camposFaltantes = camposVazios.map(campo => campo.nomeCampo);
+        alert(`Por favor, preencha os seguintes campos obrigatórios: ${camposFaltantes.join(', ')}`);
+        return;
       }
-    },
-    methods: {
-      navegar(){
-        router.push('/Login');
-      },
-      enviarFormulario() {
-        let data = {
-          nome: this.nome,
-          email: this.email,
-          dataNascimento: this.dataNascimento,
-          estado: this.options[this.selectedOption - 1].label,
-          cidade: this.cidade,
-          profissional: this.musico,
-          biografia: '',
-          telefone: '',
-          trabalho: ''
-        };
-        
-        console.log(data);
+
+      if(this.senha != this.repSenha) {
+        alert('Por favor, repita a senha correta');
+        return;
+      }
+
+      let data = {
+        nome: this.nome,
+        email: this.email,
+        dataNascimento: this.dataNascimento,
+        estado: this.options[this.selectedOption - 1].label,
+        cidade: this.cidade,
+        profissional: this.musico,
+        biografia: '',
+        telefone: '',
+        trabalho: ''
+      };
+
+      try {
+        await registerUser(this.email, this.senha);
+        await createUserData(data);
+
+        this.$router.push('/Login');
+      } catch (error) {
+        console.log('erro: ', error);
       }
     }
   }
+}
 </script>
 
 <style scoped>
@@ -288,4 +317,8 @@ select {
   cursor: pointer;
   text-decoration: underline;
 }
+
+ #dataNascimento {
+  background-color: rgba(217, 217, 217, 0.47);
+ }
 </style>
