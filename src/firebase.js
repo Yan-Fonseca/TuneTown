@@ -28,9 +28,10 @@ export const createUserData = user => {
     return addDoc(userCollection, user);
 }
 
-export const signInUser = (email, senha) => {
-    return signInWithEmailAndPassword(auth, email, senha);
-}
+export const signInUser = async (email, senha) => {
+    const { user } = await signInWithEmailAndPassword(auth, email, senha);
+    return user.uid;
+};
 
 export const signOutUser = () => {
     return signOut(auth);

@@ -13,10 +13,10 @@
           </div>
         </div>
         <div class="contatos" :style="{ borderColor: corBorda }">
-          <h3>Estado: <input v-model="estado" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Estado: <input v-model="estado" :readonly="true" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
           <h3>Cidade: <input v-model="cidade" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
           <h3>Telefone: <input v-model="telefone" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
-          <h3>Email: <input v-model="email" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Email: <input v-model="email" :readonly="true" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
         </div>
       </div>
       <div class="biography">
