@@ -20,34 +20,35 @@ const userCollection = collection(db, 'usuários');
 
 // Métodos de manipulação no firebase:
 
-export const registerUser = (email, senha) => {
-    return createUserWithEmailAndPassword(auth, email, senha);
-}
+export const registerUser = async (email, senha) => {
+    return await createUserWithEmailAndPassword(auth, email, senha);
+};
 
-export const createUserData = user => {
-    return addDoc(userCollection, user);
-}
+export const createUserData = async (user) => {
+    return await addDoc(userCollection, user);
+};
 
-export const signInUser = (email, senha) => {
-    return signInWithEmailAndPassword(auth, email, senha);
-}
+export const signInUser = async (email, senha) => {
+    return await signInWithEmailAndPassword(auth, email, senha);
+};
 
-export const signOutUser = () => {
-    return signOut(auth);
-}
+export const signOutUser = async () => {
+    return await signOut(auth);
+};
 
-export const getUser = async id => {
+export const getUser = async (id) => {
     const userDoc = await getDoc(doc(userCollection, id));
     return userDoc.exists() ? userDoc.data() : null;
-}
+};
 
-export const updateUser = (id, user) => {
-    return updateDoc(doc(userCollection, id), user);
-}
+export const updateUser = async (id, user) => {
+    return await updateDoc(doc(userCollection, id), user);
+};
 
-export const deleteUser = id => {
-    return deleteDoc(doc(userCollection, id));
-}
+export const deleteUser = async (id) => {
+    return await deleteDoc(doc(userCollection, id));
+};
+  
 
 export const fetchData = async (parametros) => {
     let q = userCollection;
