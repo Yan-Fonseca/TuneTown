@@ -56,7 +56,7 @@ export default {
     async realizarLogin() {
       try {
         await signInUser(this.email,this.senha);
-        router.push('/');
+        router.push('/home');
       } catch (error) {
         alert('Erro ao tentar entrar: ' + error);
       }

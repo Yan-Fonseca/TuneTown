@@ -15,7 +15,7 @@ export default {
   name: 'WelcomeComp',
   methods:{
     goHome(){
-        this.$router.push('/');
+        this.$router.push('/home');
     }
   }
 } 
