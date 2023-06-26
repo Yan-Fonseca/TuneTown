@@ -72,7 +72,8 @@ export default {
       }
     },
     acessarCalendario() {
-      this.$router.push('/calendario');
+      const id = this.$route.params.id;
+      this.$router.push('/calendario/'+id);
     },
     async toggleEdicao() {
       this.editando = !this.editando;
