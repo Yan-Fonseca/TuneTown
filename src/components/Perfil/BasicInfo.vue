@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="edit">
-          <button @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
+          <button v-if="autenticado" @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
         </div>
       </div>
       <div class="logout">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {signOutUser} from '@/firebase'
+import {signOutUser, getCurrentUserEmail} from '@/firebase'
 import router from '@/router';
 
 export default {
@@ -53,6 +53,7 @@ export default {
       email: '',
       trabalho: '',
       editando: false,
+      autenticado: false,
       corBorda: 'rgba(29, 36, 45, 0.84)'
     };
   },
@@ -65,6 +66,10 @@ export default {
       this.telefone = dados.telefone;
       this.email = dados.email;
       this.trabalho = dados.trabalho;
+
+      if(getCurrentUserEmail()==this.email) {
+        this.autenticado = true;
+      }
     },
     acessarCalendario() {
       this.$router.push('/calendario');

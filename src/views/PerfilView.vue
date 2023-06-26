@@ -23,7 +23,6 @@ export default {
     // Acessando o valor do ID
     const id = this.$route.params.id;
     const documento = await getUserDocumentByEmail(id);
-    console.log(documento);
     const basic = {
       biografia: documento.biografia,
       cidade: documento.cidade,
