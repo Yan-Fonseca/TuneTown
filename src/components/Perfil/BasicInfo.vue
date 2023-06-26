@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {signOutUser, getCurrentUserEmail} from '@/firebase'
+import {signOutUser, getCurrentUserEmail, updateUserData} from '@/firebase'
 import router from '@/router';
 
 export default {
@@ -74,9 +74,20 @@ export default {
     acessarCalendario() {
       this.$router.push('/calendario');
     },
-    toggleEdicao() {
+    async toggleEdicao() {
       this.editando = !this.editando;
       this.corBorda = this.editando ? 'green' : 'rgba(29, 36, 45, 0.84)';
+      if(!this.editando) {
+        const dadoParaSalvar = {
+          biografia : this.biografia,
+          estado: this.estado,
+          cidade: this.cidade,
+          telefone: this.telefone,
+          trabalho: this.trabalho
+        }
+
+        await updateUserData(dadoParaSalvar);
+      }
     },
     sairDoSistema() {
       try {

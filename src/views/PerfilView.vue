@@ -29,7 +29,8 @@ export default {
       estado: documento.estado,
       nome: documento.nome,
       telefone: documento.telefone,
-      trabalho: documento.trabalho
+      trabalho: documento.trabalho,
+      email: documento.email
     }
 
     const vetor = documento.trabalhos;
