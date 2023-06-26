@@ -55,8 +55,7 @@ export default {
     },
     async realizarLogin() {
       try {
-        const userId = await signInUser(this.email,this.senha);
-        console.log(userId);
+        await signInUser(this.email,this.senha);
         router.push('/');
       } catch (error) {
         alert('Erro ao tentar entrar: ' + error);

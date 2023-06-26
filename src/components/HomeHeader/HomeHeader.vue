@@ -17,12 +17,19 @@
   </template>
   
   <script>
+    import {getCurrentUserEmail} from '@/firebase';
+
     import router from '@/router'
     export default {
       name: 'LoginHeader',
       methods: {
         navegar1(){
-          router.push('/perfil');
+          try {
+            const email = getCurrentUserEmail();
+            router.push('/perfil/' + email);
+          } catch (error) {
+            alert('Erro ao acessar o perfil: ' + error);
+          }
         },
         navegar2(){
           router.push('/search');

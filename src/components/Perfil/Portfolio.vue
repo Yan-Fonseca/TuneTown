@@ -54,6 +54,10 @@ export default {
       console.log("Arquivo selecionado:", file);
     },
 
+    preencherVetor(dados) {
+        this.trabalhos = dados;
+    },
+
     async enviarTrabalhoParaFirestore() {
         try {
             const userData = { trabalhos: this.trabalhos };

@@ -45,18 +45,27 @@ export default {
   name: 'BasicInfo',
   data() {
     return {
-      biografia: 'Estudante e especialista em engenharia de som e afins',
-      nome: 'Baiao',
-      estado: 'minas gerais',
-      cidade: 'juiz de fora',
-      telefone: '32 98888-8888',
-      email: 'baiao.mixer@teste.com',
-      trabalho: 'Engenharia de som',
+      biografia: '',
+      nome: '',
+      estado: '',
+      cidade: '',
+      telefone: '',
+      email: '',
+      trabalho: '',
       editando: false,
       corBorda: 'rgba(29, 36, 45, 0.84)'
     };
   },
   methods: {
+    preencherDadosDePerfil(dados) {
+      this.nome = dados.nome;
+      this.biografia = dados.biografia;
+      this.estado = dados.estado;
+      this.cidade = dados.cidade;
+      this.telefone = dados.telefone;
+      this.email = dados.email;
+      this.trabalho = dados.trabalho;
+    },
     acessarCalendario() {
       this.$router.push('/calendario');
     },
