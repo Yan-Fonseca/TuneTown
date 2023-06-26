@@ -9,10 +9,13 @@
                 <div class="upload">
                     <input type="file" accept="image/*, video/*" @change="handleFileUpload">
                 </div>
-                <button @click.prevent="adicionarTrabalho" id="enviar">Enviar</button>
-            </div>
+                    <button @click.prevent="salvarTrabalho" id="enviar">Enviar</button>
+                </div>
         </div>
         <div class="trabalhos">
+            <div class="trabalhos">
+                <h3>Trabalhos:</h3>
+            </div>
             <div v-for="trabalho in trabalhos" :key="trabalho.id" class="trabalho">
                 <div class="trabalho-info">
                     <div class="descricao">
@@ -33,33 +36,47 @@
 </template>
 
 <script>
+import {updateUserData} from '@/firebase';
+
 export default {
     name: 'PortfolioMusic',
     data() {
         return {
         texto: "",
-        trabalhos: [
-            {
-            id: 1,
-            descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            dataPublicacao: "2023-06-01",
-            imagem: ""
-            },
-            {
-            id: 2,
-            descricao: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            dataPublicacao: "2023-06-02",
-            imagem: ""
-            }
-        ],
-        arquivo: null
+        trabalhos: [],
+        arquivo: null,
+        trabalhoEditado: null
         };
     },
     methods: {
     handleFileUpload(event) {
       const file = event.target.files[0];
-      // ações futuras
       console.log("Arquivo selecionado:", file);
+    },
+
+    preencherVetor(dados) {
+        this.trabalhos = dados;
+    },
+
+    async enviarTrabalhoParaFirestore() {
+        try {
+            const userData = { trabalhos: this.trabalhos };
+            await updateUserData(userData);
+        } catch (error) {
+            alert('Erro: ' + error);
+        }
+    },
+
+    salvarTrabalho() {
+        if (this.trabalhoEditado) {
+            this.trabalhoEditado.descricao = this.texto;
+            this.trabalhoEditado = null; // Limpar trabalhoEditado após a edição
+        } else {
+            this.adicionarTrabalho();
+        }
+        this.texto = '';
+
+        this.enviarTrabalhoParaFirestore();
     },
 
     adicionarTrabalho() {
@@ -97,13 +114,20 @@ export default {
     },
 
     editarTrabalho(id) {
-        console.log(id);
+        const trabalho = this.trabalhos.find(trabalho => trabalho.id === id);
+        if (trabalho) {
+            this.trabalhoEditado = trabalho;
+            this.texto = trabalho.descricao;
+        } else {
+            console.log('Trabalho não encontrado');
+        }
     },
 
     removerTrabalho(id) {
       const index = this.trabalhos.findIndex(trabalho => trabalho.id == id);
       if (index!= -1) {
         this.trabalhos.splice(index,1);
+        this.enviarTrabalhoParaFirestore();
       }
       else {
         console.log('Trabalho não encontrado');
@@ -182,5 +206,6 @@ export default {
 
     h3 {
         font-size: 30px;
+        color: white;
     }
 </style>

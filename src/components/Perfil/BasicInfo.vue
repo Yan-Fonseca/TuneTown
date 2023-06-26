@@ -13,10 +13,10 @@
           </div>
         </div>
         <div class="contatos" :style="{ borderColor: corBorda }">
-          <h3>Estado: <input v-model="estado" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Estado: <input v-model="estado" :readonly="true" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
           <h3>Cidade: <input v-model="cidade" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
           <h3>Telefone: <input v-model="telefone" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
-          <h3>Email: <input v-model="email" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>Email: <input v-model="email" :readonly="true" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
         </div>
       </div>
       <div class="biography">
@@ -27,36 +27,75 @@
           </div>
         </div>
         <div class="edit">
-          <button @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
+          <button v-if="autenticado" @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
         </div>
+      </div>
+      <div class="logout">
+        <button class="sair" @click="sairDoSistema">Sair</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {signOutUser, getCurrentUserEmail, updateUserData} from '@/firebase'
+import router from '@/router';
+
 export default {
   name: 'BasicInfo',
   data() {
     return {
-      biografia: 'Estudante e especialista em engenharia de som e afins',
-      nome: 'Baiao',
-      estado: 'minas gerais',
-      cidade: 'juiz de fora',
-      telefone: '32 98888-8888',
-      email: 'baiao.mixer@teste.com',
-      trabalho: 'Engenharia de som',
+      biografia: '',
+      nome: '',
+      estado: '',
+      cidade: '',
+      telefone: '',
+      email: '',
+      trabalho: '',
       editando: false,
+      autenticado: false,
       corBorda: 'rgba(29, 36, 45, 0.84)'
     };
   },
   methods: {
+    preencherDadosDePerfil(dados) {
+      this.nome = dados.nome;
+      this.biografia = dados.biografia;
+      this.estado = dados.estado;
+      this.cidade = dados.cidade;
+      this.telefone = dados.telefone;
+      this.email = dados.email;
+      this.trabalho = dados.trabalho;
+
+      if(getCurrentUserEmail()==this.email) {
+        this.autenticado = true;
+      }
+    },
     acessarCalendario() {
       this.$router.push('/calendario');
     },
-    toggleEdicao() {
+    async toggleEdicao() {
       this.editando = !this.editando;
       this.corBorda = this.editando ? 'green' : 'rgba(29, 36, 45, 0.84)';
+      if(!this.editando) {
+        const dadoParaSalvar = {
+          biografia : this.biografia,
+          estado: this.estado,
+          cidade: this.cidade,
+          telefone: this.telefone,
+          trabalho: this.trabalho
+        }
+
+        await updateUserData(dadoParaSalvar);
+      }
+    },
+    sairDoSistema() {
+      try {
+        signOutUser();
+        router.push('/login');
+      } catch (error) {
+        alert('Erro ao sair: ' + error);
+      }
     }
   }
 }
@@ -162,5 +201,12 @@ export default {
   border: none;
   resize: none;
   font-size: 20px;
+}
+
+.sair {
+  background-color: crimson;
+  color: white;
+  width: 5vw;
+  padding: 10%;
 }
 </style>

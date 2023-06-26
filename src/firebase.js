@@ -28,12 +28,13 @@ export const createUserData = user => {
     return addDoc(userCollection, user);
 }
 
-export const signInUser = (email, senha) => {
-    return signInWithEmailAndPassword(auth, email, senha);
-}
+export const signInUser = async (email, senha) => {
+    const { user } = await signInWithEmailAndPassword(auth, email, senha);
+    return user.uid;
+};
 
-export const signOutUser = () => {
-    return signOut(auth);
+export const signOutUser = async () => {
+    return await signOut(auth);
 }
 
 export const getUser = async id => {
@@ -48,6 +49,33 @@ export const updateUser = (id, user) => {
 export const deleteUser = id => {
     return deleteDoc(doc(userCollection, id));
 }
+
+export const updateUserData = async (userData) => {
+    const userId = auth.currentUser.email;
+    const querySnapshot = await getDocs(userCollection);
+    const userDocRef = querySnapshot.docs.find((doc) => doc.data().email === userId);
+    if (userDocRef) {
+      await updateDoc(userDocRef.ref, userData);
+    } else {
+      console.log('Documento do usuário não encontrado');
+    }
+}
+
+export const getCurrentUserEmail = () => {
+    return auth.currentUser.email;
+}
+
+export const getUserDocumentByEmail = async (email) => {
+    const q = query(userCollection, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+  
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      return userDoc.data();
+    } else {
+      return null;
+    }
+  }
 
 export const fetchData = async (parametros) => {
     let q = userCollection;

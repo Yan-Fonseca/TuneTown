@@ -10,7 +10,7 @@ const routes = [
     meta: {requiresAuth: true}*/
   },
   {
-    path: '/perfil',
+    path: '/perfil/:id',
     name: 'pefil',
     component: () => import(/* webpackChunkName: "perfil" */ '../views/PerfilView.vue')/*,
     meta: {requiresAuth: true}*/
