@@ -72,6 +72,8 @@
   </template>
   
 <script>
+  import {updateCalendarData} from '@/firebase';
+
   export default {
     name: 'AgendaUser',
     data() {
@@ -102,6 +104,26 @@
         };
       },
 
+      preencherEventos(dados) {
+        console.log(dados);
+        if(dados.empty || dados===undefined) {
+          dados = [];
+        }
+        else {
+          this.eventos = dados;
+          this.atualizarCalendario();
+        }
+      },
+
+      async enviarEventosParaFirestore() {
+        try {
+            const userData = { eventos: this.eventos };
+            await updateCalendarData(userData);
+        } catch (error) {
+            alert('Erro: ' + error);
+        }
+      },
+
       openForm() {
         this.showForm = true; // Exibe o formulário
       },
@@ -115,6 +137,7 @@
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
         this.counter--;
         this.atualizarCalendario();
+        this.enviarEventosParaFirestore();
       },
 
       saveEvent() {
@@ -135,6 +158,7 @@
 
         this.cancelForm();
         this.atualizarCalendario();
+        this.enviarEventosParaFirestore();
       },
 
       resetarCampos() {
