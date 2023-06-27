@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="header-busca">
-            <BuscaPerfil/>
+            <BuscaPerfil @buscarUsuariosNome="buscarNome"/>
         </div>
         <div class="content">
             <div class="sidebar">
@@ -30,6 +30,9 @@
         methods: {
             buscar(dados) {
                 this.$refs.results.buscarUsuarios(dados);
+            },
+            buscarNome(nome){
+                this.$refs.results.buscarUsuariosNome(nome);
             }
         }
     }
