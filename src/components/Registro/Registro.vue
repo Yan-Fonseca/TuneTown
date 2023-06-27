@@ -117,7 +117,7 @@ export default {
         nome: this.nome,
         email: this.email,
         dataNascimento: this.dataNascimento,
-        estado: this.options[this.selectedOption - 1].label,
+        estado: (this.options[this.selectedOption - 1].label).toLowerCase(),
         cidade: this.cidade,
         profissional: this.musico,
         biografia: '',
