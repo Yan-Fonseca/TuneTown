@@ -40,22 +40,22 @@
 
     <!-- Tela flutuante com o formulário de feedback -->
     <div class="feedback-overlay" v-if="showFeedbackForm">
-      <div class="feedback-container">
-        <h2 class="feedback-title">Feedback</h2>
-        <form>
-          <div class="form-row">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" v-model="feedback.name"/>
-          </div>
+    <div class="feedback-container">
+      <h2 class="feedback-title">Feedback</h2>
+      <form class="feedback-form">
+        <div class="form-row">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" v-model="feedback.name" />
+        </div>
 
-          <div class="form-row">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" v-model="feedback.email"/>
-          </div>
+        <div class="form-row">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" v-model="feedback.email" />
+        </div>
 
-          <div class="form-row">
-            <label for="rating">Avaliação:</label>
-            <div class="star-rating">
+        <div class="form-row">
+          <label for="rating">Avaliação:</label>
+          <div class="star-rating">
                 <input type="radio" id="rating-5" name="rating" value="5" @change="setRating(5)">
                 <label for="rating-5" title="5 estrelas">&#9733;</label>
                 <input type="radio" id="rating-4" name="rating" value="4" @change="setRating(4)">
@@ -69,16 +69,15 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <label for="message">Mensagem:</label>
-            <textarea id="message" name="message" v-model="feedback.message"></textarea>
-          </div>
-
+        <div class="form-row">
+          <label for="message">Mensagem:</label>
+          <textarea id="message" name="message" v-model="feedback.message"></textarea>
+        </div>
           <!-- Botões de ação -->
           <div class="form-buttons">
-            <button type="button" @click="cancelFeedbackForm" class="cancelar">Cancelar</button>
-            <button type="submit" @click.prevent="submitFeedback" class="enviar">Enviar</button>
-          </div>
+          <button type="button" @click="cancelFeedbackForm" class="cancelar">Cancelar</button>
+          <button type="submit" @click.prevent="submitFeedback" class="enviar">Enviar</button>
+        </div>
         </form>
       </div>
     </div>
@@ -167,10 +166,9 @@ export default {
       this.feedback.message = '';
     },
     setRating(rating) {
-      this.feedback.rating = rating; // Define a avaliação selecionada
+      this.feedback.rating = rating; 
     },
     submitFeedback() {
-      // Aqui você pode implementar a lógica para enviar o feedback para o servidor ou realizar outras ações necessárias
       console.log('Feedback:', this.feedback);
       this.cancelFeedbackForm();
     }
@@ -289,6 +287,9 @@ export default {
   border-radius: 5px;
 }
 
+.feedback-form {
+  width: 100%;
+}
 .feedback-button {
   background-color: #2e7a32;
   color: white;
@@ -315,6 +316,7 @@ export default {
   background-color: rgba(36, 56, 81, 1);
   padding: 20px;
   border-radius: 8px;
+  width: 300px;
 }
 
 .feedback-title {
@@ -329,12 +331,15 @@ export default {
 }
 
 .feedback-container .form-row {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
 }
 
 .feedback-container label {
   color: white;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .feedback-container input,
@@ -342,6 +347,7 @@ export default {
   padding: 5px;
   border-radius: 4px;
   border: none;
+  width: 100%;  
 }
 
 .feedback-container .form-buttons {
@@ -367,7 +373,7 @@ export default {
 .star-rating {
   direction: rtl;
   unicode-bidi: bidi-override;
-  text-align: center;
+  text-align: left;
 }
 
 .star-rating input[type="radio"] {
@@ -387,4 +393,5 @@ export default {
 .star-rating input[type="radio"]:checked ~ label {
   color: #FFD700;
 }
+
 </style>
