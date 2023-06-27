@@ -31,10 +31,10 @@
         </div>
       </div>
       <div>
-        <button class="feedback-button" @click="openFeedbackForm">Feedback</button>
+        <button v-if="!autenticado" class="feedback-button" @click="openFeedbackForm">Feedback</button>
       </div>
       <div class="logout">
-        <button class="sair" @click="sairDoSistema">Sair</button>
+        <button v-if="autenticado" class="sair" @click="sairDoSistema">Sair</button>
       </div>
     </div>
 
@@ -104,12 +104,12 @@ export default {
       autenticado: false,
       corBorda: 'rgba(29, 36, 45, 0.84)',
       showFeedbackForm: false,
-      feedback: { // Adicione esta seção
-      name: '',
-      email: '',
-      rating: 0,
-      message: ''
-    }
+      feedback: { 
+        name: '',
+        email: '',
+        rating: 0,
+        message: ''
+      }
     };
   },
   methods: {
