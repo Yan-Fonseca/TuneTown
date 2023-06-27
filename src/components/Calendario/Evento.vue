@@ -8,8 +8,8 @@
         <div class="card" v-for="evento in eventos" :key="evento.id" :style="getCardStyle(evento.id)">
           <div id="header">
             <div class="btns">
-              <button id="remove" @click="deleteEvent(evento.id)">X</button>
-              <button id="edit" @click="editEvent(evento.id)">Edit</button>
+              <button v-if="autenticado" id="remove" @click="deleteEvent(evento.id)">X</button>
+              <button v-if="autenticado" id="edit" @click="editEvent(evento.id)">Edit</button>
             </div>
             <div class="date">
               <h3>{{evento.data}}</h3>
