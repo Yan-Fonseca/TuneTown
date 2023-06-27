@@ -26,7 +26,7 @@
       </div>
   
       <div class="btn">
-        <button class="add" @click="openForm">+</button>
+        <button v-if="autenticado" class="add" @click="openForm">+</button>
       </div>
   
       <!-- Tela flutuante com o formulário -->
@@ -72,7 +72,7 @@
   </template>
   
 <script>
-  import {updateCalendarData} from '@/firebase';
+  import {updateCalendarData, getCurrentUserEmail} from '@/firebase';
 
   export default {
     name: 'AgendaUser',
@@ -87,7 +87,8 @@
         horario: '',
         integrantes: '',
         editMode: false, // Indicador do modo de edição
-        editEventId: null // ID do evento em edição
+        editEventId: null, // ID do evento em edição
+        autenticado: false
       };
     },
     methods: {
@@ -113,6 +114,11 @@
           this.eventos = dados;
           this.atualizarCalendario();
         }
+      },
+
+      estaAutenticado(email_ID) {
+        const userEmail = getCurrentUserEmail(); // Obtém o email do usuário atual
+        this.autenticado = userEmail === email_ID;
       },
 
       async enviarEventosParaFirestore() {

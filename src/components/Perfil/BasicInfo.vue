@@ -171,7 +171,6 @@ export default {
       this.feedback.rating = rating; // Define a avaliação selecionada
     },
     submitFeedback() {
-      // Aqui você pode implementar a lógica para enviar o feedback para o servidor ou realizar outras ações necessárias
       console.log('Feedback:', this.feedback);
       this.cancelFeedbackForm();
     }

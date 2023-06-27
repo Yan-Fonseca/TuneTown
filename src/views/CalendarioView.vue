@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <HeaderCal/>
+      <HeaderCal ref="header"/>
       <div class="content">
         <div class="calendar-wrapper">
           <CalendarioUser ref="calendar"/>
@@ -32,8 +32,11 @@
 
       const vetor = documento.eventos;
 
+      this.$refs.agenda.estaAutenticado(id)
       this.$refs.agenda.preencherEventos(vetor);
+      this.$refs.header.setEmail(id);
     },
+    
     methods: {
       atualizarCalendario(dados) {
         this.$refs.calendar.tratarEventosParaCalendario(dados);
