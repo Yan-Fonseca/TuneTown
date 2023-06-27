@@ -8,6 +8,7 @@
           :key="item.id"
           :nome="item.nome"
           :avaliacao="item.avaliacao"
+          :email="item.email"
         />
       </div>
     </div>
@@ -42,6 +43,7 @@ export default {
               id: this.counter,
               nome: user.nome,
               avaliacao: 5,
+              email: user.email
             };
             this.counter++;
             this.users.push(data);
@@ -63,6 +65,7 @@ export default {
               id: this.counter,
               nome: user.nome,
               avaliacao: 5,
+              email: user.email
             };
             this.counter++;
             this.users.push(data);
