@@ -30,6 +30,7 @@
 
 <script>
 import router from "@/router";
+import {getCurrentUserEmail} from '@/firebase'
 export default {
   name: "BuscaPerfil",
 
@@ -45,7 +46,8 @@ export default {
       router.push("/#");
     },
     navegarPerfil() {
-      router.push("/Perfil");
+      const email = getCurrentUserEmail()
+      router.push("/Perfil/"+email);
     },
     realizarBuscaNome() {
       const nome = this.nome;
