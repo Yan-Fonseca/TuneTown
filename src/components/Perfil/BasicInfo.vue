@@ -3,7 +3,7 @@
     <div class="info">
       <div class="info-basica">
         <div class="img">
-          <img src="../../assets/imgs/perfil.png" alt="imagem de perfil">
+          <img src="../../assets/imgs/perfil.png" alt="imagem de perfil" />
           <div class="profile-info">
             <h3>{{ nome }}</h3>
             <p class="id">@id_usuário</p>
@@ -13,21 +13,55 @@
           </div>
         </div>
         <div class="contatos" :style="{ borderColor: corBorda }">
-          <h3>Estado: <input v-model="estado" :readonly="true" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
-          <h3>Cidade: <input v-model="cidade" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
-          <h3>Telefone: <input v-model="telefone" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
-          <h3>Email: <input v-model="email" :readonly="true" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></h3>
+          <h3>
+            Estado:
+            <input
+              v-model="estado"
+              :readonly="true"
+              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+            />
+          </h3>
+          <h3>
+            Cidade:
+            <input
+              v-model="cidade"
+              :readonly="!editando"
+              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+            />
+          </h3>
+          <h3>
+            Telefone:
+            <input
+              v-model="telefone"
+              :readonly="!editando"
+              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+            />
+          </h3>
+          <h3>
+            Email:
+            <input
+              v-model="email"
+              :readonly="true"
+              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+            />
+          </h3>
         </div>
       </div>
       <div class="biography">
         <div class="work-info">
           <h3>Trabalho com: {{ trabalho }}</h3>
           <div class="biography-box" :style="{ borderColor: corBorda }">
-            <textarea v-model="biografia" :readonly="!editando" :style="{ background:'rgba(29, 36, 45, 0.84)', color:'white'}"></textarea>
+            <textarea
+              v-model="biografia"
+              :readonly="!editando"
+              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+            ></textarea>
           </div>
         </div>
         <div class="edit">
-          <button v-if="autenticado" @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
+          <button v-if="autenticado" @click="toggleEdicao">
+            {{ editando ? "Salvar" : "Editar" }}
+          </button>
         </div>
       </div>
       <div class="comentarios-avaliacao">
@@ -38,65 +72,123 @@
 
         <div class="comentarios-container">
           <h2>Comentários:</h2>
-            <ul class="comentarios-lista">
-            <li v-for="comentario in comentarios" :key="comentario.id" class="comentario-item">
+          <ul class="comentarios-lista">
+            <li
+              v-for="comentario in comentarios"
+              :key="comentario.id"
+              class="comentario-item"
+            >
               <p>{{ comentario.mensagem }}</p>
               <p>Avaliação: {{ comentario.avaliacao }}</p>
               <p>Por: {{ comentario.nome }}</p>
             </li>
           </ul>
         </div>
-    </div>
+      </div>
 
-   
       <div>
-        <button v-if="!autenticado" class="feedback-button" @click="openFeedbackForm">Feedback</button>
+        <button
+          v-if="!autenticado"
+          class="feedback-button"
+          @click="openFeedbackForm"
+        >
+          Feedback
+        </button>
       </div>
       <div class="logout">
-        <button v-if="autenticado" class="sair" @click="sairDoSistema">Sair</button>
+        <button v-if="autenticado" class="sair" @click="sairDoSistema">
+          Sair
+        </button>
       </div>
     </div>
 
     <!-- Tela flutuante com o formulário de feedback -->
     <div class="feedback-overlay" v-if="showFeedbackForm">
-    <div class="feedback-container">
-      <h2 class="feedback-title">Feedback</h2>
-      <form class="feedback-form">
-        <div class="form-row">
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" v-model="feedback.name" />
-        </div>
+      <div class="feedback-container">
+        <h2 class="feedback-title">Feedback</h2>
+        <form class="feedback-form">
+          <div class="form-row">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" v-model="feedback.name" />
+          </div>
 
-        <div class="form-row">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" v-model="feedback.email" />
-        </div>
+          <div class="form-row">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              v-model="feedback.email"
+            />
+          </div>
 
-        <div class="form-row">
-          <label for="rating">Avaliação:</label>
-          <div class="star-rating">
-                <input type="radio" id="rating-5" name="rating" value="5" @change="setRating(5)">
-                <label for="rating-5" title="5 estrelas">&#9733;</label>
-                <input type="radio" id="rating-4" name="rating" value="4" @change="setRating(4)">
-                <label for="rating-4" title="4 estrelas">&#9733;</label>
-                <input type="radio" id="rating-3" name="rating" value="3" @change="setRating(3)">
-                <label for="rating-3" title="3 estrelas">&#9733;</label>
-                <input type="radio" id="rating-2" name="rating" value="2" @change="setRating(2)">
-                <label for="rating-2" title="2 estrelas">&#9733;</label>
-                <input type="radio" id="rating-1" name="rating" value="1" @change="setRating(1)">
-                <label for="rating-1" title="1 estrela">&#9733;</label>
+          <div class="form-row">
+            <label for="rating">Avaliação:</label>
+            <div class="star-rating">
+              <input
+                type="radio"
+                id="rating-5"
+                name="rating"
+                value="5"
+                @change="setRating(5)"
+              />
+              <label for="rating-5" title="5 estrelas">&#9733;</label>
+              <input
+                type="radio"
+                id="rating-4"
+                name="rating"
+                value="4"
+                @change="setRating(4)"
+              />
+              <label for="rating-4" title="4 estrelas">&#9733;</label>
+              <input
+                type="radio"
+                id="rating-3"
+                name="rating"
+                value="3"
+                @change="setRating(3)"
+              />
+              <label for="rating-3" title="3 estrelas">&#9733;</label>
+              <input
+                type="radio"
+                id="rating-2"
+                name="rating"
+                value="2"
+                @change="setRating(2)"
+              />
+              <label for="rating-2" title="2 estrelas">&#9733;</label>
+              <input
+                type="radio"
+                id="rating-1"
+                name="rating"
+                value="1"
+                @change="setRating(1)"
+              />
+              <label for="rating-1" title="1 estrela">&#9733;</label>
             </div>
           </div>
 
-        <div class="form-row">
-          <label for="message">Mensagem:</label>
-          <textarea id="message" name="message" v-model="feedback.message"></textarea>
-        </div>
+          <div class="form-row">
+            <label for="message">Mensagem:</label>
+            <textarea
+              id="message"
+              name="message"
+              v-model="feedback.message"
+            ></textarea>
+          </div>
           <!-- Botões de ação -->
           <div class="form-buttons">
-          <button type="button" @click="cancelFeedbackForm" class="cancelar">Cancelar</button>
-          <button type="submit" @click.prevent="submitFeedback" class="enviar">Enviar</button>
-        </div>
+            <button type="button" @click="cancelFeedbackForm" class="cancelar">
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              @click.prevent="submitFeedback"
+              class="enviar"
+            >
+              Enviar
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -104,31 +196,38 @@
 </template>
 
 <script>
-import {signOutUser, getCurrentUserEmail, updateUserData, updateUserDataByEmail} from '@/firebase'
-import router from '@/router';
+import {
+  signOutUser,
+  getCurrentUserEmail,
+  updateUserData,
+  updateUserDataByEmail,
+} from "@/firebase";
+import router from "@/router";
 
 export default {
-  name: 'BasicInfo',
+  name: "BasicInfo",
   data() {
     return {
-      biografia: '',
-      nome: '',
-      estado: '',
-      cidade: '',
-      telefone: '',
-      email: '',
-      trabalho: '',
+      biografia: "",
+      nome: "",
+      estado: "",
+      cidade: "",
+      telefone: "",
+      email: "",
+      trabalho: "",
       editando: false,
       autenticado: false,
-      corBorda: 'rgba(29, 36, 45, 0.84)',
+      corBorda: "rgba(29, 36, 45, 0.84)",
       showFeedbackForm: false,
-      feedback: { // Adicione esta seção
-      name: '',
-      email: '',
-      rating: 0,
-      message: ''
-    },
+      feedback: {
+        // Adicione esta seção
+        name: "",
+        email: "",
+        rating: 0,
+        message: "",
+      },
       comentarios: [],
+      avaliacaoGeral: 0.0
     };
   },
   methods: {
@@ -141,7 +240,7 @@ export default {
       this.email = dados.email;
       this.trabalho = dados.trabalho;
 
-      if(getCurrentUserEmail()==this.email) {
+      if (getCurrentUserEmail() == this.email) {
         this.autenticado = true;
       }
 
@@ -150,19 +249,19 @@ export default {
     },
     acessarCalendario() {
       const id = this.$route.params.id;
-      this.$router.push('/calendario/'+id);
+      this.$router.push("/calendario/" + id);
     },
     async toggleEdicao() {
       this.editando = !this.editando;
-      this.corBorda = this.editando ? 'green' : 'rgba(29, 36, 45, 0.84)';
-      if(!this.editando) {
+      this.corBorda = this.editando ? "green" : "rgba(29, 36, 45, 0.84)";
+      if (!this.editando) {
         const dadoParaSalvar = {
-          biografia : this.biografia,
+          biografia: this.biografia,
           estado: this.estado,
           cidade: this.cidade,
           telefone: this.telefone,
-          trabalho: this.trabalho
-        }
+          trabalho: this.trabalho,
+        };
 
         await updateUserData(dadoParaSalvar);
       }
@@ -170,9 +269,9 @@ export default {
     sairDoSistema() {
       try {
         signOutUser();
-        router.push('/login');
+        router.push("/login");
       } catch (error) {
-        alert('Erro ao sair: ' + error);
+        alert("Erro ao sair: " + error);
       }
     },
 
@@ -184,34 +283,46 @@ export default {
       this.resetFeedbackFields();
     },
     resetFeedbackFields() {
-      this.feedback.name = '';
-      this.feedback.email = '';
+      this.feedback.name = "";
+      this.feedback.email = "";
       this.feedback.rating = 0;
-      this.feedback.message = '';
+      this.feedback.message = "";
     },
     setRating(rating) {
-      this.feedback.rating = rating; 
+      this.feedback.rating = rating;
     },
     submitFeedback() {
-      console.log('Feedback:', this.feedback);
+      console.log("Feedback:", this.feedback);
       this.comentarios.push({
         mensagem: this.feedback.message,
         avaliacao: this.feedback.rating,
-        nome: this.feedback.name});
+        nome: this.feedback.name,
+      });
       this.enviarFeedBackParaFirestore();
       this.cancelFeedbackForm();
     },
     async enviarFeedBackParaFirestore() {
-        try {
-            const userData = { feedbacks: this.comentarios };
-            await updateUserDataByEmail(userData, this.email);
-        } catch (error) {
-            alert('Erro: ' + error);
-        }
-    }    
-  }
-  }
-
+      try {
+        const media = this.calcularMediaAvaliacao();
+        const userData = { feedbacks: this.comentarios, avaliacaoMedia: media };
+        await updateUserDataByEmail(userData, this.email);
+      } catch (error) {
+        alert("Erro: " + error);
+      }
+    },
+    calcularMediaAvaliacao() {
+      let somador = 0;
+      let media = 0.0;
+      for (const comentario of this.comentarios) {
+        somador += comentario.avaliacao;
+      }
+      console.log("Tamanho:" + this.comentarios.length)
+      console.log("somador:" + somador)
+      media = somador / this.comentarios.length;
+      return media;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -384,7 +495,7 @@ export default {
   padding: 5px;
   border-radius: 4px;
   border: none;
-  width: 100%;  
+  width: 100%;
 }
 
 .feedback-container .form-buttons {
@@ -428,7 +539,7 @@ export default {
 .star-rating label:hover,
 .star-rating label:hover ~ label,
 .star-rating input[type="radio"]:checked ~ label {
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .comentarios-avaliacao {
@@ -466,6 +577,6 @@ export default {
 .avaliacao-valor {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: white;
 }
 </style>
