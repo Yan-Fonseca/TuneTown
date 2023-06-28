@@ -9,13 +9,13 @@
                 :avaliacao="item.avaliacao"
                 />
             </div>
-            <div class="button-wrapper">
-                <button v-if="showMoreButton" class="ver-mais-button" @click="verMais">Ver Mais</button>
+            <div class="button-wrapper" v-if="showMoreButton">
+                <button class="ver-mais-button" @click="verMais">Ver Mais</button>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
 import PerfilCard from "../common/perfilCard.vue"
 
@@ -33,7 +33,7 @@ export default {
     data() {
         return {
         displayedUsers: [],
-        visibleCount: 2, 
+        visibleCount: 6,
         showMoreButton: false
         };
     },
@@ -43,18 +43,29 @@ export default {
         }
     },
     mounted() {
-        this.displayedUsers = this.users.slice(0, this.visibleCount);
-        this.showMoreButton = this.hasMoreUsers;
+        this.updateDisplayedUsers();
+    },
+    watch: {
+        users: {
+        immediate: true,
+        handler() {
+            this.updateDisplayedUsers();
+        }
+        }
     },
     methods: {
+        updateDisplayedUsers() {
+            this.displayedUsers = this.users.slice(0, this.visibleCount);
+            this.showMoreButton = this.hasMoreUsers;
+        },
         verMais() {
-        this.visibleCount += 4;
-        this.displayedUsers = this.users.slice(0, this.visibleCount);
-        this.showMoreButton = this.hasMoreUsers;
+            this.visibleCount += 4;
+            this.updateDisplayedUsers();
         }
     }
 }
 </script>
+  
   
 
 <style scoped>

@@ -43,7 +43,7 @@ export default {
 
   methods: {
     inicio() {
-      router.push("/#");
+      router.push("/home");
     },
     navegarPerfil() {
       const email = getCurrentUserEmail()

@@ -1,19 +1,19 @@
 <template>
   <div class="Home">
-    <div class="avaliados">
+    <div class="avaliados" v-if="recomendados.length">
       <h1>Profissionais mais bem avaliados</h1>
-      <PerfilContainer :users="recomendados"/>
+      <PerfilContainer :users="recomendados" />
     </div>
-    <div class="perto">
+    <div class="perto" v-if="profissionaisPerto.length">
       <h1>Profissionais perto de você!</h1>
-      <PerfilContainer :users="profissionaisPerto"/>
+      <PerfilContainer :users="profissionaisPerto" />
     </div>
   </div>
 </template>
 
 <script>
 import PerfilContainer from './PerfilContainer.vue';
-import {getCurrentUserEmail, getUserDocumentByEmail, fetchData, getBestUsers} from '@/firebase';
+import { getCurrentUserEmail, getUserDocumentByEmail, fetchData, getBestUsers } from '@/firebase';
 
 export default {
   name: 'HomePage',
