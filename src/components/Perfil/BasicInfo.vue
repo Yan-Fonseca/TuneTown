@@ -330,7 +330,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25vh;
+  height: 30vh;
   background-color: rgba(29, 36, 45, 0.84);
   border-radius: 20px;
   color: white;
@@ -562,6 +562,7 @@ export default {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+  width: 30vw;
 }
 
 .comentarios-container {
