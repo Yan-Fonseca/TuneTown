@@ -18,7 +18,7 @@
             <input
               v-model="estado"
               :readonly="true"
-              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+              :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }"
             />
           </h3>
           <h3>
@@ -26,7 +26,7 @@
             <input
               v-model="cidade"
               :readonly="!editando"
-              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+              :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }"
             />
           </h3>
           <h3>
@@ -34,7 +34,7 @@
             <input
               v-model="telefone"
               :readonly="!editando"
-              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+              :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }"
             />
           </h3>
           <h3>
@@ -42,7 +42,7 @@
             <input
               v-model="email"
               :readonly="true"
-              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }"
+              :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }"
             />
           </h3>
         </div>
@@ -51,7 +51,7 @@
         <div class="work-info">
           <h3>Trabalho como: <input v-model="trabalho"
               :readonly="!editando"
-              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }">
+              :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }">
           </h3>
           <div class="biography-box" :style="{ borderColor: corBorda }">
             <textarea
@@ -263,7 +263,7 @@ export default {
           estado: this.estado,
           cidade: this.cidade,
           telefone: this.telefone,
-          trabalho: this.trabalho,
+          trabalho: (this.trabalho).toLowerCase(),
         };
 
         await updateUserData(dadoParaSalvar);
@@ -404,6 +404,12 @@ export default {
 
 .work-info {
   margin-bottom: 10px;
+}
+
+.work-info input {
+  border: none;
+  color: white;
+  font-size: 20px;
 }
 
 .work-info h3 {
