@@ -49,7 +49,10 @@
       </div>
       <div class="biography">
         <div class="work-info">
-          <h3>Trabalho com: {{ trabalho }}</h3>
+          <h3>Trabalho como: <input v-model="trabalho"
+              :readonly="!editando"
+              :style="{ background: 'rgba(29, 36, 45, 0.84)', color: 'white' }">
+          </h3>
           <div class="biography-box" :style="{ borderColor: corBorda }">
             <textarea
               v-model="biografia"
