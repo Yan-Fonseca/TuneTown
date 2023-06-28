@@ -27,8 +27,8 @@
                     <p>Data de publicação: {{ trabalho.dataPublicacao }}</p>
                 </div>
             <div class="botoes">
-                <button @click="editarTrabalho(trabalho.id)">Editar</button>
-                <button @click="removerTrabalho(trabalho.id)">Remover</button>
+                <button v-if="autenticado" @click="editarTrabalho(trabalho.id)">Editar</button>
+                <button v-if="autenticado" @click="removerTrabalho(trabalho.id)">Remover</button>
             </div>
             </div>
         </div>
