@@ -36,7 +36,7 @@ export default {
     const vetor = documento.trabalhos;
 
     this.$refs.info.preencherDadosDePerfil(basic);
-    this.$refs.portf.preencherVetor(vetor);
+    this.$refs.portf.preencherVetor(vetor, id);
   },
 }
 </script>
