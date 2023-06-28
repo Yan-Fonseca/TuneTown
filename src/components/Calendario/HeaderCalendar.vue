@@ -20,9 +20,18 @@
 import router from '@/router'
 export default {
     name:'HeaderCal',
+    data() {
+      return {
+        email: ''
+      };
+    },
     methods: {
+      setEmail(id) {
+        this.email = id;
+      },
+
       navegar1(){
-        router.push('/perfil');
+        router.push('/perfil/'+this.email);
       },
       navegar2(){
         router.push('/search');

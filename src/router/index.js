@@ -34,7 +34,7 @@ const routes = [
     meta: {requiresUnauth: true}*/
   },
   {
-    path: '/calendario',
+    path: '/calendario/:id',
     name: 'calendario',
     component: () => import(/*webpackChunkName: "registro"*/'../views/CalendarioView.vue')/*,
     meta: {requiresAuth: true}*/

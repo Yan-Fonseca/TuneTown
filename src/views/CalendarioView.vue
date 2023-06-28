@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-      <HeaderCal/>
+      <HeaderCal ref="header"/>
       <div class="content">
         <div class="calendar-wrapper">
           <CalendarioUser ref="calendar"/>
         </div>
         <div class="agenda-wrapper">
-          <AgendaUser @attCalendario="atualizarCalendario"/>
+          <AgendaUser @attCalendario="atualizarCalendario" ref="agenda"/>
         </div>
       </div>
     </div>
@@ -16,6 +16,7 @@
   import CalendarioUser from '../components/Calendario/Calendario.vue'
   import HeaderCal from '../components/Calendario/HeaderCalendar.vue'
   import AgendaUser from '../components/Calendario/Evento.vue'
+  import {getUserCalendarByEmail} from '@/firebase'
   
   export default {
     name: 'CalendarioView',
@@ -24,6 +25,18 @@
       CalendarioUser,
       AgendaUser
     },
+    async mounted() {
+      // Acessando o valor do ID
+      const id = this.$route.params.id;
+      const documento = await getUserCalendarByEmail(id);
+
+      const vetor = documento.eventos;
+
+      this.$refs.agenda.estaAutenticado(id)
+      this.$refs.agenda.preencherEventos(vetor);
+      this.$refs.header.setEmail(id);
+    },
+    
     methods: {
       atualizarCalendario(dados) {
         this.$refs.calendar.tratarEventosParaCalendario(dados);

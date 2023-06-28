@@ -24,11 +24,15 @@
       avaliacao: {
         type: Number,
         required: true
+      },
+      email: {
+        type: String,
+        required: true
       }
     },
     methods: {
       acessarPerfil() {
-        this.$router.push('/perfil');
+        this.$router.push('/perfil/'+this.email);
       }
     }
   }

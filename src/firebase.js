@@ -17,6 +17,7 @@ const firebaseApp = initializeApp(config);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 const userCollection = collection(db, 'usuários');
+const calendarCollection = collection(db, 'calendarios');
 
 // Métodos de manipulação no firebase:
 
@@ -26,6 +27,10 @@ export const registerUser = (email, senha) => {
 
 export const createUserData = user => {
     return addDoc(userCollection, user);
+}
+
+export const createUserCalendar = calendar => {
+    return addDoc(calendarCollection, calendar);
 }
 
 export const signInUser = async (email, senha) => {
@@ -61,6 +66,17 @@ export const updateUserData = async (userData) => {
     }
 }
 
+export const updateCalendarData = async (calendarData) => {
+    const userId = auth.currentUser.email;
+    const querySnapshot = await getDocs(calendarCollection);
+    const calendarDocRef = querySnapshot.docs.find((doc) => doc.data().email === userId);
+    if (calendarDocRef) {
+      await updateDoc(calendarDocRef.ref, calendarData);
+    } else {
+      console.log('Documento do calendário não encontrado');
+    }
+}
+
 export const getCurrentUserEmail = () => {
     return auth.currentUser.email;
 }
@@ -68,14 +84,26 @@ export const getCurrentUserEmail = () => {
 export const getUserDocumentByEmail = async (email) => {
     const q = query(userCollection, where("email", "==", email));
     const querySnapshot = await getDocs(q);
-  
+
     if (!querySnapshot.empty) {
-      const userDoc = querySnapshot.docs[0];
-      return userDoc.data();
+        const userDoc = querySnapshot.docs[0];
+        return userDoc.data();
     } else {
-      return null;
+        return null;
     }
-  }
+}
+
+export const getUserCalendarByEmail = async (email) => {
+    const q = query(calendarCollection, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        return userDoc.data();
+    } else {
+        return null;
+    }
+}
 
 export const fetchData = async (parametros) => {
     let q = userCollection;
@@ -86,6 +114,15 @@ export const fetchData = async (parametros) => {
         }
     }
 
+    const querySnapshot = await getDocs(q);
+    const usersData = querySnapshot.docs.map((doc) => doc.data());
+
+    return usersData;
+};
+
+export const fetchDataName = async (name) => {
+    
+    let q = query(userCollection, where("nome", "==", name))
     const querySnapshot = await getDocs(q);
     const usersData = querySnapshot.docs.map((doc) => doc.data());
 

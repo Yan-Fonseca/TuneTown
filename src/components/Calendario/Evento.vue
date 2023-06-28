@@ -8,8 +8,8 @@
         <div class="card" v-for="evento in eventos" :key="evento.id" :style="getCardStyle(evento.id)">
           <div id="header">
             <div class="btns">
-              <button id="remove" @click="deleteEvent(evento.id)">X</button>
-              <button id="edit" @click="editEvent(evento.id)">Edit</button>
+              <button v-if="autenticado" id="remove" @click="deleteEvent(evento.id)">X</button>
+              <button v-if="autenticado" id="edit" @click="editEvent(evento.id)">Edit</button>
             </div>
             <div class="date">
               <h3>{{evento.data}}</h3>
@@ -26,7 +26,7 @@
       </div>
   
       <div class="btn">
-        <button class="add" @click="openForm">+</button>
+        <button v-if="autenticado" class="add" @click="openForm">+</button>
       </div>
   
       <!-- Tela flutuante com o formulário -->
@@ -72,6 +72,8 @@
   </template>
   
 <script>
+  import {updateCalendarData, getCurrentUserEmail} from '@/firebase';
+
   export default {
     name: 'AgendaUser',
     data() {
@@ -85,7 +87,8 @@
         horario: '',
         integrantes: '',
         editMode: false, // Indicador do modo de edição
-        editEventId: null // ID do evento em edição
+        editEventId: null, // ID do evento em edição
+        autenticado: false
       };
     },
     methods: {
@@ -102,6 +105,31 @@
         };
       },
 
+      preencherEventos(dados) {
+        console.log(dados);
+        if(dados.empty || dados===undefined) {
+          dados = [];
+        }
+        else {
+          this.eventos = dados;
+          this.atualizarCalendario();
+        }
+      },
+
+      estaAutenticado(email_ID) {
+        const userEmail = getCurrentUserEmail(); // Obtém o email do usuário atual
+        this.autenticado = userEmail === email_ID;
+      },
+
+      async enviarEventosParaFirestore() {
+        try {
+            const userData = { eventos: this.eventos };
+            await updateCalendarData(userData);
+        } catch (error) {
+            alert('Erro: ' + error);
+        }
+      },
+
       openForm() {
         this.showForm = true; // Exibe o formulário
       },
@@ -115,6 +143,7 @@
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
         this.counter--;
         this.atualizarCalendario();
+        this.enviarEventosParaFirestore();
       },
 
       saveEvent() {
@@ -135,6 +164,7 @@
 
         this.cancelForm();
         this.atualizarCalendario();
+        this.enviarEventosParaFirestore();
       },
 
       resetarCampos() {

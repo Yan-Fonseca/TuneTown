@@ -66,7 +66,7 @@
 <script>
 import { estados } from "@/scripts/data.js";
 import '@vuepic/vue-datepicker/dist/main.css';
-import { registerUser, createUserData } from '@/firebase';
+import { registerUser, createUserData, createUserCalendar } from '@/firebase';
 
 export default {
   name: 'RegistroComp',
@@ -117,7 +117,7 @@ export default {
         nome: this.nome,
         email: this.email,
         dataNascimento: this.dataNascimento,
-        estado: this.options[this.selectedOption - 1].label,
+        estado: (this.options[this.selectedOption - 1].label).toLowerCase(),
         cidade: this.cidade,
         profissional: this.musico,
         biografia: '',
@@ -128,6 +128,9 @@ export default {
       try {
         await registerUser(this.email, this.senha);
         await createUserData(data);
+
+        const email = {email: this.email};
+        await createUserCalendar(email);
 
         this.$router.push('/welcome');
       } catch (error) {

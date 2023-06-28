@@ -90,10 +90,10 @@ export default {
   methods: {
     realizarBusca() {
       const dados = {
-        cidade: this.cidade,
-        estado: this.selectedOption==null? '':this.options[this.selectedOption - 1].label,
-        profissao: this.profissao,
-        generoMusical: this.genero
+        cidade: this.cidade.toLowerCase(),
+        estado: this.selectedOption==null? '':this.options[this.selectedOption - 1].label.toLowerCase(),
+        profissao: this.profissao.toLowerCase(),
+        generoMusical: this.genero.toLowerCase()
       };
 
       this.$emit('buscarUsuarios', dados);

@@ -50,10 +50,10 @@
 
    
       <div>
-        <button class="feedback-button" @click="openFeedbackForm">Feedback</button>
+        <button v-if="!autenticado" class="feedback-button" @click="openFeedbackForm">Feedback</button>
       </div>
       <div class="logout">
-        <button class="sair" @click="sairDoSistema">Sair</button>
+        <button v-if="autenticado" class="sair" @click="sairDoSistema">Sair</button>
       </div>
     </div>
 
@@ -122,13 +122,13 @@ export default {
       autenticado: false,
       corBorda: 'rgba(29, 36, 45, 0.84)',
       showFeedbackForm: false,
-      feedback: { 
+      feedback: { // Adicione esta seção
       name: '',
       email: '',
       rating: 0,
-      message: '',
+      message: ''
     },
-      comentarios: []
+      comentarios: [],
     };
   },
   methods: {
@@ -149,7 +149,8 @@ export default {
       this.avaliacaoGeral = dados.rating;
     },
     acessarCalendario() {
-      this.$router.push('/calendario');
+      const id = this.$route.params.id;
+      this.$router.push('/calendario/'+id);
     },
     async toggleEdicao() {
       this.editando = !this.editando;
