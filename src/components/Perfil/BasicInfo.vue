@@ -127,8 +127,8 @@ export default {
       email: '',
       rating: 0,
       message: '',
-      comentarios: [],
-    }
+    },
+      comentarios: []
     };
   },
   methods: {
