@@ -122,7 +122,9 @@ export default {
         profissional: this.musico,
         biografia: '',
         telefone: '',
-        trabalho: ''
+        trabalho: '',
+        feedbacks: [],
+        trabalhos: []
       };
 
       try {

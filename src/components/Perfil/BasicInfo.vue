@@ -40,9 +40,9 @@
           <h2>Comentários:</h2>
             <ul class="comentarios-lista">
             <li v-for="comentario in comentarios" :key="comentario.id" class="comentario-item">
-              <p>{{ comentario.texto }}</p>
+              <p>{{ comentario.mensagem }}</p>
               <p>Avaliação: {{ comentario.avaliacao }}</p>
-              <p>Por: {{ comentario.usuario }}</p>
+              <p>Por: {{ comentario.nome }}</p>
             </li>
           </ul>
         </div>
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import {signOutUser, getCurrentUserEmail, updateUserData} from '@/firebase'
+import {signOutUser, getCurrentUserEmail, updateUserData, updateUserDataByEmail} from '@/firebase'
 import router from '@/router';
 
 export default {
@@ -195,11 +195,20 @@ export default {
     submitFeedback() {
       console.log('Feedback:', this.feedback);
       this.comentarios.push({
-        texto: this.feedback.message,
+        mensagem: this.feedback.message,
         avaliacao: this.feedback.rating,
-        usuario: this.feedback.name});
+        nome: this.feedback.name});
+      this.enviarFeedBackParaFirestore();
       this.cancelFeedbackForm();
-    }
+    },
+    async enviarFeedBackParaFirestore() {
+        try {
+            const userData = { feedbacks: this.comentarios };
+            await updateUserDataByEmail(userData, this.email);
+        } catch (error) {
+            alert('Erro: ' + error);
+        }
+    }    
   }
   }
 

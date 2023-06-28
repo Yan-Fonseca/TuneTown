@@ -65,6 +65,15 @@ export const updateUserData = async (userData) => {
       console.log('Documento do usuário não encontrado');
     }
 }
+export const updateUserDataByEmail = async (userData, email) => {
+    const querySnapshot = await getDocs(userCollection);
+    const userDocRef = querySnapshot.docs.find((doc) => doc.data().email === email);
+    if (userDocRef) {
+      await updateDoc(userDocRef.ref, userData);
+    } else {
+      console.log('Documento do usuário não encontrado');
+    }
+}
 
 export const updateCalendarData = async (calendarData) => {
     const userId = auth.currentUser.email;
