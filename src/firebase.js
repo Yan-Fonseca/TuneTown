@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, getDoc, doc, updateDoc, deleteDoc, limit } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 
 const config = {
@@ -89,6 +89,14 @@ export const updateCalendarData = async (calendarData) => {
 export const getCurrentUserEmail = () => {
     return auth.currentUser.email;
 }
+
+export const getBestUsers = async () => {
+    const q = query(userCollection, where("avaliacaoMedia", ">=", 4.0), limit(16));
+    const querySnapshot = await getDocs(q);
+    const usersData = querySnapshot.docs.map((doc) => doc.data());
+  
+    return [...usersData];
+  };
 
 export const getUserDocumentByEmail = async (email) => {
     const q = query(userCollection, where("email", "==", email));
