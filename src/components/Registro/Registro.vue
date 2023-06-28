@@ -124,7 +124,8 @@ export default {
         telefone: '',
         trabalho: '',
         feedbacks: [],
-        trabalhos: []
+        trabalhos: [],
+        avaliacaoMedia: 0.0
       };
 
       try {
