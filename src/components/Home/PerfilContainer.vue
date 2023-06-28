@@ -9,7 +9,7 @@
                 :avaliacao="item.avaliacao"
                 />
             </div>
-            <div class="button-wrapper" v-if="showMoreButton">
+            <div class="button-wrapper">
                 <button class="ver-mais-button" @click="verMais">Ver Mais</button>
             </div>
         </div>
@@ -20,53 +20,57 @@
 import PerfilCard from "../common/perfilCard.vue"
 
 export default {
-    name: 'PerfilContainer',
-    components: {
-        PerfilCard
-    },
-    props: {
-        users: {
-        type: Array,
-        required: true
-        }
-    },
-    data() {
-        return {
-        displayedUsers: [],
-        visibleCount: 6,
-        showMoreButton: false
-        };
-    },
-    computed: {
-        hasMoreUsers() {
-        return this.visibleCount < this.users.length;
-        }
-    },
-    mounted() {
-        this.updateDisplayedUsers();
-    },
-    watch: {
-        users: {
-        immediate: true,
-        handler() {
-            this.updateDisplayedUsers();
-        }
-        }
-    },
-    methods: {
-        updateDisplayedUsers() {
-            this.displayedUsers = this.users.slice(0, this.visibleCount);
-            this.showMoreButton = this.hasMoreUsers;
-        },
-        verMais() {
-            this.visibleCount += 4;
-            this.updateDisplayedUsers();
-        }
+  name: 'PerfilContainer',
+  components: {
+    PerfilCard
+  },
+  props: {
+    users: {
+      type: Array,
+      required: true
     }
+  },
+  data() {
+    return {
+      displayedUsers: [],
+      visibleCount: 6,
+      showMoreButton: true
+    };
+  },
+  computed: {
+    hasMoreUsers() {
+      return this.visibleCount < this.users.length;
+    }
+  },
+  mounted() {
+    this.updateDisplayedUsers();
+  },
+  watch: {
+    users: {
+      immediate: true,
+      handler() {
+        this.updateDisplayedUsers();
+      }
+    }
+  },
+  methods: {
+    updateDisplayedUsers() {
+      this.displayedUsers = this.users.slice(0, this.visibleCount);
+      this.showMoreButton = this.hasMoreUsers;
+    },
+    verMais() {
+      this.visibleCount += 4;
+      if (!this.hasMoreUsers) {
+        alert('Não há mais usuários para mostrar.');
+      }
+      this.updateDisplayedUsers();
+    }
+  }
 }
 </script>
-  
-  
+
+
+
 
 <style scoped>
 .container {
@@ -105,8 +109,13 @@ export default {
 }
 
 .ver-mais-button {
-    color: white;
-    background-color: blue;
+    background-color: rgba(56, 123, 223, 1);
+    border-radius: 10px;
+    font-size: large;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .button-wrapper {

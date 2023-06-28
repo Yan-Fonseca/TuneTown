@@ -68,6 +68,7 @@
     background-color: rgba(56, 123, 223, 1);
     padding-left: 20px;
     padding-right: 20px;
+    font-size: large;
   }
 
   p {
