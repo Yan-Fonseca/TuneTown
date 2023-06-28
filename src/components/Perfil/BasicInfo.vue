@@ -30,6 +30,25 @@
           <button v-if="autenticado" @click="toggleEdicao">{{ editando ? 'Salvar' : 'Editar' }}</button>
         </div>
       </div>
+      <div class="comentarios-avaliacao">
+        <div class="avaliacao-media">
+          <h2>Avaliação Geral do Perfil:</h2>
+          <p class="avaliacao-valor">{{ avaliacaoGeral }}</p>
+        </div>
+
+        <div class="comentarios-container">
+          <h2>Comentários:</h2>
+            <ul class="comentarios-lista">
+            <li v-for="comentario in comentarios" :key="comentario.id" class="comentario-item">
+              <p>{{ comentario.texto }}</p>
+              <p>Avaliação: {{ comentario.avaliacao }}</p>
+              <p>Por: {{ comentario.usuario }}</p>
+            </li>
+          </ul>
+        </div>
+    </div>
+
+   
       <div>
         <button class="feedback-button" @click="openFeedbackForm">Feedback</button>
       </div>
@@ -103,11 +122,12 @@ export default {
       autenticado: false,
       corBorda: 'rgba(29, 36, 45, 0.84)',
       showFeedbackForm: false,
-      feedback: { // Adicione esta seção
+      feedback: { 
       name: '',
       email: '',
       rating: 0,
-      message: ''
+      message: '',
+      comentarios: [],
     }
     };
   },
@@ -124,6 +144,9 @@ export default {
       if(getCurrentUserEmail()==this.email) {
         this.autenticado = true;
       }
+
+      this.comentarios = dados.comentarios;
+      this.avaliacaoGeral = dados.rating;
     },
     acessarCalendario() {
       this.$router.push('/calendario');
@@ -170,6 +193,10 @@ export default {
     },
     submitFeedback() {
       console.log('Feedback:', this.feedback);
+      this.comentarios.push({
+        texto: this.feedback.message,
+        avaliacao: this.feedback.rating,
+        usuario: this.feedback.name});
       this.cancelFeedbackForm();
     }
   }
@@ -296,7 +323,7 @@ export default {
   width: 5vw;
   padding: 10%;
   border-radius: 5px;
-  font-size: 16px;
+  margin-right: 3px;
 }
 
 .feedback-overlay {
@@ -394,4 +421,41 @@ export default {
   color: #FFD700;
 }
 
+.comentarios-avaliacao {
+  display: flex;
+  flex-direction: row;
+  margin-right: 80px;
+}
+
+.comentarios-lista {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll; /* Adiciona uma barra de rolagem vertical */
+  max-height: 200px; /* Define uma altura máxima para cada item de comentário */
+  margin-right: 5px;
+}
+
+.comentario-item {
+  background-color: rgba(88, 112, 130, 0.26);
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.comentarios-container {
+  flex: 1;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.avaliacao-media {
+  margin-right: 70px;
+  margin-bottom: 10px;
+}
+
+.avaliacao-valor {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
 </style>
