@@ -132,7 +132,7 @@ export default {
         await registerUser(this.email, this.senha);
         await createUserData(data);
 
-        const email = {email: this.email};
+        const email = {email: this.email, eventos: []};
         await createUserCalendar(email);
 
         this.$router.push('/welcome');
