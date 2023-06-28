@@ -1,6 +1,6 @@
 <template>
     <div class="portfolio">
-        <div class="container">
+        <div v-if="autenticado" class="container">
             <div class="novo-trabalho">
                 <div class="descricao">
                     <h3>Novo Trabalho</h3>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {updateUserData} from '@/firebase';
+import {updateUserData, getCurrentUserEmail} from '@/firebase';
 
 export default {
     name: 'PortfolioMusic',
@@ -45,7 +45,8 @@ export default {
         texto: "",
         trabalhos: [],
         arquivo: null,
-        trabalhoEditado: null
+        trabalhoEditado: null,
+        autenticado: true
         };
     },
     methods: {
@@ -54,7 +55,8 @@ export default {
       console.log("Arquivo selecionado:", file);
     },
 
-    preencherVetor(dados) {
+    preencherVetor(dados, id) {
+        this.autenticado = getCurrentUserEmail() == id;
         this.trabalhos = dados;
     },
 
