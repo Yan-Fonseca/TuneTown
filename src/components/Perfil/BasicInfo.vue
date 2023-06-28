@@ -250,10 +250,12 @@ export default {
       this.comentarios = dados.comentarios;
       this.avaliacaoGeral = dados.rating;
     },
+
     acessarCalendario() {
       const id = this.$route.params.id;
       this.$router.push("/calendario/" + id);
     },
+
     async toggleEdicao() {
       this.editando = !this.editando;
       this.corBorda = this.editando ? "green" : "rgba(29, 36, 45, 0.84)";
@@ -269,6 +271,7 @@ export default {
         await updateUserData(dadoParaSalvar);
       }
     },
+
     sairDoSistema() {
       try {
         signOutUser();
@@ -281,19 +284,23 @@ export default {
     openFeedbackForm() {
       this.showFeedbackForm = true; // Exibe o formulário de feedback
     },
+
     cancelFeedbackForm() {
       this.showFeedbackForm = false; // Oculta o formulário de feedback
       this.resetFeedbackFields();
     },
+
     resetFeedbackFields() {
       this.feedback.name = "";
       this.feedback.email = "";
       this.feedback.rating = 0;
       this.feedback.message = "";
     },
+
     setRating(rating) {
       this.feedback.rating = rating;
     },
+
     submitFeedback() {
       console.log("Feedback:", this.feedback);
       this.comentarios.push({
@@ -304,6 +311,7 @@ export default {
       this.enviarFeedBackParaFirestore();
       this.cancelFeedbackForm();
     },
+
     async enviarFeedBackParaFirestore() {
       try {
         const media = this.calcularMediaAvaliacao();
@@ -313,6 +321,7 @@ export default {
         alert("Erro: " + error);
       }
     },
+    
     calcularMediaAvaliacao() {
       let somador = 0;
       let media = 0.0;
