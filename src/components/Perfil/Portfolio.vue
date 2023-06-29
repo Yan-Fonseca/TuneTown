@@ -99,7 +99,6 @@ export default {
                 this.adicionarTrabalho();
             }
             this.texto = '';
-
             this.enviarTrabalhoParaFirestore();
         }
     },

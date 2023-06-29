@@ -142,6 +142,11 @@
       deleteEvent(id) {
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
         this.counter--;
+
+        for (let i = 0; i < this.eventos.length; i++) {
+          this.eventos[i].id = i + 1;
+        }
+
         this.atualizarCalendario();
         this.enviarEventosParaFirestore();
       },
