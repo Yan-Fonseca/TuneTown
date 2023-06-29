@@ -53,6 +53,10 @@
               :readonly="!editando"
               :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }">
           </h3>
+          <h3>Genero Musical principal: <input v-model="generoMusical"
+              :readonly="!editando"
+              :style="{ background: 'rgba(0, 0, 0, 0)', color: 'white' }">
+          </h3>
           <div class="biography-box" :style="{ borderColor: corBorda }">
             <textarea
               v-model="biografia"
@@ -218,6 +222,7 @@ export default {
       telefone: "",
       email: "",
       trabalho: "",
+      generoMusical: "",
       editando: false,
       autenticado: false,
       corBorda: "rgba(29, 36, 45, 0.84)",
@@ -266,6 +271,7 @@ export default {
           cidade: this.cidade,
           telefone: this.telefone,
           trabalho: (this.trabalho).toLowerCase(),
+          generoMusical: (this.generoMusical).toLowerCase()
         };
 
         await updateUserData(dadoParaSalvar);

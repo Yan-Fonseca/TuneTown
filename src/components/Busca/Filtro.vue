@@ -92,7 +92,7 @@ export default {
       const dados = {
         cidade: this.cidade.toLowerCase(),
         estado: this.selectedOption==null? '':this.options[this.selectedOption - 1].label.toLowerCase(),
-        profissao: this.profissao.toLowerCase(),
+        trabalho: this.profissao.toLowerCase(),
         generoMusical: this.genero.toLowerCase()
       };
 
