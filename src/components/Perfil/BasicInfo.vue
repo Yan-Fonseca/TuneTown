@@ -247,6 +247,7 @@ export default {
       this.telefone = dados.telefone;
       this.email = dados.email;
       this.trabalho = dados.trabalho;
+      this.generoMusical = dados.generoMusical;
 
       if (getCurrentUserEmail() == this.email) {
         this.autenticado = true;

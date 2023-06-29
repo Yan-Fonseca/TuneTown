@@ -32,7 +32,8 @@ export default {
       trabalho: documento.trabalho,
       email: documento.email,
       comentarios: documento.feedbacks,
-      rating: documento.avaliacaoMedia
+      rating: documento.avaliacaoMedia,
+      generoMusical: documento.generoMusical
     }
 
     const vetor = documento.trabalhos;
