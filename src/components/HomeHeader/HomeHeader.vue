@@ -5,7 +5,7 @@
             <h1>TuneTown</h1>
         </div>
         <div class="Nav">
-          <p><a class="PerfilButton" @click=navegar1>Perfil</a></p>
+          <p><a class="PerfilButton" @click=navegar1>Meu Perfil</a></p>
           <p><a class="PerfilButton" @click=navegar2>Buscar Perfil</a></p>
         </div>
         <div class="Icons">
@@ -17,12 +17,19 @@
   </template>
   
   <script>
+    import {getCurrentUserEmail} from '@/firebase';
+
     import router from '@/router'
     export default {
       name: 'LoginHeader',
       methods: {
         navegar1(){
-          router.push('/perfil');
+          try {
+            const email = getCurrentUserEmail();
+            router.push('/perfil/' + email);
+          } catch (error) {
+            alert('Erro ao acessar o perfil: ' + error);
+          }
         },
         navegar2(){
           router.push('/search');

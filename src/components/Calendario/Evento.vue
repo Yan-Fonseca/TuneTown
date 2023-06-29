@@ -8,8 +8,8 @@
         <div class="card" v-for="evento in eventos" :key="evento.id" :style="getCardStyle(evento.id)">
           <div id="header">
             <div class="btns">
-              <button id="remove" @click="deleteEvent(evento.id)">X</button>
-              <button id="edit" @click="editEvent(evento.id)">Edit</button>
+              <button v-if="autenticado" id="remove" @click="deleteEvent(evento.id)">X</button>
+              <button v-if="autenticado" id="edit" @click="editEvent(evento.id)">Edit</button>
             </div>
             <div class="date">
               <h3>{{evento.data}}</h3>
@@ -18,6 +18,8 @@
           <div class="content">
             <div class="info">
               <p>horário: {{ evento.horario }}</p>
+              <p>Local: {{ evento.local }}</p>
+              <p>Entrada: R${{ evento.valor }}</p>
               <p>descrição: {{ evento.descricao }}</p>
               <p>integrantes: {{ evento.integrantes }}</p>
             </div>
@@ -26,7 +28,7 @@
       </div>
   
       <div class="btn">
-        <button class="add" @click="openForm">+</button>
+        <button v-if="autenticado" class="add" @click="openForm">+</button>
       </div>
   
       <!-- Tela flutuante com o formulário -->
@@ -51,6 +53,16 @@
               <label for="integrantes">Integrantes:</label>
               <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
             </div>
+
+            <div class="form-row integrantes-row">
+              <label for="local">Local:</label>
+              <input type="text" id="local" name="local" v-model="local"/>
+            </div>
+
+            <div class="form-row">
+              <label for="preco">Valor Entrada: R$</label>
+              <input type="text" id="preco" name="preco" v-model="valor"/>
+            </div>
             
             <div>
               <label for="nome">Descrição do Evento:</label>
@@ -72,6 +84,8 @@
   </template>
   
 <script>
+  import {updateCalendarData, getCurrentUserEmail} from '@/firebase';
+
   export default {
     name: 'AgendaUser',
     data() {
@@ -84,8 +98,11 @@
         data: '',
         horario: '',
         integrantes: '',
+        local: '',
+        valor: 0.0,
         editMode: false, // Indicador do modo de edição
-        editEventId: null // ID do evento em edição
+        editEventId: null, // ID do evento em edição
+        autenticado: false
       };
     },
     methods: {
@@ -102,6 +119,31 @@
         };
       },
 
+      preencherEventos(dados) {
+        console.log(dados);
+        if(dados.empty || dados===undefined) {
+          dados = [];
+        }
+        else {
+          this.eventos = dados;
+          this.atualizarCalendario();
+        }
+      },
+
+      estaAutenticado(email_ID) {
+        const userEmail = getCurrentUserEmail(); // Obtém o email do usuário atual
+        this.autenticado = userEmail === email_ID;
+      },
+
+      async enviarEventosParaFirestore() {
+        try {
+            const userData = { eventos: this.eventos };
+            await updateCalendarData(userData);
+        } catch (error) {
+            alert('Erro: ' + error);
+        }
+      },
+
       openForm() {
         this.showForm = true; // Exibe o formulário
       },
@@ -114,7 +156,13 @@
       deleteEvent(id) {
         this.eventos = this.eventos.filter((evento) => evento.id !== id);
         this.counter--;
+
+        for (let i = 0; i < this.eventos.length; i++) {
+          this.eventos[i].id = i + 1;
+        }
+
         this.atualizarCalendario();
+        this.enviarEventosParaFirestore();
       },
 
       saveEvent() {
@@ -125,7 +173,9 @@
             data: this.data,
             horario: this.horario,
             descricao: this.descricao,
-            integrantes: this.integrantes
+            integrantes: this.integrantes,
+            local: this.local,
+            valor: this.valor
           }
           this.eventos.push(evento);
           this.counter++;
@@ -135,6 +185,7 @@
 
         this.cancelForm();
         this.atualizarCalendario();
+        this.enviarEventosParaFirestore();
       },
 
       resetarCampos() {
@@ -151,6 +202,8 @@
         this.horario = evento.horario;
         this.descricao = evento.descricao;
         this.integrantes = evento.integrantes;
+        this.local = evento.local;
+        this.valor = evento.valor;
       },
 
       editEvent(id) {
@@ -171,6 +224,8 @@
           evento.horario = this.horario;
           evento.descricao = this.descricao;
           evento.integrantes = this.integrantes;
+          evento.local = this.local;
+          evento.valor = this.valor;
         }
         this.editMode = false;
       },
@@ -250,7 +305,7 @@
   
   .card {
     width: 300px;
-    max-height: 15vh;
+    max-height: 20vh;
     padding: 20px;
     border-radius: 8px;
     color: white;
@@ -275,6 +330,7 @@
     padding: 10px;
     display: flex;
     flex-direction: row;
+    overflow-y: auto;
   }
   
   .info p {

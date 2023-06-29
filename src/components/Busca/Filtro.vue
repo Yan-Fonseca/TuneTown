@@ -54,8 +54,10 @@
               <label for="star1">&#9733;</label>
            </div>
         </div>
-
-        <button class="buscar" @click="realizarBusca">Buscar</button>
+        <div class="button-wrapper"> 
+          <button class="buscar" @click="realizarBusca">Buscar</button>
+        </div>
+        
       </form>
     </div>
   </div>
@@ -88,10 +90,10 @@ export default {
   methods: {
     realizarBusca() {
       const dados = {
-        cidade: this.cidade,
-        estado: this.options[this.selectedOption - 1].label,
-        profissao: this.profissao,
-        generoMusical: this.genero
+        cidade: this.cidade.toLowerCase(),
+        estado: this.selectedOption==null? '':this.options[this.selectedOption - 1].label.toLowerCase(),
+        trabalho: this.profissao.toLowerCase(),
+        generoMusical: this.genero.toLowerCase()
       };
 
       this.$emit('buscarUsuarios', dados);
@@ -129,13 +131,13 @@ input {
     background-color: #5870827a;
     color: white;
     border-radius: 10px;
-    height: 3vh;
-    width: 90%;
+    width: 100%;
     margin-top: 10px;
 }
 
 select {
     margin-top: 10px;
+    width: 100%;
     height: 4vh;
 }
 
@@ -155,6 +157,11 @@ select {
 .custom-background {
   background-color: #5870827a;
   color: white;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .buscar {

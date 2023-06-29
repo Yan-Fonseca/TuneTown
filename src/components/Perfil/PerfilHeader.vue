@@ -22,7 +22,7 @@ export default {
   name: 'PerfilHeader',
   methods: {
     navegar1(){
-      router.push('/');
+      router.push('/home');
     },
     navegar2(){
       router.push('/search');

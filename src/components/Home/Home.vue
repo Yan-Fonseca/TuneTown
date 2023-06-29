@@ -1,18 +1,19 @@
 <template>
   <div class="Home">
-    <div class="avaliados">
+    <div class="avaliados" v-if="recomendados.length">
       <h1>Profissionais mais bem avaliados</h1>
-      <PerfilContainer :users="recomendados"/>
+      <PerfilContainer :users="recomendados" />
     </div>
-    <div class="perto">
+    <div class="perto" v-if="profissionaisPerto.length">
       <h1>Profissionais perto de você!</h1>
-      <PerfilContainer :users="profissionaisPerto"/>
+      <PerfilContainer :users="profissionaisPerto" />
     </div>
   </div>
 </template>
 
 <script>
 import PerfilContainer from './PerfilContainer.vue';
+import { getCurrentUserEmail, getUserDocumentByEmail, fetchData, getBestUsers } from '@/firebase';
 
 export default {
   name: 'HomePage',
@@ -21,27 +22,42 @@ export default {
   },
   data() {
     return {
-      recomendados: [
-        { id: 0, nome: 'Yan', avaliacao: 5.9 },
-        { id: 1, nome: 'Gabriela', avaliacao: 9.6 },
-        { id: 2, nome: 'Amanda', avaliacao: 1.9 },
-        { id: 3, nome: 'Cleopatra', avaliacao: 9.6 },
-        { id: 0, nome: 'Yan', avaliacao: 9.9 },
-        { id: 1, nome: 'Joel', avaliacao: 8.5 },
-        { id: 2, nome: 'João', avaliacao: 7.8 },
-        { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
-        { id: 0, nome: 'Yan', avaliacao: 6.9 },
-        { id: 1, nome: 'Joel', avaliacao: 8.5 },
-        { id: 2, nome: 'João', avaliacao: 2.8 },
-        { id: 3, nome: 'Gabriela', avaliacao: 9.6 }
-      ],
-      profissionaisPerto: [
-        { id: 0, nome: 'Yan', avaliacao: 9.9 },
-        { id: 1, nome: 'Joel', avaliacao: 8.5 },
-        { id: 2, nome: 'João', avaliacao: 7.8 },
-        { id: 3, nome: 'Gabriela', avaliacao: 9.6 },
-      ]
+      contadorRecomendados: 0,
+      recomendados: [],
+      contadorProfPerto: 0,
+      profissionaisPerto: []
     };
+  },
+  async mounted() {
+    await this.getUsuariosMelhorAvaliados();
+    await this.getUsuariosPerto();
+  },
+  methods: {
+    async getUsuariosMelhorAvaliados() {
+      const bestUsers = await getBestUsers();
+      this.recomendados = bestUsers.map((user, index) => ({
+        id: this.contadorRecomendados + index,
+        nome: user.nome,
+        avaliacao: user.avaliacao
+      }));
+      this.contadorRecomendados += bestUsers.length;
+    },
+
+    async getUsuariosPerto() {
+      const user = getCurrentUserEmail();
+      const userDoc = await getUserDocumentByEmail(user);
+      const data = {
+        estado: userDoc.estado,
+        cidade: userDoc.cidade
+      };
+      const usuariosPerto = await fetchData(data);
+      this.profissionaisPerto = usuariosPerto.map((user, index) => ({
+        id: this.contadorProfPerto + index,
+        nome: user.nome,
+        avaliacao: user.avaliacao
+      }));
+      this.contadorProfPerto += usuariosPerto.length;
+    }
   }
 }
 </script>

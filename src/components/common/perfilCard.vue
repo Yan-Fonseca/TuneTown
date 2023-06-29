@@ -3,7 +3,7 @@
       <img src="../../assets/imgs/perfil.png" alt="foto de perfil">
       <div class="data">
         <p class="nome">{{ nome }}</p>
-        <button class="perfil-btn">Perfil</button>
+        <button class="perfil-btn" @click="acessarPerfil">Perfil</button>
        <!-- <p class="avaliacao">{{ avaliacao }}/10.0</p> -->
        <div class="avaliacao">
           <span v-for="i in 5" :key="i" :class="[i <= Math.ceil(avaliacao) ? 'gold' : 'gray']">&#x2605;</span>
@@ -24,6 +24,15 @@
       avaliacao: {
         type: Number,
         required: true
+      },
+      email: {
+        type: String,
+        required: true
+      }
+    },
+    methods: {
+      acessarPerfil() {
+        this.$router.push('/perfil/'+this.email);
       }
     }
   }
@@ -59,6 +68,7 @@
     background-color: rgba(56, 123, 223, 1);
     padding-left: 20px;
     padding-right: 20px;
+    font-size: large;
   }
 
   p {
