@@ -44,6 +44,22 @@ export const signOutUser = async () => {
     return await signOut(auth);
 }
 
+export const getUserState = () => {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        // Usuário autenticado
+        resolve(true);
+      } else {
+        // Usuário não autenticado
+        resolve(false);
+      }
+    }, error => {
+      reject(error);
+    });
+  });
+}
+
 export const getUser = async id => {
     const userDoc = await getDoc(doc(userCollection, id));
     return userDoc.exists() ? userDoc.data() : null;
