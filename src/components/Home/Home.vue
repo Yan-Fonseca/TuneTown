@@ -38,7 +38,8 @@ export default {
       this.recomendados = bestUsers.map((user, index) => ({
         id: this.contadorRecomendados + index,
         nome: user.nome,
-        avaliacao: user.avaliacao
+        avaliacao: user.avaliacao,
+        email: user.email
       }));
       this.contadorRecomendados += bestUsers.length;
     },
@@ -54,7 +55,8 @@ export default {
       this.profissionaisPerto = usuariosPerto.map((user, index) => ({
         id: this.contadorProfPerto + index,
         nome: user.nome,
-        avaliacao: user.avaliacao
+        avaliacao: user.avaliacao,
+        email: user.email
       }));
       this.contadorProfPerto += usuariosPerto.length;
     }

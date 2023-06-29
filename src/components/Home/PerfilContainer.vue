@@ -3,10 +3,11 @@
         <div class="scrollable-wrapper">
             <div class="cards-wrapper">
                 <PerfilCard
-                v-for="(item) in displayedUsers"
+                v-for="item in displayedUsers"
                 :key="item.id"
                 :nome="item.nome"
                 :avaliacao="item.avaliacao"
+                :email="item.email"
                 />
             </div>
             <div class="button-wrapper">
