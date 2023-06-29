@@ -9,8 +9,8 @@
                 <div class="upload">
                     <input type="file" accept="image/*, video/*" @change="handleFileUpload">
                 </div>
-                    <button @click.prevent="salvarTrabalho" id="enviar">Enviar</button>
-                </div>
+                <button @click.prevent="salvarTrabalho" id="enviar">Enviar</button>
+            </div>
         </div>
         <div class="trabalhos">
             <div class="trabalhos">
@@ -20,23 +20,24 @@
                 <div class="trabalho-info">
                     <div class="descricao">
                         <img :src="trabalho.imagem" alt="Imagem" v-if="trabalho.imagem">
+                        <video :src="trabalho.video" controls v-if="trabalho.video"></video>
                         <div class="descricao">
-                            <p>{{ trabalho.descricao }}</p> 
+                            <p>{{ trabalho.descricao }}</p>
                         </div>
                     </div>
                     <p>Data de publicação: {{ trabalho.dataPublicacao }}</p>
                 </div>
-            <div class="botoes">
-                <button v-if="autenticado" @click="editarTrabalho(trabalho.id)">Editar</button>
-                <button v-if="autenticado" @click="removerTrabalho(trabalho.id)">Remover</button>
-            </div>
+                <div class="botoes">
+                    <button v-if="autenticado" @click="editarTrabalho(trabalho.id)">Editar</button>
+                    <button v-if="autenticado" @click="removerTrabalho(trabalho.id)">Remover</button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import {updateUserData, getCurrentUserEmail} from '@/firebase';
+import {updateUserData, getCurrentUserEmail, uploadFileToFirebase, deleteFileFromFirebase} from '@/firebase';
 
 export default {
     name: 'PortfolioMusic',
@@ -51,8 +52,28 @@ export default {
     },
     methods: {
     handleFileUpload(event) {
-      const file = event.target.files[0];
-      console.log("Arquivo selecionado:", file);
+      this.arquivo = event.target.files[0];
+      console.log("Arquivo selecionado:", this.arquivo);
+    },
+
+    async enviarArquivoParaFirebase() {
+      try {
+        const userEmail = getCurrentUserEmail();
+        const fileURL = await uploadFileToFirebase(this.arquivo,userEmail);
+        return fileURL;
+      } catch (error) {
+        alert('Erro ao enviar arquivo para o Firebase: ' + error);
+        throw error;
+      }
+    },
+
+    async removerArquivoDoFirebase(url) {
+      try {
+        await deleteFileFromFirebase(url);
+      } catch (error) {
+        alert('Erro ao excluir arquivo do Firebase: ' + error);
+        throw error;
+      }
     },
 
     preencherVetor(dados, id) {
@@ -70,49 +91,49 @@ export default {
     },
 
     salvarTrabalho() {
-        if (this.trabalhoEditado) {
-            this.trabalhoEditado.descricao = this.texto;
-            this.trabalhoEditado = null; // Limpar trabalhoEditado após a edição
-        } else {
-            this.adicionarTrabalho();
-        }
-        this.texto = '';
+        if(this.texto !== "") {
+            if (this.trabalhoEditado) {
+                this.trabalhoEditado.descricao = this.texto;
+                this.trabalhoEditado = null; // Limpar trabalhoEditado após a edição
+            } else {
+                this.adicionarTrabalho();
+            }
+            this.texto = '';
 
-        this.enviarTrabalhoParaFirestore();
+            this.enviarTrabalhoParaFirestore();
+        }
     },
 
-    adicionarTrabalho() {
-        const data = new Date();
-        let counter = 0;
-        this.trabalhos.forEach(element => {
-            if(element.id>counter) {
-                counter = element.id;
-            }
-        });
-        counter++;
-
-        let publicacao = data.getDate().toString() + '-' + (data.getUTCMonth() + 1).toString() + '-' + data.getFullYear().toString();
-
-        let trabalho = {
-            id: counter,
-            descricao: this.texto,
-            dataPublicacao: publicacao,
-            imagem: ""
+    async adicionarTrabalho() {
+      const data = new Date();
+      let counter = 0;
+      this.trabalhos.forEach(element => {
+        if (element.id > counter) {
+          counter = element.id;
         }
+      });
+      counter++;
 
-        if (this.arquivo) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                const imagemURL = reader.result;
-                trabalho.imagem = imagemURL;
-                this.trabalhos.push(trabalho);
-            };
-            reader.readAsDataURL(this.arquivo);
-        } else {
-            this.trabalhos.push(trabalho);
+      let publicacao = data.getDate().toString() + '-' + (data.getUTCMonth() + 1).toString() + '-' + data.getFullYear().toString();
+
+      let trabalho = {
+        id: counter,
+        descricao: this.texto,
+        dataPublicacao: publicacao,
+        imagem: "",
+        video: ""
+      };
+
+      if (this.arquivo) {
+        const fileURL = await this.enviarArquivoParaFirebase();
+        if (this.arquivo.type.startsWith('image/')) {
+          trabalho.imagem = fileURL;
+        } else if (this.arquivo.type.startsWith('video/')) {
+          trabalho.video = fileURL;
         }
+      }
 
-        this.texto = '';
+      this.trabalhos.push(trabalho);
     },
 
     editarTrabalho(id) {
@@ -125,13 +146,18 @@ export default {
         }
     },
 
-    removerTrabalho(id) {
-      const index = this.trabalhos.findIndex(trabalho => trabalho.id == id);
-      if (index!= -1) {
-        this.trabalhos.splice(index,1);
-        this.enviarTrabalhoParaFirestore();
-      }
-      else {
+    async removerTrabalho(id) {
+      const index = this.trabalhos.findIndex((trabalho) => trabalho.id === id);
+      if (index !== -1) {
+        const trabalhoRemovido = this.trabalhos.splice(index, 1)[0];
+        if (trabalhoRemovido.imagem) {
+          await this.removerArquivoDoFirebase(trabalhoRemovido.imagem);
+        }
+        if (trabalhoRemovido.video) {
+          await this.removerArquivoDoFirebase(trabalhoRemovido.video);
+        }
+        await this.enviarTrabalhoParaFirestore();
+      } else {
         console.log('Trabalho não encontrado');
       }
     }
