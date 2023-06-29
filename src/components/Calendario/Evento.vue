@@ -18,6 +18,8 @@
           <div class="content">
             <div class="info">
               <p>horário: {{ evento.horario }}</p>
+              <p>Local: {{ evento.local }}</p>
+              <p>Entrada: R${{ evento.valor }}</p>
               <p>descrição: {{ evento.descricao }}</p>
               <p>integrantes: {{ evento.integrantes }}</p>
             </div>
@@ -50,6 +52,16 @@
             <div class="form-row integrantes-row">
               <label for="integrantes">Integrantes:</label>
               <input type="text" id="integrantes" name="integrantes" v-model="integrantes"/>
+            </div>
+
+            <div class="form-row integrantes-row">
+              <label for="local">Local:</label>
+              <input type="text" id="local" name="local" v-model="local"/>
+            </div>
+
+            <div class="form-row">
+              <label for="preco">Valor Entrada: R$</label>
+              <input type="text" id="preco" name="preco" v-model="valor"/>
             </div>
             
             <div>
@@ -86,6 +98,8 @@
         data: '',
         horario: '',
         integrantes: '',
+        local: '',
+        valor: 0.0,
         editMode: false, // Indicador do modo de edição
         editEventId: null, // ID do evento em edição
         autenticado: false
@@ -159,7 +173,9 @@
             data: this.data,
             horario: this.horario,
             descricao: this.descricao,
-            integrantes: this.integrantes
+            integrantes: this.integrantes,
+            local: this.local,
+            valor: this.valor
           }
           this.eventos.push(evento);
           this.counter++;
@@ -186,6 +202,8 @@
         this.horario = evento.horario;
         this.descricao = evento.descricao;
         this.integrantes = evento.integrantes;
+        this.local = evento.local;
+        this.valor = evento.valor;
       },
 
       editEvent(id) {
@@ -206,6 +224,8 @@
           evento.horario = this.horario;
           evento.descricao = this.descricao;
           evento.integrantes = this.integrantes;
+          evento.local = this.local;
+          evento.valor = this.valor;
         }
         this.editMode = false;
       },
@@ -285,7 +305,7 @@
   
   .card {
     width: 300px;
-    max-height: 15vh;
+    max-height: 20vh;
     padding: 20px;
     border-radius: 8px;
     color: white;
@@ -310,6 +330,7 @@
     padding: 10px;
     display: flex;
     flex-direction: row;
+    overflow-y: auto;
   }
   
   .info p {
