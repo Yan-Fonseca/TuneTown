@@ -93,8 +93,8 @@ export default {
     margin-right: 75px;
   }
   .login {
-    width: 650px;
-    height: 620px;
+    width: 550px;
+    height: 520px;
     background: rgba(36, 56, 81, 0.84);
     border-radius: 20px;
     display: flex;
