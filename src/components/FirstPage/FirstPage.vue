@@ -17,6 +17,7 @@
         </div>
       </nav>
     </div>
+<div class="td">
   <div class="main">
     <div id="mainLogo">
       <img src="../../assets/imgs/logo_TuneTown.png">
@@ -37,7 +38,7 @@
       </p>
     </div>
   </div>
-
+</div>
   <footer>
     <div class="FooterBody">
         <div>
@@ -71,11 +72,16 @@
 </script>
 
 <style scoped>
-
+.td{
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: rgba(36, 56, 81, 0.84);
+}
 .header {
     margin-top: 0;
     display: table;
-    background: rgba(36, 56, 81, 0.459);
+    background: rgba(36, 56, 81, 0.84);
     clear: both;
     width: 100%;
     height: 100%;
@@ -83,11 +89,11 @@
 
 footer {
     width: 100%;
-    background: rgba(19, 27, 36, 0.904);
+    background: rgba(36, 56, 81, 0.84);
 }
 
 nav {
-      background: rgba(36, 56, 81, 0.64);
+  background: rgba(36, 56, 81, 0.84);
 }
 
 .nav ul {
@@ -152,14 +158,17 @@ a:link, a:active, a:visited {
 }
 
 .main {
-        clear: both;
-        min-height: 100vh;
-        justify-content: space-between;
-        background-size: cover;
-        text-align: center;
+  border-radius: 20px;
+  margin: 20px;
+  clear: both;
+  min-height: 40px;
+  justify-content: space-between;
+  background-size: cover;
+  text-align: center;
 }
 
 #mainDescricao {
+    margin-bottom: 30px;
     margin-top: 80px;
     color: white;
 }
@@ -188,10 +197,10 @@ a:link, a:active, a:visited {
 }
 
 .FooterBody p {
-        color: #ffffff;
-        font-size: 20px;
-        margin-right: 30px;
-        float: left;
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 30px;
+  float: left;
 }
 
 .FooterBody img {
@@ -199,15 +208,15 @@ a:link, a:active, a:visited {
     height: 75px;
 }
 .FooterBody{
-        width: 100%;
-        height:150px;
-        background: rgba(36, 56, 81, 0.253);
-        font-family: 'Arapey', serif;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
+  width: 100%;
+  height: 80px;
+  background: rgba(36, 56, 81, 0.84);
+  font-family: 'Arapey', serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
 
 .FooterBody #tuneTownName {
