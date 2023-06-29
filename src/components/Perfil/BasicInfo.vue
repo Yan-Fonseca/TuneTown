@@ -563,7 +563,7 @@ export default {
 .comentarios-avaliacao {
   display: flex;
   flex-direction: row;
-  margin-right: 80px;
+  margin-right: 35px;
 }
 
 .comentarios-lista {
